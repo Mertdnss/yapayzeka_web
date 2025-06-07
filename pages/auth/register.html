@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kayıt Ol - AssistAI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .register-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .register-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 20px;
+            padding: 48px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+        .register-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        .register-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 8px;
+        }
+        .register-subtitle {
+            color: #374151;
+            font-size: 16px;
+        }
+        .form-group {
+            margin-bottom: 24px;
+        }
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #111827;
+        }
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.2s ease;
+            background: white;
+        }
+        .form-input:focus {
+            border-color: #6C63FF;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.1);
+        }
+        .register-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #6C63FF, #3F8EFC);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 16px;
+        }
+        .register-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(108, 99, 255, 0.4);
+        }
+        .back-link {
+            display: inline-block;
+            color: #6C63FF;
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 24px;
+            transition: color 0.2s ease;
+        }
+        .back-link:hover {
+            color: #3F8EFC;
+        }
+        .login-link {
+            text-align: center;
+            color: #374151;
+        }
+        .login-link a {
+            color: #6C63FF;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .login-link a:hover {
+            color: #3F8EFC;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        @media (max-width: 480px) {
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <div class="register-card">
+            <a href="index.html" class="back-link">← Ana Sayfaya Dön</a>
+            
+            <div class="register-header">
+                <h1 class="register-title">Kayıt Ol</h1>
+                <p class="register-subtitle">AssistAI'ya katılın ve verimliliğinizi artırın</p>
+            </div>
+
+            <form>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName" class="form-label">Ad</label>
+                        <input type="text" id="firstName" class="form-input" placeholder="Adınız" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName" class="form-label">Soyad</label>
+                        <input type="text" id="lastName" class="form-input" placeholder="Soyadınız" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="form-label">E-posta</label>
+                    <input type="email" id="email" class="form-input" placeholder="ornek@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="form-label">Şifre</label>
+                    <input type="password" id="password" class="form-input" placeholder="En az 8 karakter" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword" class="form-label">Şifre Tekrar</label>
+                    <input type="password" id="confirmPassword" class="form-input" placeholder="Şifrenizi tekrar girin" required>
+                </div>
+
+                <button type="submit" class="register-btn">Kayıt Ol</button>
+                
+                <div class="login-link">
+                    Zaten hesabınız var mı? <a href="login.html">Giriş Yap</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html> 

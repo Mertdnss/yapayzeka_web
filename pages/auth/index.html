@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Verimlilik Asistanı - Verimliliğinizi Artırın</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                        <rect width="32" height="32" rx="8" fill="url(#logoGradient)"/>
+                        <path d="M8 12h16v2H8v-2zm0 4h12v2H8v-2zm0 4h16v2H8v-2z" fill="white"/>
+                        <circle cx="20" cy="8" r="3" fill="#FFD700"/>
+                        <defs>
+                            <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#6C63FF"/>
+                                <stop offset="100%" style="stop-color:#3F8EFC"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <span class="logo-text">AssistAI</span>
+            </div>
+            <div class="nav-links">
+                <a href="#features" class="nav-link">Özellikler</a>
+                <a href="#pricing" class="nav-link">Fiyatlandırma</a>
+                <a href="#faq" class="nav-link">SSS</a>
+                <a href="login.html" class="btn-login">Giriş</a>
+                <a href="register.html" class="btn-register">Kayıt Ol</a>
+            </div>
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    AI Destekli
+                    <span class="gradient-text">Verimlilik</span>
+                    Asistanınız
+                </h1>
+                <p class="hero-subtitle">
+                    Akıllı otomasyon ile iş akışınızı hızlandırın. CV oluşturmadan ses klonlamaya, akıllı görev yönetiminden daha fazlasına - hepsi güçlü bir platformda.
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn-primary">
+                        <span>Hemen Başla</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M4.167 10h11.666m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <button class="btn-secondary">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M6.667 6.667 10 10l3.333-3.333M10 1.667a8.333 8.333 0 1 0 0 16.666 8.333 8.333 0 0 0 0-16.666z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Demo İzle
+                    </button>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">50K+</span>
+                        <span class="stat-label">Aktif Kullanıcı</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">99.9%</span>
+                        <span class="stat-label">Çalışma Süresi</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">4.9/5</span>
+                        <span class="stat-label">Değerlendirme</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="app-mockup">
+                    <div class="mockup-header">
+                        <div class="mockup-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="mockup-content">
+                        <div class="ai-avatar">
+                            <div class="avatar-circle">
+                                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                                    <circle cx="20" cy="20" r="20" fill="url(#avatarGradient)"/>
+                                    <path d="M12 16c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8-8-3.6-8-8zm8-6a6 6 0 1 0 0 12 6 6 0 0 0 0-12z" fill="white"/>
+                                    <defs>
+                                        <linearGradient id="avatarGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#6C63FF"/>
+                                            <stop offset="100%" style="stop-color:#3F8EFC"/>
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            </div>
+                            <div class="typing-indicator">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="chat-messages">
+                            <div class="message user-message">
+                                Profesyonel bir CV oluşturmama yardım et
+                            </div>
+                            <div class="message ai-message">
+                                Harika bir CV oluşturmanıza yardımcı olacağım! Bilgilerinizi toparlayıp sektörünüze özel profesyonel bir şablon hazırlayacağım.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="features-content">
+            <div class="section-header">
+                <h2 class="section-title">Güçlü Özellikler</h2>
+                <p class="section-subtitle">Verimliliğinizi artırmak için ihtiyacınız olan her şey</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                            <rect width="48" height="48" rx="12" fill="url(#cvGradient)"/>
+                            <path d="M14 16h20v2H14v-2zm0 4h16v2H14v-2zm0 4h20v2H14v-2zm0 4h12v2H14v-2z" stroke="white" stroke-width="1.5" fill="white"/>
+                            <defs>
+                                <linearGradient id="cvGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#6C63FF"/>
+                                    <stop offset="100%" style="stop-color:#3F8EFC"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">AI CV Oluşturucu</h3>
+                    <p class="feature-description">Dakikalar içinde profesyonel, ATS-optimize CV'ler oluşturun. AI'mız iş tanımlarını analiz eder ve maksimum etki için CV'nizi özelleştirir.</p>
+                    <div class="feature-tags">
+                        <span>ATS Optimize</span>
+                        <span>Çoklu Şablonlar</span>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                            <rect width="48" height="48" rx="12" fill="url(#voiceGradient)"/>
+                            <path d="M24 8a8 8 0 0 1 8 8v8a8 8 0 0 1-16 0v-8a8 8 0 0 1 8-8zm0 2a6 6 0 0 0-6 6v8a6 6 0 0 0 12 0v-8a6 6 0 0 0-6-6z" fill="white"/>
+                            <path d="M12 24a12 12 0 0 0 24 0h2a14 14 0 0 1-28 0h2z" fill="white"/>
+                            <path d="M23 34h2v4h-2v-4z" fill="white"/>
+                            <defs>
+                                <linearGradient id="voiceGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#FF6B6B"/>
+                                    <stop offset="100%" style="stop-color:#FF8E53"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Ses Klonlama</h3>
+                    <p class="feature-description">Sunumlar, seslendirmeler ve otomatik yanıtlar için sesinizin dijital ikizini oluşturun. Yüksek kaliteli, doğal sesli AI ses üretimi.</p>
+                    <div class="feature-tags">
+                        <span>Doğal Ses</span>
+                        <span>Çoklu Dil</span>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                            <rect width="48" height="48" rx="12" fill="url(#taskGradient)"/>
+                            <path d="M34 14H14a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h20a2 2 0 0 0 2-2V16a2 2 0 0 0-2-2z" stroke="white" stroke-width="1.5" fill="none"/>
+                            <path d="M17 24l3 3 8-8" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <defs>
+                                <linearGradient id="taskGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#4ECDC4"/>
+                                    <stop offset="100%" style="stop-color:#44A08D"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Akıllı Görev Önerileri</h3>
+                    <p class="feature-description">AI'ın iş akışınızı analiz etmesine ve optimizasyon önerileri sunmasına izin verin. Alışkanlıklarınıza göre akıllı görev önceliklendirme ve verimlilik içgörüleri alın.</p>
+                    <div class="feature-tags">
+                        <span>Akıllı Önceliklendirme</span>
+                        <span>İş Akışı Analizi</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="testimonial">
+        <div class="testimonial-content">
+            <div class="testimonial-badge">
+                <div class="badge-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#FFD700"/>
+                    </svg>
+                </div>
+                <div class="badge-content">
+                    <div class="badge-title">Profesyoneller Tarafından Güvenilir</div>
+                    <div class="badge-subtitle">Dünya çapında 50,000+ kullanıcıya katılın</div>
+                </div>
+            </div>
+            <blockquote class="testimonial-quote">
+                "Bu AI asistan kariyerimi yönetme şeklimi tamamen dönüştürdü. CV oluşturucu bir hafta içinde üç mülakata girmemi sağladı ve ses klonlama özelliği sunumlarda saatlerimi tasarruf ediyor."
+            </blockquote>
+            <div class="testimonial-author">
+                <div class="author-avatar">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=64&h=64&fit=crop&crop=face&auto=format" alt="Sarah Chen" />
+                </div>
+                <div class="author-info">
+                    <div class="author-name">Ayşe Demir</div>
+                    <div class="author-title">TeknoŞirket'te Ürün Müdürü</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="pricing-content">
+            <div class="section-header">
+                <h2 class="section-title">Fiyatlandırma</h2>
+                <p class="section-subtitle">Size en uygun planı seçin ve verimliliğinizi artırmaya başlayın</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="plan-header">
+                        <h3 class="plan-name">Başlangıç</h3>
+                        <div class="plan-price">
+                            <span class="currency">₺</span>
+                            <span class="amount">99</span>
+                            <span class="period">/ay</span>
+                        </div>
+                        <p class="plan-description">Bireysel kullanıcılar için ideal</p>
+                    </div>
+                    <ul class="plan-features">
+                        <li class="feature-item">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M16.667 5.833L7.5 15 3.333 10.833" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            AI CV Oluşturucu
+                        </li>
+                        <li class="feature-item">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M16.667 5.833L7.5 15 3.333 10.833" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Temel Ses Klonlama (5 dakika/ay)
+                        </li>
+                        <li class="feature-item">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M16.667 5.833L7.5 15 3.333 10.833" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Akıllı Görev Önerileri
+                        </li>
+                        <li class="feature-item">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M16.667 5.833L7.5 15 3.333 10.833" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            E-posta Desteği
+                        </li>
+                    </ul>
+                    <button class="plan-button btn-outline">Başla</button>
+                </div>
+
+                <div class="pricing-card featured">
+                    <div class="popular-badge">En Popüler</div>
+                    <div class="plan-header">
+                        <h3 class="plan-name">Profesyonel</h3>
+                        <div class="plan-price">
+                            <span class="currency">₺</span>
+                            <span class="amount">199</span>
+                            <span class="period">/ay</span>
+                        </div>
+                        <p class="plan-description">Küçük ekipler ve profesyoneller için</p>
+                    </div>
+                    <ul class="plan-features">
+                        <li class="feature-item">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M16.667 5.833L7.5 15 3.333 10.833" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Tüm Başlangıç Özellikleri
+                        </li>
+                        <li class="feature-item">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M16.667 5.833L7.5 15 3.333 10.833" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Gelişmiş Ses Klonlama (30 dakika/ay)
+                        </li>
+                        <li class="feature-item">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M16.667 5.833L7.5 15 3.333 10.833" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Çoklu Dil Desteği
+                        </li>
+                        <li class="feature-item">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M16.667 5.833L7.5 15 3.333 10.833" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Öncelikli Destek
+                        </li>
+                        <li class="feature-item">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M16.667 5.833L7.5 15 3.333 10.833" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            API Erişimi
+                        </li>
+                    </ul>
+                    <button class="plan-button btn-featured">Başla</button>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="plan-header">
+                        <h3 class="plan-name">Kurumsal</h3>
+                        <div class="plan-price">
+                            <span class="currency">₺</span>
+                            <span class="amount">499</span>
+                            <span class="period">/ay</span>
+                        </div>
+                        <p class="plan-description">Büyük ekipler ve şirketler için</p>
+                    </div>
+                    <ul class="plan-features">
+                        <li class="feature-item">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M16.667 5.833L7.5 15 3.333 10.833" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Tüm Profesyonel Özellikler
+                        </li>
+                        <li class="feature-item">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M16.667 5.833L7.5 15 3.333 10.833" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Sınırsız Ses Klonlama
+                        </li>
+                        <li class="feature-item">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M16.667 5.833L7.5 15 3.333 10.833" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Özel Entegrasyonlar
+                        </li>
+                        <li class="feature-item">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M16.667 5.833L7.5 15 3.333 10.833" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Özel Hesap Yöneticisi
+                        </li>
+                        <li class="feature-item">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M16.667 5.833L7.5 15 3.333 10.833" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            SLA Garantisi
+                        </li>
+                    </ul>
+                    <button class="plan-button btn-outline">İletişime Geç</button>
+                </div>
+            </div>
+            <div class="pricing-note">
+                <p>Tüm planlar 14 günlük ücretsiz deneme ile gelir. İstediğiniz zaman iptal edebilirsiniz.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-content">
+            <div class="about-text">
+                <div class="section-header">
+                    <h2 class="section-title">Hakkımızda</h2>
+                    <p class="section-subtitle">Verimliliği artırmak için teknolojinin gücünü kullanıyoruz</p>
+                </div>
+                <div class="about-description">
+                    <p>AssistAI olarak, yapay zeka teknolojilerinin gücünü kullanarak profesyonellerin ve ekiplerin verimliliğini maksimize etmek için çalışıyoruz. Misyonumuz, karmaşık görevleri basitleştirmek ve herkesin potansiyelini en üst düzeye çıkarmasına yardımcı olmaktır.</p>
+                    <p>2024'te kurulan şirketimiz, CV oluşturma, ses klonlama ve akıllı görev yönetimi alanlarında yenilikçi çözümler sunmaktadır. Kullanıcı deneyimini ön planda tutarak, en karmaşık teknolojileri bile sezgisel hale getiriyoruz.</p>
+                </div>
+                <div class="about-values">
+                    <div class="value-item">
+                        <div class="value-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="#6C63FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="value-content">
+                            <h4>Güvenilirlik</h4>
+                            <p>Verilerinizin güvenliği bizim önceliğimizdir</p>
+                        </div>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M13 10V3L4 14h7v7l9-11h-7z" stroke="#6C63FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="value-content">
+                            <h4>Hız</h4>
+                            <p>Dakikalar içinde profesyonel sonuçlar</p>
+                        </div>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="#6C63FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="value-content">
+                            <h4>Kalite</h4>
+                            <p>Her detayda mükemmellik arayışı</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="about-image">
+                <div class="team-illustration">
+                    <div class="illustration-card">
+                        <div class="card-header">
+                            <div class="card-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="stats-grid">
+                                <div class="stat-box">
+                                    <div class="stat-icon">🚀</div>
+                                    <div class="stat-info">
+                                        <div class="stat-num">50K+</div>
+                                        <div class="stat-text">Kullanıcı</div>
+                                    </div>
+                                </div>
+                                <div class="stat-box">
+                                    <div class="stat-icon">⭐</div>
+                                    <div class="stat-info">
+                                        <div class="stat-num">4.9</div>
+                                        <div class="stat-text">Rating</div>
+                                    </div>
+                                </div>
+                                <div class="stat-box">
+                                    <div class="stat-icon">💼</div>
+                                    <div class="stat-info">
+                                        <div class="stat-num">100K+</div>
+                                        <div class="stat-text">CV Oluşturuldu</div>
+                                    </div>
+                                </div>
+                                <div class="stat-box">
+                                    <div class="stat-icon">🎯</div>
+                                    <div class="stat-info">
+                                        <div class="stat-num">99.9%</div>
+                                        <div class="stat-text">Uptime</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="contact-content">
+            <div class="contact-info">
+                <div class="section-header">
+                    <h2 class="section-title">İletişim</h2>
+                    <p class="section-subtitle">Sorularınız mı var? Bizimle iletişime geçin</p>
+                </div>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke="#6C63FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="contact-text">
+                            <h4>E-posta</h4>
+                            <p>info@assistai.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" stroke="#6C63FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Telefon</h4>
+                            <p>+90 555 123 45 67</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="#6C63FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <circle cx="12" cy="10" r="3" stroke="#6C63FF" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Adres</h4>
+                            <p>İstanbul, Türkiye</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form">
+                <form class="form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Ad Soyad</label>
+                            <input type="text" id="name" class="form-input" placeholder="Adınız ve soyadınız" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="form-label">E-posta</label>
+                            <input type="email" id="email" class="form-input" placeholder="ornek@email.com" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject" class="form-label">Konu</label>
+                        <input type="text" id="subject" class="form-input" placeholder="Mesajınızın konusu" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message" class="form-label">Mesaj</label>
+                        <textarea id="message" class="form-textarea" rows="5" placeholder="Mesajınızı buraya yazın..." required></textarea>
+                    </div>
+                    <button type="submit" class="contact-btn">
+                        <span>Mesaj Gönder</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M4.167 10h11.666m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="faq-content">
+            <div class="section-header">
+                <h2 class="section-title">Sık Sorulan Sorular</h2>
+                <p class="section-subtitle">Merak ettiğiniz her şeyin cevabı burada</p>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>AssistAI nasıl çalışır?</h3>
+                        <div class="faq-toggle">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>AssistAI, yapay zeka teknolojisini kullanarak CV oluşturma, ses klonlama ve görev yönetimi gibi işlerinizi otomatikleştirir. Sadece bilgilerinizi girin, AI size özelleştirilmiş sonuçlar sunsun.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Verilerim güvende mi?</h3>
+                        <div class="faq-toggle">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Evet, tüm verileriniz 256-bit SSL şifreleme ile korunur. GDPR uyumlu olan sistemimizde verileriniz güvenle saklanır ve asla üçüncü taraflarla paylaşılmaz.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Ücretsiz deneme süresi var mı?</h3>
+                        <div class="faq-toggle">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Evet! Tüm planlarımızda 14 günlük ücretsiz deneme sunuyoruz. Kredi kartı bilginizi girmeden tüm özellikleri test edebilirsiniz.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Ses klonlama nasıl çalışır?</h3>
+                        <div class="faq-toggle">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>5-10 dakikalık ses kaydınızı yükleyerek kendi sesinizin dijital kopyasını oluşturabilirsiniz. AI, sesinizin tonunu ve karakteristiklerini öğrenerek doğal seslendirmeler üretir.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Hangi CV formatları destekleniyor?</h3>
+                        <div class="faq-toggle">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>PDF, Word (DOCX) ve HTML formatlarında CV indirebilirsiniz. Ayrıca 15+ farklı profesyonel şablon arasından seçim yapabilirsiniz.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Planımı değiştirebilir miyim?</h3>
+                        <div class="faq-toggle">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Tabii ki! İstediğiniz zaman planınızı yükseltebilir, düşürebilir veya iptal edebilirsiniz. Plan değişiklikleri anında geçerli olur.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Mobil uygulama var mı?</h3>
+                        <div class="faq-toggle">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Şu anda web tabanlı uygulamamız var ve tüm cihazlarda mükemmel çalışır. iOS ve Android uygulamalarımız 2024 sonunda yayınlanacak.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Destek nasıl alabilirim?</h3>
+                        <div class="faq-toggle">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>E-posta, canlı chat ve telefon desteğimiz var. Profesyonel plan ve üzeri kullanıcılarımız öncelikli destek alır. Ortalama yanıt süremiz 2 saat.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="faq-cta">
+                <p>Sorunuzun cevabını bulamadınız mı?</p>
+                <a href="#contact" class="faq-contact-btn">Bizimle İletişime Geçin</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="cta-content">
+            <h2 class="cta-title">Verimliliğinizi artırmaya hazır mısınız?</h2>
+            <p class="cta-subtitle">AI asistanımızı kullanan binlerce profesyonele katılın</p>
+            <button class="btn-primary btn-large">
+                <span>Hemen Başla</span>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M4.167 10h11.666m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            <p class="cta-note">Kredi kartı gerekmez • 14 günlük ücretsiz deneme</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <rect width="32" height="32" rx="8" fill="url(#footerLogoGradient)"/>
+                            <path d="M8 12h16v2H8v-2zm0 4h12v2H8v-2zm0 4h16v2H8v-2z" fill="white"/>
+                            <circle cx="20" cy="8" r="3" fill="#FFD700"/>
+                            <defs>
+                                <linearGradient id="footerLogoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#6C63FF"/>
+                                    <stop offset="100%" style="stop-color:#3F8EFC"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <span class="logo-text">AssistAI</span>
+                </div>
+                <p class="footer-description">Akıllı otomasyon ile verimliliği güçlendiriyoruz.</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Ürün</h4>
+                    <a href="#">Özellikler</a>
+                    <a href="#">Fiyatlandırma</a>
+                    <a href="#">API</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Şirket</h4>
+                    <a href="#about">Hakkımızda</a>
+                    <a href="#">Blog</a>
+                    <a href="#">Kariyer</a>
+                </div>
+                <div class="footer-column">
+                    <h4>Destek</h4>
+                    <a href="#faq">SSS</a>
+                    <a href="#">Yardım Merkezi</a>
+                    <a href="#contact">İletişim</a>
+                    <a href="#">Durum</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 AssistAI. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html> 

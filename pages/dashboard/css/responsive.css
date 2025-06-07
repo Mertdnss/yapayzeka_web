@@ -1,0 +1,87 @@
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .main-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .action-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+    
+    .sidebar.active {
+        transform: translateX(0);
+    }
+    
+    .main-content {
+        margin-left: 0;
+    }
+    
+    .sidebar-toggle {
+        display: block;
+    }
+    
+    .header {
+        padding: 16px 20px;
+    }
+    
+    .page-title h1 {
+        font-size: 24px;
+    }
+    
+    .search-box input {
+        width: 200px;
+    }
+    
+    .dashboard-content {
+        padding: 20px;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .main-grid {
+        gap: 16px;
+    }
+    
+    .action-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .card-header {
+        padding: 20px 20px 0 20px;
+    }
+    
+    .card-content {
+        padding: 0 20px 20px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-right {
+        gap: 8px;
+    }
+    
+    .search-box {
+        display: none;
+    }
+    
+    .stats-grid {
+        gap: 12px;
+    }
+    
+    .stat-card {
+        padding: 20px;
+    }
+    
+    .stat-number {
+        font-size: 24px;
+    }
+}
