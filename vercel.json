@@ -1,8 +1,9 @@
 {
-  "rewrites": [
+  "redirects": [
     {
       "source": "/",
-      "destination": "/pages/auth/index.html"
+      "destination": "/pages/auth/index.html",
+      "permanent": true
     }
   ]
 }
