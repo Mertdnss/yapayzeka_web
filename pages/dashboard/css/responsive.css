@@ -10,88 +10,105 @@
 }
 
 @media (max-width: 768px) {
+    /* Sidebar mobile overlay */
     .sidebar {
         transform: translateX(-100%);
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 100vh;
-        z-index: 1000;
-        width: 280px;
-        overflow-y: auto;
-        overflow-x: hidden;
-        -webkit-overflow-scrolling: touch;
+        width: 85vw;
+        max-width: 320px;
+        z-index: 9999;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(25px);
+        border-right: 1px solid rgba(108, 99, 255, 0.1);
+        box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+        transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        will-change: transform;
     }
     
     .sidebar.active {
         transform: translateX(0);
     }
     
-    /* Sidebar scroll içeriği etkilemeyecek şekilde ayarlama */
-    .sidebar-nav {
-        flex: 1;
-        min-height: 0;
-        overflow-y: auto;
-        padding-bottom: 20px;
-    }
-    
-    /* Sidebar footer'ı her zaman görünür yapmak için */
-    .sidebar-footer {
-        position: sticky;
-        bottom: 0;
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(20px);
-        border-top: 1px solid rgba(0, 0, 0, 0.05);
-        padding: 24px;
-        margin-top: auto;
-        flex-shrink: 0;
-    }
-    
-    /* Sidebar yapısını mobile için optimize etme */
-    .sidebar {
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .sidebar-nav {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        min-height: 0;
-    }
-    
-    .nav-list {
-        flex: 1;
-        overflow-y: auto;
-        padding-bottom: 20px;
-    }
-    
-    /* Body scroll'u sidebar açıkken engelleme */
-    body.sidebar-open {
-        overflow: hidden;
-    }
-    
-    /* Sidebar overlay */
-    .sidebar-overlay {
+    /* Mobile overlay background */
+    .mobile-overlay {
         position: fixed;
         top: 0;
         left: 0;
-        width: 100%;
-        height: 100%;
+        width: 100vw;
+        height: 100vh;
         background: rgba(0, 0, 0, 0.5);
-        z-index: 999;
+        z-index: 9998;
         opacity: 0;
         visibility: hidden;
-        transition: all 0.3s ease;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        backdrop-filter: blur(2px);
     }
     
-    .sidebar-overlay.active {
+    .mobile-overlay.active {
         opacity: 1;
         visibility: visible;
     }
     
+    /* Sidebar structure optimization */
+    .sidebar-header {
+        padding: 5vh 24px 3vh 24px;
+        border-bottom: 1px solid rgba(108, 99, 255, 0.1);
+    }
+    
+    .sidebar-nav {
+        flex: 1;
+        padding: 3vh 0;
+        overflow-y: auto;
+        min-height: 0;
+        /* Touch-friendly scrolling */
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
+        /* Custom scrollbar */
+        scrollbar-width: thin;
+        scrollbar-color: rgba(108, 99, 255, 0.3) transparent;
+    }
+    
+    .sidebar-nav::-webkit-scrollbar {
+        width: 4px;
+    }
+    
+    .sidebar-nav::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    
+    .sidebar-nav::-webkit-scrollbar-thumb {
+        background: linear-gradient(135deg, #6C63FF 0%, #3F8EFC 100%);
+        border-radius: 2px;
+    }
+    
+    .sidebar-nav::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(135deg, #5B52FF 0%, #2E7EEB 100%);
+    }
+    
+    .nav-item {
+        margin-bottom: 1.5vh;
+    }
+    
+    .nav-link {
+        padding: 2vh 16px;
+        font-size: 16px;
+        min-height: 6vh;
+        display: flex;
+        align-items: center;
+    }
+    
+    .sidebar-footer {
+        padding: 3vh 24px 5vh 24px;
+        border-top: 1px solid rgba(108, 99, 255, 0.1);
+    }
+    
     .main-content {
         margin-left: 0;
+        transition: filter 0.3s ease;
+    }
+    
+    .main-content.sidebar-open {
+        filter: brightness(0.7) blur(1px);
+        pointer-events: none;
     }
     
     .sidebar-toggle {
