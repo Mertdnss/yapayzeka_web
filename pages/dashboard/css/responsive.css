@@ -22,6 +22,10 @@
         box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
         transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         will-change: transform;
+        /* Android navigation bar compatibility */
+        height: 100vh;
+        height: calc(100vh + env(safe-area-inset-bottom, 0px));
+        height: 100dvh; /* Dynamic viewport height for newer browsers */
     }
     
     .sidebar.active {
@@ -99,6 +103,8 @@
     .sidebar-footer {
         padding: 3vh 24px 5vh 24px;
         border-top: 1px solid rgba(108, 99, 255, 0.1);
+        /* Extra padding for Android navigation bars */
+        padding-bottom: calc(5vh + max(env(safe-area-inset-bottom, 0px), 20px));
     }
     
     .main-content {
@@ -172,5 +178,20 @@
     
     .stat-number {
         font-size: 24px;
+    }
+    
+    /* Android navigation bar support */
+    .sidebar-footer {
+        padding-bottom: calc(5vh + max(env(safe-area-inset-bottom, 0px), 30px)) !important;
+        min-height: calc(8vh + env(safe-area-inset-bottom, 30px));
+    }
+}
+
+/* Specific support for gesture navigation */
+@supports (padding: max(0px)) {
+    @media (max-width: 768px) {
+        .sidebar-footer {
+            padding-bottom: max(calc(5vh + env(safe-area-inset-bottom, 0px)), 8vh) !important;
+        }
     }
 }
