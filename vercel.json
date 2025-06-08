@@ -2,7 +2,7 @@
   "redirects": [
     {
       "source": "/",
-      "destination": "/pages/auth/index.html",
+      "destination": "/pages/site/index.html",
       "permanent": true
     }
   ]

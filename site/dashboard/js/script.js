@@ -86,15 +86,144 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Notification button
+    // Notification functionality
     const notificationBtn = document.querySelector('.notification-btn');
+    const notificationDropdown = document.querySelector('.notification-dropdown');
+    const markAllReadBtn = document.querySelector('.mark-all-read');
+    const viewAllNotificationsBtn = document.querySelector('.view-all-notifications');
     
-    if (notificationBtn) {
-        notificationBtn.addEventListener('click', function() {
-            // Toggle notifications panel
-            console.log('Show notifications');
-            // You can implement a dropdown here
+    if (notificationBtn && notificationDropdown) {
+        // Toggle notification dropdown
+        notificationBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            notificationDropdown.classList.toggle('active');
         });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!notificationBtn.contains(e.target) && !notificationDropdown.contains(e.target)) {
+                notificationDropdown.classList.remove('active');
+            }
+        });
+
+        // Mark all as read functionality
+        if (markAllReadBtn) {
+            markAllReadBtn.addEventListener('click', function() {
+                const unreadItems = document.querySelectorAll('.notification-item.unread');
+                unreadItems.forEach(item => {
+                    item.classList.remove('unread');
+                });
+                
+                // Update badge count
+                const badge = document.querySelector('.notification-badge');
+                if (badge) {
+                    badge.style.opacity = '0';
+                    setTimeout(() => {
+                        badge.textContent = '0';
+                        badge.style.display = 'none';
+                    }, 200);
+                }
+                
+                // Show success message
+                showToast('Tüm bildirimler okundu olarak işaretlendi', 'success');
+            });
+        }
+
+        // View all notifications
+        if (viewAllNotificationsBtn) {
+            viewAllNotificationsBtn.addEventListener('click', function() {
+                console.log('Navigate to all notifications page');
+                notificationDropdown.classList.remove('active');
+                // Add navigation logic here
+            });
+        }
+
+        // Individual notification actions
+        const actionButtons = document.querySelectorAll('.action-view');
+        actionButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const notificationItem = this.closest('.notification-item');
+                const title = notificationItem.querySelector('.notification-title').textContent;
+                
+                // Mark as read
+                notificationItem.classList.remove('unread');
+                
+                // Update badge count
+                updateNotificationBadge();
+                
+                console.log('Action clicked for notification:', title);
+                showToast('Bildirim işlendi: ' + title, 'info');
+            });
+        });
+
+        // Click on notification item to mark as read
+        const notificationItems = document.querySelectorAll('.notification-item');
+        notificationItems.forEach(item => {
+            item.addEventListener('click', function() {
+                if (this.classList.contains('unread')) {
+                    this.classList.remove('unread');
+                    updateNotificationBadge();
+                }
+            });
+        });
+    }
+
+    // Update notification badge count
+    function updateNotificationBadge() {
+        const unreadCount = document.querySelectorAll('.notification-item.unread').length;
+        const badge = document.querySelector('.notification-badge');
+        
+        if (badge) {
+            if (unreadCount > 0) {
+                badge.textContent = unreadCount;
+                badge.style.display = 'block';
+                badge.style.opacity = '1';
+            } else {
+                badge.style.opacity = '0';
+                setTimeout(() => {
+                    badge.style.display = 'none';
+                }, 200);
+            }
+        }
+    }
+
+    // Toast notification function
+    function showToast(message, type = 'info') {
+        // Remove existing toast if any
+        const existingToast = document.querySelector('.toast');
+        if (existingToast) {
+            existingToast.remove();
+        }
+
+        const toast = document.createElement('div');
+        toast.className = `toast toast-${type}`;
+        toast.innerHTML = `
+            <div class="toast-content">
+                <div class="toast-icon">
+                    ${type === 'success' ? 
+                        '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13 4L6 11L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' : 
+                        '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="2"/><path d="M8 11V7M8 5h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+                    }
+                </div>
+                <span class="toast-message">${message}</span>
+            </div>
+        `;
+
+        document.body.appendChild(toast);
+
+        // Trigger animation
+        setTimeout(() => {
+            toast.classList.add('show');
+        }, 100);
+
+        // Auto remove after 3 seconds
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => {
+                toast.remove();
+            }, 300);
+        }, 3000);
     }
 
     // Quick action buttons
