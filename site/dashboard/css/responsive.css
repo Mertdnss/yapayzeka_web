@@ -195,3 +195,292 @@
         }
     }
 }
+
+/* CV Builder Responsive Styles */
+@media (max-width: 1024px) {
+    .cv-builder-hero {
+        padding: 30px;
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+    
+    .hero-content h2 {
+        font-size: 2rem;
+    }
+    
+    .hero-visual {
+        flex: none;
+    }
+    
+    .cv-main-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .template-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+    
+    /* Multi-step form responsive */
+    .cv-builder-container {
+        padding: 1rem;
+    }
+    
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .cv-builder-content {
+        flex-direction: column;
+    }
+    
+    .cv-form-section {
+        width: 100%;
+    }
+    
+    .cv-preview-section {
+        width: 100%;
+        margin-top: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .cv-builder-hero {
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .hero-content h2 {
+        font-size: 1.75rem;
+        margin-bottom: 12px;
+    }
+    
+    .hero-content p {
+        font-size: 1rem;
+        margin-bottom: 24px;
+    }
+    
+    .hero-actions {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+    
+    .btn-primary, .btn-secondary {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+    }
+    
+    .cv-preview-mockup {
+        width: 150px;
+        height: 210px;
+    }
+    
+    .stats-grid.cv-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    .cv-step {
+        padding: 16px;
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+    }
+    
+    .step-content {
+        order: 2;
+    }
+    
+    .step-status {
+        order: 3;
+    }
+    
+    .step-number {
+        order: 1;
+    }
+    
+    .template-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    .template-card {
+        padding: 12px;
+    }
+    
+    .cv-item {
+        padding: 16px;
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+    }
+    
+    .cv-actions {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .cv-builder-hero {
+        padding: 16px;
+    }
+    
+    .hero-content h2 {
+        font-size: 1.5rem;
+    }
+    
+    .hero-content p {
+        font-size: 0.9rem;
+    }
+    
+    .cv-preview-mockup {
+        width: 120px;
+        height: 168px;
+    }
+    
+    .stats-grid.cv-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .stat-card {
+        padding: 16px;
+    }
+    
+    .cv-step {
+        padding: 12px;
+    }
+    
+    .step-number {
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
+    }
+    
+    .step-title {
+        font-size: 1rem;
+    }
+    
+    .step-desc {
+        font-size: 0.85rem;
+    }
+    
+    .template-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .template-mockup {
+        width: 60px;
+        height: 80px;
+    }
+    
+    .cv-item {
+        padding: 12px;
+    }
+    
+    .cv-item .cv-icon {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .cv-name {
+        font-size: 1rem;
+    }
+    
+    .cv-details {
+        font-size: 0.85rem;
+    }
+    
+    .cv-action-btn {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+/* Landscape orientation adjustments */
+@media (max-width: 768px) and (orientation: landscape) {
+    .cv-builder-hero {
+        flex-direction: row;
+        padding: 20px;
+    }
+    
+    .hero-actions {
+        flex-direction: row;
+        gap: 12px;
+    }
+    
+    .btn-primary, .btn-secondary {
+        width: auto;
+        max-width: none;
+    }
+    
+    .cv-step {
+        flex-direction: row;
+        text-align: left;
+    }
+    
+    .step-content {
+        order: 2;
+    }
+    
+    .step-status {
+        order: 3;
+    }
+    
+    .step-number {
+        order: 1;
+    }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .cv-preview-mockup {
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    }
+    
+    .template-mockup {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+}
+
+/* Dark mode support for CV Builder */
+@media (prefers-color-scheme: dark) {
+    .cv-step {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .template-card {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .cv-item {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .cv-preview-mockup {
+        background: #2d3748;
+    }
+    
+    .mockup-header {
+        background: #4a5568;
+    }
+    
+    .cv-line {
+        background: #4a5568;
+    }
+    
+    .template-mockup.minimal {
+        background: #2d3748;
+    }
+    
+    .template-mockup.minimal .template-line {
+        background: #4a5568;
+    }
+}
+/* Add more responsive styles as needed */
