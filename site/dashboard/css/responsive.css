@@ -196,291 +196,237 @@
     }
 }
 
-/* CV Builder Responsive Styles */
-@media (max-width: 1024px) {
-    .cv-builder-hero {
-        padding: 30px;
-        flex-direction: column;
-        text-align: center;
-        gap: 30px;
-    }
-    
-    .hero-content h2 {
-        font-size: 2rem;
-    }
-    
-    .hero-visual {
-        flex: none;
-    }
-    
-    .cv-main-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    
-    .template-grid {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    }
-    
-    /* Multi-step form responsive */
-    .cv-builder-container {
-        padding: 1rem;
-    }
-    
-    .form-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-    
-    .cv-builder-content {
-        flex-direction: column;
-    }
-    
-    .cv-form-section {
-        width: 100%;
-    }
-    
-    .cv-preview-section {
-        width: 100%;
-        margin-top: 2rem;
-    }
-}
-
+/* CV Builder Mobile Styles */
 @media (max-width: 768px) {
-    .cv-builder-hero {
+    .cv-builder-container {
+        padding: 10px;
+    }
+
+    /* Dashboard Mobile Styles */
+    .dashboard-header h1 {
+        font-size: 24px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .stat-card {
+        padding: 15px;
+    }
+
+    .stat-number {
+        font-size: 24px;
+    }
+
+    .quick-actions {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .action-card {
         padding: 20px;
+        text-align: center;
+    }
+
+    .recent-cvs-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .cv-card {
+        padding: 15px;
+    }
+
+    .cv-actions {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .cv-actions .btn {
+        width: 100%;
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+
+    /* Builder Mobile Styles */
+    .progress-bar {
         margin-bottom: 20px;
     }
-    
-    .hero-content h2 {
-        font-size: 1.75rem;
-        margin-bottom: 12px;
+
+    .progress-step {
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+        margin: 0 5px;
     }
-    
-    .hero-content p {
-        font-size: 1rem;
-        margin-bottom: 24px;
-    }
-    
-    .hero-actions {
-        flex-direction: column;
-        align-items: center;
-        gap: 12px;
-    }
-    
-    .btn-primary, .btn-secondary {
-        width: 100%;
-        max-width: 280px;
-        justify-content: center;
-    }
-    
-    .cv-preview-mockup {
-        width: 150px;
-        height: 210px;
-    }
-    
-    .stats-grid.cv-stats {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-    }
-    
-    .cv-step {
-        padding: 16px;
-        flex-direction: column;
-        text-align: center;
-        gap: 12px;
-    }
-    
+
     .step-content {
-        order: 2;
+        padding: 15px;
     }
-    
-    .step-status {
-        order: 3;
-    }
-    
-    .step-number {
-        order: 1;
-    }
-    
-    .template-grid {
-        grid-template-columns: repeat(2, 1fr);
+
+    .form-grid {
+        grid-template-columns: 1fr;
         gap: 15px;
     }
-    
-    .template-card {
+
+    .experience-item,
+    .education-item {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+
+    .skill-input-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .skill-input {
+        margin-right: 0;
+    }
+
+    .navigation {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn {
+        width: 100%;
         padding: 12px;
     }
-    
-    .cv-item {
-        padding: 16px;
-        flex-direction: column;
-        text-align: center;
-        gap: 12px;
+
+    .cv-preview {
+        padding: 15px;
+        font-size: 14px;
     }
-    
-    .cv-actions {
-        justify-content: center;
+
+    .cv-preview h1 {
+        font-size: 24px;
+    }
+
+    .cv-preview h2 {
+        font-size: 18px;
+    }
+
+    .cv-preview h3 {
+        font-size: 16px;
     }
 }
 
 @media (max-width: 480px) {
-    .cv-builder-hero {
+    /* CV Builder Mobile Styles */
+    .cv-progress-bar {
+        flex-direction: column;
+        gap: 16px;
         padding: 16px;
     }
-    
-    .hero-content h2 {
-        font-size: 1.5rem;
+
+    .cv-progress-bar::before {
+        display: none;
     }
-    
-    .hero-content p {
-        font-size: 0.9rem;
-    }
-    
-    .cv-preview-mockup {
-        width: 120px;
-        height: 168px;
-    }
-    
-    .stats-grid.cv-stats {
-        grid-template-columns: 1fr;
-    }
-    
-    .stat-card {
-        padding: 16px;
-    }
-    
-    .cv-step {
+
+    .progress-step {
+        flex-direction: row;
+        justify-content: flex-start;
+        width: 100%;
         padding: 12px;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 12px;
     }
-    
+
     .step-number {
         width: 32px;
         height: 32px;
-        font-size: 1rem;
+        font-size: 12px;
     }
-    
-    .step-title {
-        font-size: 1rem;
-    }
-    
-    .step-desc {
-        font-size: 0.85rem;
-    }
-    
-    .template-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .template-mockup {
-        width: 60px;
-        height: 80px;
-    }
-    
-    .cv-item {
-        padding: 12px;
-    }
-    
-    .cv-item .cv-icon {
-        width: 40px;
-        height: 40px;
-    }
-    
-    .cv-name {
-        font-size: 1rem;
-    }
-    
-    .cv-details {
-        font-size: 0.85rem;
-    }
-    
-    .cv-action-btn {
-        width: 32px;
-        height: 32px;
-    }
-}
 
-/* Landscape orientation adjustments */
-@media (max-width: 768px) and (orientation: landscape) {
-    .cv-builder-hero {
-        flex-direction: row;
-        padding: 20px;
+    .step-label {
+        font-size: 14px;
+        text-align: left;
+        margin-left: 12px;
     }
-    
-    .hero-actions {
-        flex-direction: row;
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .form-group.full-width {
+        grid-column: 1;
+    }
+
+    .experience-item,
+    .education-item {
+        padding: 16px;
+    }
+
+    .remove-item-btn {
+        top: 12px;
+        right: 12px;
+        width: 28px;
+        height: 28px;
+    }
+
+    .skill-input-container {
+        flex-direction: column;
         gap: 12px;
     }
-    
-    .btn-primary, .btn-secondary {
-        width: auto;
-        max-width: none;
-    }
-    
-    .cv-step {
-        flex-direction: row;
-        text-align: left;
-    }
-    
-    .step-content {
-        order: 2;
-    }
-    
-    .step-status {
-        order: 3;
-    }
-    
-    .step-number {
-        order: 1;
-    }
-}
 
-/* High DPI displays */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-    .cv-preview-mockup {
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    .add-skill-btn {
+        width: 100%;
+        height: 44px;
+        border-radius: 12px;
     }
-    
-    .template-mockup {
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    }
-}
 
-/* Dark mode support for CV Builder */
-@media (prefers-color-scheme: dark) {
-    .cv-step {
-        background: rgba(255, 255, 255, 0.05);
-        border-color: rgba(255, 255, 255, 0.1);
+    .cv-navigation {
+        flex-direction: column;
+        gap: 12px;
+        padding: 16px;
     }
-    
-    .template-card {
-        background: rgba(255, 255, 255, 0.05);
-        border-color: rgba(255, 255, 255, 0.1);
+
+    .nav-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 16px;
     }
-    
-    .cv-item {
-        background: rgba(255, 255, 255, 0.05);
-        border-color: rgba(255, 255, 255, 0.1);
+
+    .cv-preview-container {
+        padding: 16px;
+        max-height: 400px;
     }
-    
-    .cv-preview-mockup {
-        background: #2d3748;
+
+    .cv-template {
+        padding: 20px;
     }
-    
-    .mockup-header {
-        background: #4a5568;
+
+    .cv-name {
+        font-size: 24px;
     }
-    
-    .cv-line {
-        background: #4a5568;
+
+    .cv-contact {
+        flex-direction: column;
+        gap: 8px;
     }
-    
-    .template-mockup.minimal {
-        background: #2d3748;
+
+    .preview-actions {
+        flex-direction: column;
+        gap: 8px;
     }
-    
-    .template-mockup.minimal .template-line {
-        background: #4a5568;
+
+    .template-btn,
+    .download-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 12px 16px;
+    }
+
+    .suggested-skills {
+        gap: 6px;
+    }
+
+    .suggested-skill {
+        font-size: 11px;
+        padding: 4px 8px;
     }
 }
-/* Add more responsive styles as needed */

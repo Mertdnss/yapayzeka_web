@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>AI CV Builder - AssistAI</title>
+    <title>CV Builder - AssistAI</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
@@ -37,7 +37,7 @@
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                             <path d="M3 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4zM3 10a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-6zM13 9a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1h-3z" fill="currentColor"/>
                         </svg>
-                        <span>Kontrol Paneli</span>
+                        <span>Dashboard</span>
                     </a>
                 </li>
                 <li class="nav-item active">
@@ -98,7 +98,7 @@
         <div class="sidebar-footer">
             <div class="user-info">
                 <div class="user-avatar">
-                    <img src="https://via.placeholder.com/40" alt="User">
+                    <img src="https://via.placeholder.com/40" alt="Kullanıcı">
                 </div>
                 <div class="user-details">
                     <div class="user-name">Mert Demir</div>
@@ -127,8 +127,8 @@
                     </svg>
                 </button>
                 <div class="page-title">
-                    <h1>AI CV Oluşturucu</h1>
-                    <p>Yapay zeka desteğiyle profesyonel özgeçmişler oluşturun</p>
+                    <h1>CV Builder</h1>
+                    <p>AI destekli CV oluşturucu ile profesyonel CV'nizi hazırlayın</p>
                 </div>
             </div>
             <div class="header-right">
@@ -136,599 +136,601 @@
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path d="M9 17A8 8 0 1 0 9 1a8 8 0 0 0 0 16zM20 20l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    <input type="text" placeholder="Şablon ara...">
+                    <input type="text" placeholder="Ara...">
                 </div>
                 <div class="notification-container">
                     <button class="notification-btn">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                             <path d="M10 2C7.8 2 6 3.8 6 6v4l-2 2v1h12v-1l-2-2V6c0-2.2-1.8-4-4-4zM8.5 15.5v.5c0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5v-.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        <span class="notification-badge">2</span>
+                        <span class="notification-badge">3</span>
                     </button>
                 </div>
             </div>
         </header>
 
         <!-- CV Builder Content -->
-        <div class="dashboard-content" id="mainGrid">
-            <!-- Quick Start Section -->
-            <div class="cv-builder-hero">
-                <div class="hero-content">
-                    <div class="hero-text">
-                        <h2>Mükemmel Özgeçmişinizi Oluşturun</h2>
-                        <p>Yapay zekamızın öne çıkan profesyonel bir özgeçmiş oluşturmanıza yardım etmesine izin verin. Şablonlar arasından seçin veya sıfırdan başlayın.</p>
-                    </div>
-                    <div class="hero-actions">
-                        <button class="btn-primary cv-start-btn" onclick="startCVBuilder(1)">
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                <path d="M10 2l6 4v8l-6 4-6-4V6l6-4z" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                                <path d="M10 8l4 2-4 2-4-2 4-2z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+        <div class="dashboard-content">
+            <!-- Dashboard View -->
+            <div id="dashboardView" class="dashboard-view">
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" stroke-width="2" fill="none"/>
+                                <polyline points="14,2 14,8 20,8" stroke="currentColor" stroke-width="2" fill="none"/>
+                                <line x1="16" y1="13" x2="8" y2="13" stroke="currentColor" stroke-width="2"/>
+                                <line x1="16" y1="17" x2="8" y2="17" stroke="currentColor" stroke-width="2"/>
+                                <polyline points="10,9 9,9 8,9" stroke="currentColor" stroke-width="2"/>
                             </svg>
-                            AI ile Başla
-                        </button>
-                        <button class="btn-secondary cv-template-btn" onclick="document.getElementById('templatesSection').scrollIntoView({behavior: 'smooth'})">
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                <path d="M4 4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4z" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                                <path d="M6 8h8M6 12h8M6 16h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </div>
+                        <div class="stat-content">
+                            <h3>3</h3>
+                            <p>Oluşturulan CV</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="currentColor" stroke-width="2" fill="none"/>
                             </svg>
-                            Şablonlara Gözat
-                        </button>
-                    </div>
-                </div>
-                <div class="hero-visual">
-                    <div class="cv-preview-mockup">
-                        <div class="mockup-header">
-                            <div class="mockup-dots">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </div>
                         </div>
-                        <div class="mockup-content">
-                            <div class="cv-lines">
-                                <div class="cv-line title"></div>
-                                <div class="cv-line subtitle"></div>
-                                <div class="cv-line"></div>
-                                <div class="cv-line"></div>
-                                <div class="cv-line short"></div>
-                                <div class="cv-line"></div>
-                                <div class="cv-line medium"></div>
-                            </div>
+                        <div class="stat-content">
+                            <h3>4.8</h3>
+                            <p>Ortalama Puan</p>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <!-- Stats Cards -->
-            <div class="stats-grid cv-stats">
-                <div class="stat-card">
-                    <div class="stat-icon cv-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M4 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4z" stroke="currentColor" stroke-width="2" fill="none"/>
-                            <path d="M6 8h12M6 12h12M6 16h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <div class="stat-content">
-                        <div class="stat-number">12</div>
-                        <div class="stat-label">Oluşturulan CV</div>
-                        <div class="stat-change positive">+3 bu ay</div>
-                    </div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-icon template-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2 2z" stroke="currentColor" stroke-width="2" fill="none"/>
-                            <path d="M8 5v4M16 5v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <div class="stat-content">
-                        <div class="stat-number">25+</div>
-                        <div class="stat-label">Şablon</div>
-                        <div class="stat-change neutral">Mevcut</div>
-                    </div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-icon ai-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="currentColor" stroke-width="2" fill="none"/>
-                        </svg>
-                    </div>
-                    <div class="stat-content">
-                        <div class="stat-number">95%</div>
-                        <div class="stat-label">AI Doğruluğu</div>
-                        <div class="stat-change positive">İyileştirildi</div>
-                    </div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-icon download-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <div class="stat-content">
-                        <div class="stat-number">48</div>
-                        <div class="stat-label">İndirme</div>
-                        <div class="stat-change positive">Bu ay</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CV Builder Form Container -->
-            <div class="cv-builder-container" id="cvBuilderContainer" style="display: none;">
-                <!-- Progress Bar -->
-                <div class="cv-progress-bar">
-                    <div class="progress-steps">
-                        <div class="progress-step active" data-step="1">
-                            <div class="step-circle">1</div>
-                            <span>Kişisel Bilgiler</span>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2"/>
+                                <circle cx="8.5" cy="7" r="4" stroke="currentColor" stroke-width="2" fill="none"/>
+                                <path d="m17 11 2 2 4-4" stroke="currentColor" stroke-width="2"/>
+                            </svg>
                         </div>
-                        <div class="progress-step" data-step="2">
-                            <div class="step-circle">2</div>
-                            <span>İş Deneyimi</span>
-                        </div>
-                        <div class="progress-step" data-step="3">
-                            <div class="step-circle">3</div>
-                            <span>Yetenekler & Eğitim</span>
-                        </div>
-                        <div class="progress-step" data-step="4">
-                            <div class="step-circle">4</div>
-                            <span>İnceleme & İndirme</span>
-                        </div>
-                    </div>
-                    <div class="progress-line">
-                        <div class="progress-fill" style="width: 25%;"></div>
-                    </div>
-                </div>
-
-                <!-- Step 1: Personal Information -->
-                <div class="cv-step-form active" id="step1">
-                    <div class="step-header">
-                        <h2>Kişisel Bilgileriniz</h2>
-                        <p>CV'nizin temelini oluşturacak kişisel bilgilerinizi girin</p>
-                    </div>
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label for="firstName">Ad *</label>
-                            <input type="text" id="firstName" name="firstName" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="lastName">Soyad *</label>
-                            <input type="text" id="lastName" name="lastName" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">E-posta *</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Telefon</label>
-                            <input type="tel" id="phone" name="phone">
-                        </div>
-                        <div class="form-group full-width">
-                            <label for="address">Adres</label>
-                            <input type="text" id="address" name="address">
-                        </div>
-                        <div class="form-group">
-                            <label for="city">Şehir</label>
-                            <input type="text" id="city" name="city">
-                        </div>
-                        <div class="form-group">
-                            <label for="country">Ülke</label>
-                            <input type="text" id="country" name="country">
-                        </div>
-                        <div class="form-group full-width">
-                            <label for="profession">Meslek/Pozisyon *</label>
-                            <input type="text" id="profession" name="profession" required>
-                        </div>
-                        <div class="form-group full-width">
-                            <label for="summary">Kısa Özet</label>
-                            <textarea id="summary" name="summary" rows="4" placeholder="Kendinizi kısaca tanıtın..."></textarea>
+                        <div class="stat-content">
+                            <h3>12</h3>
+                            <p>İş Başvurusu</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Step 2: Work Experience -->
-                <div class="cv-step-form" id="step2">
-                    <div class="step-header">
-                        <h2>İş Deneyimi</h2>
-                        <p>AI size en uygun açıklamaları önerecek</p>
-                    </div>
-                    <div class="experience-container">
-                        <div class="experience-item">
-                            <div class="form-grid">
-                                <div class="form-group">
-                                    <label for="jobTitle1">Pozisyon *</label>
-                                    <input type="text" id="jobTitle1" name="jobTitle1" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="company1">Şirket *</label>
-                                    <input type="text" id="company1" name="company1" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="startDate1">Başlangıç Tarihi</label>
-                                    <input type="month" id="startDate1" name="startDate1">
-                                </div>
-                                <div class="form-group">
-                                    <label for="endDate1">Bitiş Tarihi</label>
-                                    <input type="month" id="endDate1" name="endDate1">
-                                    <label class="checkbox-label">
-                                        <input type="checkbox" id="current1" name="current1">
-                                        Halen çalışıyorum
-                                    </label>
-                                </div>
-                                <div class="form-group full-width">
-                                    <label for="description1">İş Açıklaması</label>
-                                    <textarea id="description1" name="description1" rows="4" placeholder="Sorumluluklarınızı ve başarılarınızı açıklayın..."></textarea>
-                                    <button type="button" class="ai-suggest-btn">
-                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                            <path d="M8 0l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6l2-6z" fill="currentColor"/>
-                                        </svg>
-                                        AI Önerisi Al
-                                    </button>
-                                </div>
-                            </div>
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <button id="createNewCV" class="create-cv-btn">
+                        <div class="btn-icon">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
                         </div>
-                    </div>
-                    <button type="button" class="add-experience-btn">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                            <path d="M8 1v14M1 8h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                        Deneyim Ekle
+                        <div class="btn-content">
+                            <h3>Yeni CV Oluştur</h3>
+                            <p>AI destekli araçlarla profesyonel CV'nizi oluşturun</p>
+                        </div>
+                    </button>
+                    <button class="template-btn">
+                        <div class="btn-icon">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M3 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4zM3 10a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-6zM13 9a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1h-3z" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <div class="btn-content">
+                            <h3>Şablon Galerisini Gör</h3>
+                            <p>Hazır şablonlardan birini seçin</p>
+                        </div>
                     </button>
                 </div>
 
-                <!-- Step 3: Skills & Education -->
-                <div class="cv-step-form" id="step3">
-                    <div class="step-header">
-                        <h2>Yetenekler ve Eğitim</h2>
-                        <p>AI size uygun yetenekleri önerecek</p>
+                <!-- Recent CVs -->
+                <div class="recent-cvs">
+                    <div class="section-header">
+                        <h2>Son Oluşturulan CV'ler</h2>
+                        <button class="view-all-btn">Tümünü Gör</button>
                     </div>
-                    <div class="skills-education-grid">
-                        <div class="skills-section">
-                            <h3>Yetenekler</h3>
-                            <div class="skills-input-container">
-                                <input type="text" id="skillInput" placeholder="Yetenek ekleyin...">
-                                <button type="button" class="add-skill-btn">Ekle</button>
-                            </div>
-                            <div class="skills-list" id="skillsList">
-                                <!-- Skills will be added dynamically -->
-                            </div>
-                            <button type="button" class="ai-suggest-btn">
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                    <path d="M8 0l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6l2-6z" fill="currentColor"/>
-                                </svg>
-                                AI Yetenek Önerisi
-                            </button>
-                        </div>
-                        <div class="education-section">
-                            <h3>Eğitim</h3>
-                            <div class="education-item">
-                                <div class="form-grid">
-                                    <div class="form-group">
-                                        <label for="degree1">Derece/Diploma</label>
-                                        <input type="text" id="degree1" name="degree1">
+                    <div class="cv-grid">
+                        <div class="cv-card">
+                            <div class="cv-preview">
+                                <div class="cv-thumbnail">
+                                    <div class="cv-header-mini">
+                                        <div class="cv-name-mini">Ahmet Yılmaz</div>
+                                        <div class="cv-title-mini">Frontend Developer</div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="school1">Okul/Üniversite</label>
-                                        <input type="text" id="school1" name="school1">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="eduStartDate1">Başlangıç</label>
-                                        <input type="month" id="eduStartDate1" name="eduStartDate1">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="eduEndDate1">Bitiş</label>
-                                        <input type="month" id="eduEndDate1" name="eduEndDate1">
+                                    <div class="cv-content-mini">
+                                        <div class="cv-line"></div>
+                                        <div class="cv-line short"></div>
+                                        <div class="cv-line"></div>
                                     </div>
                                 </div>
                             </div>
-                            <button type="button" class="add-education-btn">
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                    <path d="M8 1v14M1 8h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                                </svg>
-                                Eğitim Ekle
-                            </button>
+                            <div class="cv-info">
+                                <h3>Frontend Developer CV</h3>
+                                <p>Son güncelleme: 2 gün önce</p>
+                                <div class="cv-actions">
+                                    <button class="edit-btn">Düzenle</button>
+                                    <button class="download-btn">İndir</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cv-card">
+                            <div class="cv-preview">
+                                <div class="cv-thumbnail">
+                                    <div class="cv-header-mini">
+                                        <div class="cv-name-mini">Ayşe Demir</div>
+                                        <div class="cv-title-mini">UI/UX Designer</div>
+                                    </div>
+                                    <div class="cv-content-mini">
+                                        <div class="cv-line"></div>
+                                        <div class="cv-line short"></div>
+                                        <div class="cv-line"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cv-info">
+                                <h3>UI/UX Designer CV</h3>
+                                <p>Son güncelleme: 1 hafta önce</p>
+                                <div class="cv-actions">
+                                    <button class="edit-btn">Düzenle</button>
+                                    <button class="download-btn">İndir</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cv-card">
+                            <div class="cv-preview">
+                                <div class="cv-thumbnail">
+                                    <div class="cv-header-mini">
+                                        <div class="cv-name-mini">Mehmet Kaya</div>
+                                        <div class="cv-title-mini">Data Scientist</div>
+                                    </div>
+                                    <div class="cv-content-mini">
+                                        <div class="cv-line"></div>
+                                        <div class="cv-line short"></div>
+                                        <div class="cv-line"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cv-info">
+                                <h3>Data Scientist CV</h3>
+                                <p>Son güncelleme: 2 hafta önce</p>
+                                <div class="cv-actions">
+                                    <button class="edit-btn">Düzenle</button>
+                                    <button class="download-btn">İndir</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Builder View -->
+            <div id="builderView" class="builder-view" style="display: none;">
+                <!-- Progress Bar -->
+                <div class="cv-progress-container">
+                    <div class="cv-progress-bar">
+                        <div class="progress-step active" data-step="1">
+                            <div class="step-number">1</div>
+                            <div class="step-label">Kişisel Bilgiler</div>
+                        </div>
+                        <div class="progress-step" data-step="2">
+                            <div class="step-number">2</div>
+                            <div class="step-label">Deneyim</div>
+                        </div>
+                        <div class="progress-step" data-step="3">
+                            <div class="step-number">3</div>
+                            <div class="step-label">Eğitim</div>
+                        </div>
+                        <div class="progress-step" data-step="4">
+                            <div class="step-number">4</div>
+                            <div class="step-label">Yetenekler</div>
+                        </div>
+                        <div class="progress-step" data-step="5">
+                            <div class="step-number">5</div>
+                            <div class="step-label">AI Mesaj</div>
+                        </div>
+                        <div class="progress-step" data-step="6">
+                            <div class="step-number">6</div>
+                            <div class="step-label">Önizleme</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Step 4: Review & Download -->
-                <div class="cv-step-form" id="step4">
-                    <div class="step-header">
-                        <h2>İnceleme ve İndirme</h2>
-                        <p>CV'nizi son kez gözden geçirin ve indirin</p>
-                    </div>
-                    <div class="review-container">
-                        <div class="cv-preview">
-                            <div class="preview-header">
-                                <h3>CV Önizleme</h3>
-                                <div class="template-selector">
-                                    <label for="templateSelect">Şablon Seç:</label>
-                                    <select id="templateSelect">
-                                        <option value="modern">Modern Profesyonel</option>
-                                        <option value="creative">Yaratıcı Tasarımcı</option>
-                                        <option value="minimal">Minimal Temiz</option>
-                                    </select>
+                <!-- CV Builder Form -->
+                <div class="cv-builder-container">
+                <div class="cv-form-section">
+                    <!-- Step 1: Personal Information -->
+                    <div class="form-step active" id="step-1">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Kişisel Bilgiler</h3>
+                                <div class="ai-badge">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M8 1l2.5 5h5.5l-4.5 3.5 1.5 5.5-4.5-3.5-4.5 3.5 1.5-5.5-4.5-3.5h5.5z" fill="currentColor"/>
+                                    </svg>
+                                    AI Destekli
                                 </div>
                             </div>
-                            <div class="preview-content" id="cvPreview">
-                                <!-- CV preview will be generated here -->
-                                <div class="preview-placeholder">
-                                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                                        <path d="M8 8a4 4 0 0 1 4-4h24a4 4 0 0 1 4 4v32a4 4 0 0 1-4 4H12a4 4 0 0 1-4-4V8z" stroke="currentColor" stroke-width="2" fill="none"/>
-                                        <path d="M12 16h24M12 24h24M12 32h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                                    </svg>
-                                    <p>CV önizlemesi burada görünecek</p>
+                            <div class="card-content">
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label for="firstName">Ad <span class="required">*</span></label>
+                                        <input type="text" id="firstName" name="firstName" placeholder="Adınızı girin" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="lastName">Soyad <span class="required">*</span></label>
+                                        <input type="text" id="lastName" name="lastName" placeholder="Soyadınızı girin" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">E-posta <span class="required">*</span></label>
+                                        <input type="email" id="email" name="email" placeholder="E-posta adresinizi girin" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phone">Telefon <span class="required">*</span></label>
+                                        <input type="tel" id="phone" name="phone" placeholder="Telefon numaranızı girin" required>
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label for="address">Adres</label>
+                                        <input type="text" id="address" name="address" placeholder="Adresinizi girin">
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label for="jobTitle">Hedef Pozisyon <span class="required">*</span></label>
+                                        <input type="text" id="jobTitle" name="jobTitle" placeholder="Örn: Frontend Developer, Pazarlama Uzmanı" required>
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <div class="ai-toggle-section">
+                                            <div class="toggle-header">
+                                                <label for="summary">Özet</label>
+                                                <div class="ai-toggle">
+                                                    <input type="checkbox" id="aiSummary" class="ai-checkbox">
+                                                    <label for="aiSummary" class="toggle-label">
+                                                        <span class="toggle-text">AI Oluştursun</span>
+                                                        <div class="toggle-switch"></div>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <textarea id="summary" name="summary" rows="6" placeholder="Kendinizi kısaca tanıtın... Profesyonel geçmişiniz, yetenekleriniz ve hedefleriniz hakkında 2-3 cümle yazın. AI'nın oluşturmasını istiyorsanız yukarıdaki seçeneği işaretleyin."></textarea>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="download-options">
-                            <h3>İndirme Seçenekleri</h3>
-                            <div class="download-formats">
-                                <button class="download-btn pdf-btn">
-                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                        <path d="M4 4a2 2 0 0 1 2-2h8l4 4v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4z" stroke="currentColor" stroke-width="2" fill="none"/>
-                                        <path d="M14 2v4h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </div>
+
+                    <!-- Step 2: Experience -->
+                    <div class="form-step" id="step-2">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>İş Deneyimi</h3>
+                                <div class="ai-toggle">
+                                    <input type="checkbox" id="aiExperience" class="ai-checkbox">
+                                    <label for="aiExperience" class="toggle-label">
+                                        <span class="toggle-text">AI Tamamlasın</span>
+                                        <div class="toggle-switch"></div>
+                                    </label>
+                                </div>
+                                <button id="addExperience" class="add-experience-btn">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M8 1v14M1 8h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                                     </svg>
-                                    PDF İndir
-                                </button>
-                                <button class="download-btn word-btn">
-                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                        <path d="M4 4a2 2 0 0 1 2-2h8l4 4v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4z" stroke="currentColor" stroke-width="2" fill="none"/>
-                                        <path d="M14 2v4h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                    Word İndir
+                                    Deneyim Ekle
                                 </button>
                             </div>
-                            <div class="share-options">
-                                <h4>Paylaşım</h4>
-                                <button class="share-btn">
+                            <div class="card-content">
+                                <div class="ai-info-box">
                                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                        <path d="M6 8a2 2 0 1 0 4 0 2 2 0 0 0-4 0zM2 8a2 2 0 1 0 4 0 2 2 0 0 0-4 0zM10 8a2 2 0 1 0 4 0 2 2 0 0 0-4 0z" fill="currentColor"/>
+                                        <path d="M8 1l2.5 5h5.5l-4.5 3.5 1.5 5.5-4.5-3.5-4.5 3.5 1.5-5.5-4.5-3.5h5.5z" fill="currentColor"/>
                                     </svg>
-                                    Link Oluştur
+                                    <span>İş deneyiminiz varsa ekleyin. Deneyiminiz yoksa bu bölümü boş bırakabilir veya staj, gönüllülük, proje deneyimlerinizi yazabilirsiniz. AI eksik bilgileri tamamlayabilir.</span>
+                                </div>
+                                <div class="experience-list" id="experienceContainer">
+                                    <div class="experience-item">
+                                        <div class="form-grid">
+                                            <div class="form-group">
+                                                <label for="expJobTitle">Pozisyon</label>
+                                                <input type="text" id="expJobTitle" name="expJobTitle" placeholder="Pozisyon adı (örn: Stajyer, Gönüllü, Freelancer)">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="company">Şirket/Kurum</label>
+                                                <input type="text" id="company" name="company" placeholder="Şirket, kurum veya proje adı">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="startDate">Başlangıç Tarihi</label>
+                                                <input type="month" id="startDate" name="startDate">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="endDate">Bitiş Tarihi</label>
+                                                <input type="month" id="endDate" name="endDate">
+                                                <div class="checkbox-group">
+                                                    <input type="checkbox" id="currentJob" name="currentJob">
+                                                    <label for="currentJob">Halen çalışıyorum</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group full-width">
+                                                <div class="ai-toggle-section">
+                                                    <div class="toggle-header">
+                                                        <label for="jobDescription">Açıklama</label>
+                                                        <div class="ai-toggle">
+                                                            <input type="checkbox" id="aiJobDesc" class="ai-checkbox">
+                                                            <label for="aiJobDesc" class="toggle-label">
+                                                                <span class="toggle-text">AI Oluştursun</span>
+                                                                <div class="toggle-switch"></div>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <textarea id="jobDescription" name="jobDescription" rows="5" placeholder="İş tanımınızı, sorumluluklarınızı ve başarılarınızı detaylı olarak yazın. Örn: Proje yönetimi, takım liderliği, müşteri ilişkileri... AI'nın oluşturmasını istiyorsanız yukarıdaki seçeneği işaretleyin."></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button class="remove-item-btn">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                <path d="M12 4L4 12M4 4l8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Education -->
+                    <div class="form-step" id="step-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Eğitim Bilgileri</h3>
+                                <div class="ai-toggle">
+                                    <input type="checkbox" id="aiEducation" class="ai-checkbox">
+                                    <label for="aiEducation" class="toggle-label">
+                                        <span class="toggle-text">AI Tamamlasın</span>
+                                        <div class="toggle-switch"></div>
+                                    </label>
+                                </div>
+                                <button id="addEducation" class="add-education-btn">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M8 1v14M1 8h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                    Eğitim Ekle
                                 </button>
+                            </div>
+                            <div class="card-content">
+                                <div class="ai-info-box">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M8 1l2.5 5h5.5l-4.5 3.5 1.5 5.5-4.5-3.5-4.5 3.5 1.5-5.5-4.5-3.5h5.5z" fill="currentColor"/>
+                                    </svg>
+                                    <span>En az bir eğitim bilgisi ekleyin. AI, eksik detayları tamamlayabilir.</span>
+                                </div>
+                                <div class="education-list" id="educationContainer">
+                                    <div class="education-item">
+                                        <div class="form-grid">
+                                            <div class="form-group">
+                                                <label for="degree">Derece <span class="required">*</span></label>
+                                                <input type="text" id="degree" name="degree" placeholder="Lisans, Yüksek Lisans vb." required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="school">Okul <span class="required">*</span></label>
+                                                <input type="text" id="school" name="school" placeholder="Okul adı" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="eduStartDate">Başlangıç Yılı <span class="required">*</span></label>
+                                                <input type="number" id="eduStartDate" name="eduStartDate" min="1950" max="2030" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="eduEndDate">Bitiş Yılı</label>
+                                                <input type="number" id="eduEndDate" name="eduEndDate" min="1950" max="2030">
+                                            </div>
+                                            <div class="form-group full-width">
+                                                <div class="ai-toggle-section">
+                                                    <div class="toggle-header">
+                                                        <label for="eduDescription">Açıklama</label>
+                                                        <div class="ai-toggle">
+                                                            <input type="checkbox" id="aiEduDesc" class="ai-checkbox">
+                                                            <label for="aiEduDesc" class="toggle-label">
+                                                                <span class="toggle-text">AI Oluştursun</span>
+                                                                <div class="toggle-switch"></div>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <textarea id="eduDescription" name="eduDescription" rows="4" placeholder="Eğitim sürecindeki başarılarınızı, önemli projelerinizi, aldığınız ödülleri, not ortalamanızı veya öne çıkan deneyimlerinizi yazın. AI'nın oluşturmasını istiyorsanız yukarıdaki seçeneği işaretleyin."></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button class="remove-item-btn">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                <path d="M12 4L4 12M4 4l8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Skills -->
+                    <div class="form-step" id="step-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Yetenekler</h3>
+                                <div class="ai-toggle">
+                                    <input type="checkbox" id="aiSkills" class="ai-checkbox">
+                                    <label for="aiSkills" class="toggle-label">
+                                        <span class="toggle-text">AI Önersin</span>
+                                        <div class="toggle-switch"></div>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <div class="ai-info-box">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M8 1l2.5 5h5.5l-4.5 3.5 1.5 5.5-4.5-3.5-4.5 3.5 1.5-5.5-4.5-3.5h5.5z" fill="currentColor"/>
+                                    </svg>
+                                    <span>En az 3 yetenek ekleyin. AI, pozisyonunuza uygun yetenekler önerebilir.</span>
+                                </div>
+                                <div class="skills-section">
+                                    <div class="form-group">
+                                        <label for="skillInput">Yetenek Ekle</label>
+                                        <div class="skill-input-container">
+                                            <input type="text" id="skillInput" placeholder="Yetenek adını yazın...">
+                                            <button type="button" id="addSkill" class="add-skill-btn">
+                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                    <path d="M8 1v14M1 8h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div id="skillsList" class="skills-list">
+                                        <div class="skill-item">
+                                            <span class="skill-name">JavaScript</span>
+                                            <div class="skill-level">
+                                                <div class="skill-dots">
+                                                    <span class="dot active"></span>
+                                                    <span class="dot active"></span>
+                                                    <span class="dot active"></span>
+                                                    <span class="dot active"></span>
+                                                    <span class="dot"></span>
+                                                </div>
+                                            </div>
+                                            <button class="remove-skill-btn">
+                                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                                    <path d="M9 3L3 9M3 3l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="ai-skill-suggestions">
+                                        <h4>AI Önerilen Yetenekler</h4>
+                                        <div class="suggested-skills">
+                                            <button class="suggested-skill">React</button>
+                                            <button class="suggested-skill">Node.js</button>
+                                            <button class="suggested-skill">Python</button>
+                                            <button class="suggested-skill">SQL</button>
+                                            <button class="suggested-skill">Git</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 5: AI Message -->
+                    <div class="form-step" id="step-5">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>AI'a Mesaj (Opsiyonel)</h3>
+                                <div class="ai-badge">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M8 1l2.5 5h5.5l-4.5 3.5 1.5 5.5-4.5-3.5-4.5 3.5 1.5-5.5-4.5-3.5h5.5z" fill="currentColor"/>
+                                    </svg>
+                                    AI Destekli
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <div class="ai-info-box">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M8 1l2.5 5h5.5l-4.5 3.5 1.5 5.5-4.5-3.5-4.5 3.5 1.5-5.5-4.5-3.5h5.5z" fill="currentColor"/>
+                                    </svg>
+                                    <span>AI'a özel talimatlar verebilir, CV'nizde vurgulamak istediğiniz noktaları belirtebilirsiniz.</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="aiMessage">AI'a Mesajınız</label>
+                                    <textarea id="aiMessage" rows="8" placeholder="AI'a özel talimatlarınızı yazın:\n\n• Hangi yeteneklerinizi vurgulamasını istiyorsunuz?\n• Hangi deneyimlerinizi öne çıkarmasını istiyorsunuz?\n• CV'nizde hangi kişilik özellikleriniz belirtilsin?\n• Hedef sektörünüze özel hangi noktalar vurgulanmalı?\n\nÖrnek: 'Liderlik yeteneklerimi ve takım yönetimi deneyimimi vurgula, teknoloji alanındaki yenilikçi projelerimi öne çıkar, problem çözme becerilerimi belirt.'"></textarea>
+                                </div>
+                                <div class="message-examples">
+                                    <h4>Örnek Mesajlar:</h4>
+                                    <div class="example-messages">
+                                        <button class="example-btn">"Liderlik yeteneklerimi vurgula"</button>
+                                        <button class="example-btn">"Teknoloji deneyimimi öne çıkar"</button>
+                                        <button class="example-btn">"Yaratıcı projelerimi belirt"</button>
+                                        <button class="example-btn">"Takım çalışması becerilerimi vurgula"</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 6: Preview -->
+                    <div class="form-step" id="step-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>CV Önizleme</h3>
+                                <div class="preview-actions">
+                                    <button class="template-btn">
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                            <path d="M2 3h12v10H2V3zM5 6h6M5 8h6M5 10h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                        </svg>
+                                        Şablon Değiştir
+                                    </button>
+                                    <button id="downloadCV" class="download-btn">
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                            <path d="M8 1v10M4 7l4 4 4-4M2 13h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                        PDF İndir
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <div class="cv-preview">
+                                    <div class="cv-preview-container">
+                                        <div id="cvPreview" class="cv-template">
+                                            <div class="cv-header">
+                                                <h2 class="cv-name">Ad Soyad</h2>
+                                                <div class="cv-contact">
+                                                    <span class="cv-email">email@example.com</span>
+                                                    <span class="cv-phone">+90 555 123 4567</span>
+                                                    <span class="cv-address">İstanbul, Türkiye</span>
+                                                </div>
+                                            </div>
+                                            <div class="cv-section">
+                                                <h3>Özet</h3>
+                                                <p class="cv-summary">Profesyonel özet buraya gelecek...</p>
+                                            </div>
+                                            <div class="cv-section">
+                                                <h3>İş Deneyimi</h3>
+                                                <div class="cv-experience">
+                                                    <div class="cv-job">
+                                                        <h4>Pozisyon - Şirket</h4>
+                                                        <span class="cv-date">2020 - Günümüz</span>
+                                                        <p>İş açıklaması buraya gelecek...</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="cv-section">
+                                                <h3>Eğitim</h3>
+                                                <div class="cv-education">
+                                                    <div class="cv-degree">
+                                                        <h4>Derece - Okul</h4>
+                                                        <span class="cv-date">2016 - 2020</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="cv-section">
+                                                <h3>Yetenekler</h3>
+                                                <div class="cv-skills">
+                                                    <span class="cv-skill">JavaScript</span>
+                                                    <span class="cv-skill">React</span>
+                                                    <span class="cv-skill">Node.js</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Navigation Buttons -->
-                <div class="step-navigation">
-                    <button type="button" class="nav-btn prev-btn" id="prevBtn" style="display: none;">Önceki</button>
-                    <button type="button" class="nav-btn next-btn" id="nextBtn">Sonraki</button>
-                    <button type="button" class="nav-btn finish-btn" id="finishBtn" style="display: none;">CV'yi Tamamla</button>
+                <div class="cv-navigation">
+                    <button id="prevBtn" class="nav-btn prev-btn" disabled>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Önceki
+                    </button>
+                    <button id="nextBtn" class="nav-btn next-btn">
+                        Sonraki
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M6 12l4-4-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
                 </div>
-            </div>
-
-            <!-- Main Grid -->
-            <div class="main-grid cv-main-grid" id="mainGrid">
-                <!-- CV Builder Steps -->
-                <div class="card cv-steps">
-                    <div class="card-header">
-                        <h3>CV'nizi Oluşturun</h3>
-                        <div class="ai-badge">
-                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                <path d="M6 0l1.5 4.5L12 6l-4.5 1.5L6 12l-1.5-4.5L0 6l4.5-1.5L6 0z" fill="currentColor"/>
-                            </svg>
-                            AI Destekli
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <div class="cv-step-list">
-                            <div class="cv-step active" data-step="1">
-                                <div class="step-number">1</div>
-                                <div class="step-content">
-                                    <div class="step-title">Kişisel Bilgiler</div>
-                                    <div class="step-desc">Temel bilgilerinizi ve iletişim bilgilerinizi ekleyin</div>
-                                </div>
-                                <div class="step-status">
-                                    <button class="step-btn" onclick="startCVBuilder(1)">Başla</button>
-                                </div>
-                            </div>
-
-                            <div class="cv-step" data-step="2">
-                                <div class="step-number">2</div>
-                                <div class="step-content">
-                                    <div class="step-title">İş Deneyimi</div>
-                                    <div class="step-desc">AI'ın deneyiminizi optimize etmesine izin verin</div>
-                                </div>
-                                <div class="step-status">
-                                    <button class="step-btn" onclick="startCVBuilder(2)">Başla</button>
-                                </div>
-                            </div>
-
-                            <div class="cv-step" data-step="3">
-                                <div class="step-number">3</div>
-                                <div class="step-content">
-                                    <div class="step-title">Yetenekler ve Eğitim</div>
-                                    <div class="step-desc">AI ilgili yetenekleri önerecek</div>
-                                </div>
-                                <div class="step-status">
-                                    <span class="step-pending">Beklemede</span>
-                                </div>
-                            </div>
-
-                            <div class="cv-step" data-step="4">
-                                <div class="step-number">4</div>
-                                <div class="step-content">
-                                    <div class="step-title">İnceleme ve İndirme</div>
-                                    <div class="step-desc">Son inceleme ve dışa aktarma seçenekleri</div>
-                                </div>
-                                <div class="step-status">
-                                    <span class="step-pending">Beklemede</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Template Gallery -->
-                <div class="card cv-templates">
-                    <div class="card-header">
-                        <h3>Popüler Şablonlar</h3>
-                        <button class="header-btn">Tümünü Gör</button>
-                    </div>
-                    <div class="card-content">
-                        <div class="template-grid">
-                            <div class="template-card">
-                                <div class="template-preview">
-                                    <div class="template-mockup modern">
-                                        <div class="template-header"></div>
-                                        <div class="template-body">
-                                            <div class="template-line"></div>
-                                            <div class="template-line short"></div>
-                                            <div class="template-line"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="template-info">
-                                    <div class="template-name">Modern Profesyonel</div>
-                                    <div class="template-category">İş</div>
-                                </div>
-                                <button class="template-select-btn">Şablonu Kullan</button>
-                            </div>
-
-                            <div class="template-card">
-                                <div class="template-preview">
-                                    <div class="template-mockup creative">
-                                        <div class="template-sidebar"></div>
-                                        <div class="template-main">
-                                            <div class="template-line"></div>
-                                            <div class="template-line"></div>
-                                            <div class="template-line short"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="template-info">
-                                    <div class="template-name">Yaratıcı Tasarımcı</div>
-                                    <div class="template-category">Yaratıcı</div>
-                                </div>
-                                <button class="template-select-btn">Şablonu Kullan</button>
-                            </div>
-
-                            <div class="template-card">
-                                <div class="template-preview">
-                                    <div class="template-mockup minimal">
-                                        <div class="template-body">
-                                            <div class="template-line"></div>
-                                            <div class="template-line"></div>
-                                            <div class="template-line short"></div>
-                                            <div class="template-line"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="template-info">
-                                    <div class="template-name">Minimal Temiz</div>
-                                    <div class="template-category">Basit</div>
-                                </div>
-                                <button class="template-select-btn">Şablonu Kullan</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Recent CVs -->
-            <div class="card recent-cvs">
-                <div class="card-header">
-                    <h3>Son CV'ler</h3>
-                    <button class="header-btn">Tümünü Yönet</button>
-                </div>
-                <div class="card-content">
-                    <div class="cv-list">
-                        <div class="cv-item">
-                            <div class="cv-icon">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M4 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4z" stroke="currentColor" stroke-width="2" fill="none"/>
-                                    <path d="M6 8h12M6 12h12M6 16h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                                </svg>
-                            </div>
-                            <div class="cv-info">
-                                <div class="cv-name">Yazılım Geliştirici CV'si</div>
-                                <div class="cv-details">Modern Profesyonel • 2 saat önce güncellendi</div>
-                            </div>
-                            <div class="cv-actions">
-                                <button class="cv-action-btn edit">
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                        <path d="M11.5 2.5l2 2L8 10l-2.5.5.5-2.5 5.5-5.5z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </button>
-                                <button class="cv-action-btn download">
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                        <path d="M14 10v2a2 2 0 01-2 2H4a2 2 0 01-2-2v-2M8 12V2M5 7l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </button>
-                                <button class="cv-action-btn share">
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                        <path d="M12 5l-8 4 8 4V5zM4 7v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="cv-item">
-                            <div class="cv-icon">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M4 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4z" stroke="currentColor" stroke-width="2" fill="none"/>
-                                    <path d="M6 8h12M6 12h12M6 16h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                                </svg>
-                            </div>
-                            <div class="cv-info">
-                                <div class="cv-name">Pazarlama Müdürü CV'si</div>
-                                <div class="cv-details">Yaratıcı Tasarımcı • 1 gün önce güncellendi</div>
-                            </div>
-                            <div class="cv-actions">
-                                <button class="cv-action-btn edit">
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                        <path d="M11.5 2.5l2 2L8 10l-2.5.5.5-2.5 5.5-5.5z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </button>
-                                <button class="cv-action-btn download">
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                        <path d="M14 10v2a2 2 0 01-2 2H4a2 2 0 01-2-2v-2M8 12V2M5 7l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </button>
-                                <button class="cv-action-btn share">
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                        <path d="M12 5l-8 4 8 4V5zM4 7v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="cv-item">
-                            <div class="cv-icon">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M4 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4z" stroke="currentColor" stroke-width="2" fill="none"/>
-                                    <path d="M6 8h12M6 12h12M6 16h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                                </svg>
-                            </div>
-                            <div class="cv-info">
-                                <div class="cv-name">Veri Analisti CV'si</div>
-                                <div class="cv-details">Minimal Temiz • 3 gün önce güncellendi</div>
-                            </div>
-                            <div class="cv-actions">
-                                <button class="cv-action-btn edit">
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                        <path d="M11.5 2.5l2 2L8 10l-2.5.5.5-2.5 5.5-5.5z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </button>
-                                <button class="cv-action-btn download">
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                        <path d="M14 10v2a2 2 0 01-2 2H4a2 2 0 01-2-2v-2M8 12V2M5 7l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </button>
-                                <button class="cv-action-btn share">
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                        <path d="M12 5l-8 4 8 4V5zM4 7v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

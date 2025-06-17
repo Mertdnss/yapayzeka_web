@@ -33,7 +33,7 @@
         <nav class="sidebar-nav">
             <ul class="nav-list">
                 <li class="nav-item active">
-                    <a href="/dashboard" class="nav-link">
+                    <a href="index.html" class="nav-link">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                             <path d="M3 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4zM3 10a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-6zM13 9a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1h-3z" fill="currentColor"/>
                         </svg>
@@ -291,47 +291,47 @@
             <!-- Main Grid -->
             <div class="main-grid">
                 <!-- Quick Actions -->
-                <div class="card quick-actions">
+                <div class="card fast-operations">
                     <div class="card-header">
                         <h3>Hızlı İşlemler</h3>
                     </div>
                     <div class="card-content">
-                        <div class="action-grid">
-                            <button class="action-btn primary">
-                                <div class="action-icon">
-                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                        <path d="M4 4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4z" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                                        <path d="M6 8h8M6 12h8M6 16h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        <div class="operations-container">
+                            <div class="operation-card cv-create">
+                                <div class="operation-icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M4 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4z" stroke="currentColor" stroke-width="2" fill="none"/>
+                                        <path d="M6 8h12M6 12h12M6 16h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                                     </svg>
                                 </div>
-                                <span>Yeni CV Oluştur</span>
-                            </button>
-                            <button class="action-btn secondary">
-                                <div class="action-icon">
-                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                        <path d="M10 2a8 8 0 0 1 8 8v2a8 8 0 0 1-8 8 8 8 0 0 1-8-8v-2a8 8 0 0 1 8-8z" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                                        <path d="M7 10a3 3 0 0 1 6 0v2a3 3 0 0 1-6 0v-2z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                                <span class="operation-text">Yeni CV Oluştur</span>
+                            </div>
+                            <div class="operation-card voice-record">
+                                <div class="operation-icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+                                        <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1" stroke="currentColor" stroke-width="2"/>
                                     </svg>
                                 </div>
-                                <span>Ses Kaydet</span>
-                            </button>
-                            <button class="action-btn tertiary">
-                                <div class="action-icon">
-                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                        <path d="M10 5v10M5 10h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                <span class="operation-text">Ses Kaydet</span>
+                            </div>
+                            <div class="operation-card task-add">
+                                <div class="operation-icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M12 5v14m7-7H5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                                     </svg>
                                 </div>
-                                <span>Görev Ekle</span>
-                            </button>
-                            <button class="action-btn quaternary">
-                                <div class="action-icon">
-                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                        <path d="M7 4V2a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M7 4H3a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1h-4M7 4h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M10 11h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                <span class="operation-text">Görev Ekle</span>
+                            </div>
+                            <div class="operation-card template-view">
+                                <div class="operation-icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M7 4V2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v2M7 4H3a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1h-4M7 4h10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M9 12h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                                     </svg>
                                 </div>
-                                <span>Template Görüntüle</span>
-                            </button>
+                                <span class="operation-text">Template Görüntüle</span>
+                            </div>
                         </div>
                     </div>
                 </div>
