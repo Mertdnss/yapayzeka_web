@@ -1,4 +1,17 @@
 /* Dashboard Styles */
+:root {
+    --primary-color: #6C63FF;
+    --primary-hover: #5A52E8;
+    --surface-color: rgba(255, 255, 255, 0.95);
+    --border-color: rgba(0, 0, 0, 0.1);
+    --text-primary: #1a1a1a;
+    --text-secondary: #666666;
+    --success-color: #10B981;
+    --warning-color: #F59E0B;
+    --error-color: #EF4444;
+    --background-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -2203,3 +2216,206 @@ textarea::placeholder {
     border-color: #6C63FF;
 }
 
+/* Voice Cloning Specific Styles */
+.voice-cloning-page .dashboard-content {
+    max-width: none;
+}
+
+.voice-cloning-page .stats-grid {
+    margin-bottom: 2rem;
+}
+
+.voice-cloning-page .card {
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.voice-cloning-page .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary-color);
+}
+
+.voice-cloning-page .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.voice-cloning-page .card-header h3 {
+    margin: 0;
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.voice-cloning-page .card-header p {
+    margin: 0.25rem 0 0 0;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.voice-cloning-page .ai-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: linear-gradient(135deg, rgba(108, 99, 255, 0.1) 0%, rgba(63, 142, 252, 0.1) 100%);
+    color: var(--primary-color);
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.voice-cloning-page .ai-badge svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* Sample Voice Card Selected State */
+.sample-voice-card.selected {
+    border-color: var(--primary-color);
+    background: rgba(108, 99, 255, 0.05);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(108, 99, 255, 0.2);
+}
+
+/* Processing Step States */
+.step.processing {
+    background: rgba(108, 99, 255, 0.1);
+    border-color: var(--primary-color);
+}
+
+.step.processing .step-icon {
+    background: var(--primary-color);
+    color: white;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Audio Player Enhancements */
+.audio-player.playing .play-btn {
+    background: #ef4444;
+}
+
+.audio-player.playing .audio-waveform::after {
+    animation-play-state: running;
+}
+
+/* Voice Settings Enhanced */
+.voice-settings .setting-row.active {
+    background: rgba(108, 99, 255, 0.05);
+    border-color: var(--primary-color);
+}
+
+/* Button Loading States */
+.btn-loading {
+    position: relative;
+    pointer-events: none;
+}
+
+.btn-loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 16px;
+    margin: -8px 0 0 -8px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* Enhanced Hover Effects */
+.voice-cloning-page .operation-card:hover {
+    transform: translateY(-4px) scale(1.02);
+}
+
+.voice-cloning-page .project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+    
+    .sidebar.active {
+        transform: translateX(0);
+    }
+    
+    .main-content {
+        margin-left: 0;
+    }
+    
+    .mobile-overlay {
+        display: block;
+    }
+    
+    .mobile-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .sidebar-toggle {
+        display: flex;
+    }
+    
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .operations-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .search-box {
+        display: none;
+    }
+    
+    /* Voice Cloning Mobile Adjustments */
+    .voice-cloning-page .voice-cloning-grid,
+    .voice-cloning-page .processing-results-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .voice-cloning-page .sample-voices-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .voice-cloning-page .projects-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .voice-cloning-page .recording-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .voice-cloning-page .action-buttons {
+        flex-direction: column;
+    }
+    
+    .voice-cloning-page .voice-comparison {
+        grid-template-columns: 1fr;
+    }
+}
