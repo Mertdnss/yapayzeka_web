@@ -52,6 +52,51 @@
         visibility: visible;
     }
     
+    /* Voice Cloning Responsive Styles */
+    .voice-cloning-grid,
+    .processing-results-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .voice-comparison {
+        grid-template-columns: 1fr;
+    }
+    
+    .audio-settings {
+        grid-template-columns: 1fr;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    .sample-voices-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .project-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .setting-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+    }
+    
+    .setting-row label {
+        min-width: auto;
+    }
+    
+    .setting-row span {
+        text-align: center;
+    }
+    
     /* Sidebar structure optimization */
     .sidebar-header {
         padding: 5vh 24px 3vh 24px;
