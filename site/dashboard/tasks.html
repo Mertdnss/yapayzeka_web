@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Görevler - YapayZeka Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                        <rect width="32" height="32" rx="8" fill="url(#logoGradient)"/>
+                        <path d="M8 12h16v2H8v-2zm0 4h12v2H8v-2zm0 4h16v2H8v-2z" fill="white"/>
+                        <circle cx="20" cy="8" r="3" fill="#FFD700"/>
+                        <defs>
+                            <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#6C63FF"/>
+                                <stop offset="100%" style="stop-color:#3F8EFC"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <span class="logo-text">AssistAI</span>
+            </div>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M3 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4zM3 10a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-6zM13 9a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1h-3z" fill="currentColor"/>
+                        </svg>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="cv-builder.html" class="nav-link">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M4 4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            <path d="M6 8h8M6 12h8M6 16h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        <span>CV Oluşturucu</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="voice-cloning.html" class="nav-link">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M10 2a8 8 0 0 1 8 8v2a8 8 0 0 1-8 8 8 8 0 0 1-8-8v-2a8 8 0 0 1 8-8z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            <path d="M7 10a3 3 0 0 1 6 0v2a3 3 0 0 1-6 0v-2z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        </svg>
+                        <span>Ses Klonlama</span>
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a href="tasks.html" class="nav-link">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        </svg>
+                        <span>Görevler</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/sohbet" class="nav-link">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                            <path d="M7 10h.01M10 10h.01M13 10h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>AI Sohbet</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/profil" class="nav-link">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        </svg>
+                        <span>Profil</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/ayarlar" class="nav-link">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                            <path d="M8 12a4 4 0 108 0 4 4 0 00-8 0z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        </svg>
+                        <span>Ayarlar</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="user-avatar">
+                    <img src="https://via.placeholder.com/40" alt="Kullanıcı">
+                </div>
+                <div class="user-details">
+                    <div class="user-name">Mert Demir</div>
+                    <div class="user-plan">Pro Plan</div>
+                </div>
+            </div>
+            <button class="logout-btn">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M6 14H3a1 1 0 01-1-1V3a1 1 0 011-1h3M11 11l3-3-3-3M9 8h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <button class="sidebar-toggle">
+                    <svg fill="currentColor" viewBox="0 0 20 20" width="24" height="24">
+                        <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/>
+                    </svg>
+                </button>
+                <div class="page-title">
+                    <h1>Görevler</h1>
+                    <p>Görevleri tamamlayarak puan kazanın</p>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="search-box">
+                    <svg fill="currentColor" viewBox="0 0 20 20" width="20" height="20">
+                        <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/>
+                    </svg>
+                    <input type="text" placeholder="Görev ara...">
+                </div>
+                <div class="user-points">
+                    <div class="points-display">
+                        <span class="points-label">Puanım</span>
+                        <span class="points-value">2,450</span>
+                    </div>
+                </div>
+                <div class="notification-container">
+                    <button class="notification-btn">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M10 2C7.8 2 6 3.8 6 6v4l-2 2v1h12v-1l-2-2V6c0-2.2-1.8-4-4-4zM8.5 15.5v.5c0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5v-.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="notification-badge">3</span>
+                    </button>
+                    
+                    <!-- Notification Dropdown -->
+                    <div class="notification-dropdown">
+                        <div class="notification-header">
+                            <h4>Bildirimler</h4>
+                            <button class="mark-all-read">Tümünü Okundu İşaretle</button>
+                        </div>
+                        <div class="notification-list">
+                            <div class="notification-item unread">
+                                <div class="notification-icon success">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" fill="currentColor"/>
+                                    </svg>
+                                </div>
+                                <div class="notification-content">
+                                    <div class="notification-title">Yeni görev eklendi</div>
+                                    <div class="notification-text">Trendyol sponsorluğunda yeni bir görev mevcut</div>
+                                    <div class="notification-time">2 dakika önce</div>
+                                </div>
+                                <div class="notification-actions">
+                                    <button class="notification-action">Görüntüle</button>
+                                </div>
+                            </div>
+                            <div class="notification-item unread">
+                                <div class="notification-icon info">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" fill="currentColor"/>
+                                        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" fill="currentColor"/>
+                                    </svg>
+                                </div>
+                                <div class="notification-content">
+                                    <div class="notification-title">Görev tamamlandı</div>
+                                    <div class="notification-text">Hepsiburada ürün ziyareti görevi başarıyla tamamlandı</div>
+                                    <div class="notification-time">1 saat önce</div>
+                                </div>
+                                <div class="notification-actions">
+                                    <button class="notification-action">Detaylar</button>
+                                </div>
+                            </div>
+                            <div class="notification-item">
+                                <div class="notification-icon warning">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" fill="currentColor"/>
+                                    </svg>
+                                </div>
+                                <div class="notification-content">
+                                    <div class="notification-title">Görev süresi dolmak üzere</div>
+                                    <div class="notification-text">GittiGidiyor sosyal medya paylaşımı için 2 saat kaldı</div>
+                                    <div class="notification-time">3 saat önce</div>
+                                </div>
+                                <div class="notification-actions">
+                                    <button class="notification-action">Tamamla</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="notification-footer">
+                            <button class="view-all-notifications">Tüm Bildirimleri Görüntüle</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div class="dashboard-content">
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <svg fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-number">12</div>
+                        <div class="stat-label">Aktif Görevler</div>
+                        <div class="stat-change positive">+3 yeni</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <svg fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-number">47</div>
+                        <div class="stat-label">Tamamlanan</div>
+                        <div class="stat-change positive">+5 bu hafta</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <svg fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                        </svg>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-number">2,450</div>
+                        <div class="stat-label">Toplam Puan</div>
+                        <div class="stat-change positive">+180 bu hafta</div>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <svg fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Süresi Dolan</div>
+                        <div class="stat-change negative">Son 24 saat</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tasks Grid -->
+            <div class="tasks-grid">
+                <!-- Available Tasks -->
+                <div class="tasks-section">
+                    <div class="section-header">
+                        <h2>Mevcut Görevler</h2>
+                        <div class="filter-buttons">
+                            <button class="filter-btn active" data-filter="all">Tümü</button>
+                            <button class="filter-btn" data-filter="high">Yüksek Puan</button>
+                            <button class="filter-btn" data-filter="easy">Kolay</button>
+                            <button class="filter-btn" data-filter="urgent">Acil</button>
+                        </div>
+                    </div>
+                    
+                    <div class="tasks-list">
+                        <!-- Task Card 1 -->
+                        <div class="task-card high-reward" data-category="high">
+                            <div class="task-header">
+                                <div class="task-sponsor">
+                                    <img src="https://via.placeholder.com/40x40/FF6B6B/FFFFFF?text=T" alt="Trendyol" class="sponsor-logo">
+                                    <div class="sponsor-info">
+                                        <span class="sponsor-name">Trendyol</span>
+                                        <span class="sponsor-type">E-ticaret</span>
+                                    </div>
+                                </div>
+                                <div class="task-reward">
+                                    <span class="reward-points">+250</span>
+                                    <span class="reward-label">puan</span>
+                                </div>
+                            </div>
+                            
+                            <div class="task-content">
+                                <h3 class="task-title">Ürün Sayfası Ziyareti</h3>
+                                <p class="task-description">Belirtilen ürün sayfasını ziyaret edin ve en az 30 saniye kalın. Ürün detaylarını inceleyin.</p>
+                                
+                                <div class="task-details">
+                                    <div class="task-progress">
+                                        <div class="progress-info">
+                                            <span>İlerleme</span>
+                                            <span>750/1000</span>
+                                        </div>
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" style="width: 75%"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="task-meta">
+                                        <div class="meta-item">
+                                            <svg fill="currentColor" viewBox="0 0 20 20" width="16" height="16">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                                            </svg>
+                                            <span>2 gün kaldı</span>
+                                        </div>
+                                        <div class="meta-item">
+                                            <svg fill="currentColor" viewBox="0 0 20 20" width="16" height="16">
+                                                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
+                                            </svg>
+                                            <span>250 kişi katıldı</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="task-actions">
+                                <button class="btn btn-primary task-start-btn">Görevi Başlat</button>
+                            </div>
+                        </div>
+
+                        <!-- Task Card 2 -->
+                        <div class="task-card" data-category="easy">
+                            <div class="task-header">
+                                <div class="task-sponsor">
+                                    <img src="https://via.placeholder.com/40x40/4ECDC4/FFFFFF?text=H" alt="Hepsiburada" class="sponsor-logo">
+                                    <div class="sponsor-info">
+                                        <span class="sponsor-name">Hepsiburada</span>
+                                        <span class="sponsor-type">E-ticaret</span>
+                                    </div>
+                                </div>
+                                <div class="task-reward">
+                                    <span class="reward-points">+100</span>
+                                    <span class="reward-label">puan</span>
+                                </div>
+                            </div>
+                            
+                            <div class="task-content">
+                                <h3 class="task-title">Ürün İncelemesi</h3>
+                                <p class="task-description">Satın aldığınız ürün için detaylı bir inceleme yazın ve 5 yıldız verin.</p>
+                                
+                                <div class="task-details">
+                                    <div class="task-progress">
+                                        <div class="progress-info">
+                                            <span>İlerleme</span>
+                                            <span>45/100</span>
+                                        </div>
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" style="width: 45%"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="task-meta">
+                                        <div class="meta-item">
+                                            <svg fill="currentColor" viewBox="0 0 20 20" width="16" height="16">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                                            </svg>
+                                            <span>5 gün kaldı</span>
+                                        </div>
+                                        <div class="meta-item">
+                                            <svg fill="currentColor" viewBox="0 0 20 20" width="16" height="16">
+                                                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
+                                            </svg>
+                                            <span>45 kişi katıldı</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="task-actions">
+                                <button class="btn btn-primary task-start-btn">Görevi Başlat</button>
+                            </div>
+                        </div>
+
+                        <!-- Task Card 3 -->
+                        <div class="task-card urgent" data-category="urgent">
+                            <div class="task-header">
+                                <div class="task-sponsor">
+                                    <img src="https://via.placeholder.com/40x40/FF9F43/FFFFFF?text=G" alt="GittiGidiyor" class="sponsor-logo">
+                                    <div class="sponsor-info">
+                                        <span class="sponsor-name">GittiGidiyor</span>
+                                        <span class="sponsor-type">E-ticaret</span>
+                                    </div>
+                                </div>
+                                <div class="task-reward">
+                                    <span class="reward-points">+150</span>
+                                    <span class="reward-label">puan</span>
+                                </div>
+                            </div>
+                            
+                            <div class="task-content">
+                                <h3 class="task-title">Sosyal Medya Paylaşımı</h3>
+                                <p class="task-description">Ürünü sosyal medya hesabınızda paylaşın ve #GittiGidiyor etiketini kullanın.</p>
+                                
+                                <div class="task-details">
+                                    <div class="task-progress">
+                                        <div class="progress-info">
+                                            <span>İlerleme</span>
+                                            <span>12/50</span>
+                                        </div>
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" style="width: 24%"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="task-meta">
+                                        <div class="meta-item urgent-time">
+                                            <svg fill="currentColor" viewBox="0 0 20 20" width="16" height="16">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                                            </svg>
+                                            <span>6 saat kaldı</span>
+                                        </div>
+                                        <div class="meta-item">
+                                            <svg fill="currentColor" viewBox="0 0 20 20" width="16" height="16">
+                                                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
+                                            </svg>
+                                            <span>12 kişi katıldı</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="task-actions">
+                                <button class="btn btn-primary task-start-btn">Görevi Başlat</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- My Tasks -->
+                <div class="my-tasks-section">
+                    <div class="section-header">
+                        <h2>Devam Eden Görevlerim</h2>
+                        <span class="task-count">3 aktif görev</span>
+                    </div>
+                    
+                    <div class="my-tasks-list">
+                        <!-- Active Task 1 -->
+                        <div class="my-task-card in-progress">
+                            <div class="task-status">
+                                <div class="status-indicator"></div>
+                                <span class="status-text">Devam Ediyor</span>
+                            </div>
+                            
+                            <div class="task-info">
+                                <h4>Trendyol Ürün Ziyareti</h4>
+                                <p>750/1000 tıklama tamamlandı</p>
+                                
+                                <div class="task-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 75%"></div>
+                                    </div>
+                                    <span class="progress-text">%75</span>
+                                </div>
+                                
+                                <div class="task-time">
+                                    <svg fill="currentColor" viewBox="0 0 20 20" width="14" height="14">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <span>2 gün kaldı</span>
+                                </div>
+                            </div>
+                            
+                            <div class="task-actions">
+                                <button class="btn btn-outline continue-btn">Devam Et</button>
+                            </div>
+                        </div>
+
+                        <!-- Active Task 2 -->
+                        <div class="my-task-card in-progress">
+                            <div class="task-status">
+                                <div class="status-indicator"></div>
+                                <span class="status-text">Devam Ediyor</span>
+                            </div>
+                            
+                            <div class="task-info">
+                                <h4>Hepsiburada İnceleme</h4>
+                                <p>45/100 inceleme yazıldı</p>
+                                
+                                <div class="task-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 45%"></div>
+                                    </div>
+                                    <span class="progress-text">%45</span>
+                                </div>
+                                
+                                <div class="task-time">
+                                    <svg fill="currentColor" viewBox="0 0 20 20" width="14" height="14">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <span>5 gün kaldı</span>
+                                </div>
+                            </div>
+                            
+                            <div class="task-actions">
+                                <button class="btn btn-outline continue-btn">Devam Et</button>
+                            </div>
+                        </div>
+
+                        <!-- Completed Task -->
+                        <div class="my-task-card completed">
+                            <div class="task-status">
+                                <div class="status-indicator"></div>
+                                <span class="status-text">Tamamlandı</span>
+                            </div>
+                            
+                            <div class="task-info">
+                                <h4>N11 Ürün Paylaşımı</h4>
+                                <p>50/50 paylaşım tamamlandı</p>
+                                
+                                <div class="task-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill completed" style="width: 100%"></div>
+                                    </div>
+                                    <span class="progress-text">%100</span>
+                                </div>
+                                
+                                <div class="task-reward-earned">
+                                    <svg fill="currentColor" viewBox="0 0 20 20" width="14" height="14">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                                    </svg>
+                                    <span>+120 puan kazandınız</span>
+                                </div>
+                            </div>
+                            
+                            <div class="task-actions">
+                                <button class="btn btn-success" disabled>Tamamlandı</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/dashboard.js"></script>
+    <script src="js/tasks.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

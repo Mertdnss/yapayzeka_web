@@ -475,3 +475,152 @@
         padding: 4px 8px;
     }
 }
+
+/* Tasks Page Responsive Styles */
+@media (max-width: 768px) {
+    .user-points {
+        display: flex;
+        margin-right: 8px;
+    }
+    
+    .points-display {
+        padding: 6px 12px;
+    }
+    
+    .points-label {
+        font-size: 12px;
+    }
+    
+    .points-value {
+        font-size: 14px;
+        font-weight: 600;
+    }
+    
+    /* Notification dropdown mobile styles */
+    .notification-container {
+        position: relative;
+    }
+    
+    .notification-dropdown {
+        right: 0;
+        left: auto;
+        width: 90vw;
+        max-width: 350px;
+        max-height: 70vh;
+    }
+    
+    .notification-dropdown::before {
+        right: 20px;
+        left: auto;
+    }
+    
+    .header-right {
+        gap: 8px;
+    }
+    
+    .search-box {
+        display: none;
+    }
+    
+    .tasks-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .tasks-section, .my-tasks-section {
+        padding: 16px;
+    }
+    
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .filter-buttons {
+        width: 100%;
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 4px;
+    }
+    
+    .filter-btn {
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+    
+    .task-card {
+        padding: 16px;
+    }
+    
+    .task-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .task-sponsor {
+        width: 100%;
+    }
+    
+    .task-reward {
+        align-self: flex-end;
+    }
+    
+    .task-meta {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .my-task-card {
+        padding: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .tasks-section, .my-tasks-section {
+        padding: 12px;
+    }
+    
+    .task-card {
+        padding: 12px;
+    }
+    
+    .task-title {
+        font-size: 14px;
+    }
+    
+    .task-description {
+        font-size: 12px;
+    }
+    
+    .sponsor-logo {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .sponsor-name {
+        font-size: 12px;
+    }
+    
+    .sponsor-type {
+        font-size: 10px;
+    }
+    
+    .task-reward {
+        min-width: 60px;
+        padding: 6px 12px;
+    }
+    
+    .reward-points {
+        font-size: 14px;
+    }
+    
+    .reward-label {
+        font-size: 9px;
+    }
+}

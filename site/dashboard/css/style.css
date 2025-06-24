@@ -324,19 +324,19 @@ body {
 /* Notification Dropdown */
 .notification-dropdown {
     position: absolute;
-    top: calc(100% + 12px);
+    top: calc(100% + 8px);
     right: 0;
-    width: 380px;
-    max-height: 500px;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    width: 320px;
+    max-height: 400px;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-10px) scale(0.95);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(-8px) scale(0.96);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 1000;
     overflow: hidden;
 }
@@ -363,15 +363,15 @@ body {
 }
 
 .notification-header {
-    padding: 20px 24px 16px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 16px 20px 12px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
 .notification-header h4 {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
     color: #1a1a1a;
     margin: 0;
@@ -413,9 +413,9 @@ body {
 }
 
 .notification-item {
-    padding: 16px 24px;
+    padding: 12px 20px;
     display: flex;
-    gap: 12px;
+    gap: 10px;
     transition: all 0.2s ease;
     position: relative;
     cursor: pointer;
@@ -442,9 +442,9 @@ body {
 }
 
 .notification-icon {
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -472,22 +472,22 @@ body {
 }
 
 .notification-title {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
     color: #1a1a1a;
-    margin-bottom: 4px;
+    margin-bottom: 3px;
     line-height: 1.3;
 }
 
 .notification-text {
-    font-size: 13px;
+    font-size: 12px;
     color: #6b7280;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
     line-height: 1.4;
 }
 
 .notification-time {
-    font-size: 11px;
+    font-size: 10px;
     color: #9ca3af;
     font-weight: 500;
 }
@@ -495,29 +495,29 @@ body {
 .notification-actions {
     display: flex;
     align-items: flex-start;
-    padding-top: 2px;
+    padding-top: 1px;
 }
 
-.action-view {
+.notification-action {
     background: rgba(108, 99, 255, 0.1);
     border: none;
     color: #6C63FF;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 600;
-    padding: 6px 12px;
-    border-radius: 6px;
+    padding: 4px 8px;
+    border-radius: 4px;
     cursor: pointer;
     transition: all 0.2s ease;
 }
 
-.action-view:hover {
+.notification-action:hover {
     background: rgba(108, 99, 255, 0.2);
-    transform: scale(1.05);
+    transform: scale(1.02);
 }
 
 .notification-footer {
-    padding: 16px 24px 20px;
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 12px 20px 16px;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .view-all-notifications {
@@ -525,10 +525,10 @@ body {
     background: linear-gradient(135deg, #6C63FF, #3F8EFC);
     border: none;
     color: white;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 600;
-    padding: 12px;
-    border-radius: 12px;
+    padding: 10px;
+    border-radius: 8px;
     cursor: pointer;
     transition: all 0.2s ease;
 }
@@ -3235,4 +3235,402 @@ textarea::placeholder {
     .voice-cloning-page .voice-comparison {
         grid-template-columns: 1fr;
     }
+}
+
+/* Tasks Page Styles */
+.user-points {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px 16px;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+}
+
+.points-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.points-label {
+    font-size: 12px;
+    color: #1a1a1a;
+    font-weight: 500;
+}
+
+.points-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.tasks-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+    margin-top: 24px;
+}
+
+.tasks-section, .my-tasks-section {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.section-header h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.filter-btn {
+    padding: 6px 12px;
+    border: 1px solid rgba(108, 99, 255, 0.2);
+    background: transparent;
+    color: #6C63FF;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+    background: rgba(108, 99, 255, 0.1);
+}
+
+.filter-btn.active {
+    background: #6C63FF;
+    color: white;
+}
+
+.task-count {
+    font-size: 14px;
+    color: #6b7280;
+    background: rgba(108, 99, 255, 0.1);
+    padding: 4px 12px;
+    border-radius: 12px;
+}
+
+.tasks-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.task-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.task-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.task-card.high-reward::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+}
+
+.task-card.urgent::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+}
+
+.task-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.task-sponsor {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.sponsor-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.sponsor-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.sponsor-name {
+    font-weight: 600;
+    color: #1a1a1a;
+    font-size: 14px;
+}
+
+.sponsor-type {
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.task-reward {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(135deg, #6C63FF, #3F8EFC);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 12px;
+    min-width: 80px;
+}
+
+.reward-points {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.reward-label {
+    font-size: 10px;
+    opacity: 0.9;
+}
+
+.task-content {
+    margin-bottom: 20px;
+}
+
+.task-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+}
+
+.task-description {
+    font-size: 14px;
+    color: #6b7280;
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+.task-details {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.task-progress {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.progress-bar {
+    height: 6px;
+    background: rgba(108, 99, 255, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(135deg, #6C63FF, #3F8EFC);
+    border-radius: 3px;
+    transition: width 0.3s ease;
+}
+
+.progress-fill.completed {
+    background: linear-gradient(135deg, #10B981, #059669);
+}
+
+.task-meta {
+    display: flex;
+    gap: 16px;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.meta-item.urgent-time {
+    color: #ef4444;
+}
+
+.task-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.task-start-btn {
+    flex: 1;
+    padding: 12px 24px;
+    font-weight: 600;
+}
+
+/* My Tasks Section */
+.my-tasks-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.my-task-card {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+}
+
+.my-task-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.task-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.status-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #6C63FF;
+}
+
+.my-task-card.completed .status-indicator {
+    background: #10B981;
+}
+
+.status-text {
+    font-size: 12px;
+    font-weight: 500;
+    color: #6C63FF;
+}
+
+.my-task-card.completed .status-text {
+    color: #10B981;
+}
+
+.task-info h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 4px;
+}
+
+.task-info p {
+    font-size: 12px;
+    color: #6b7280;
+    margin-bottom: 12px;
+}
+
+.my-task-card .task-progress {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.my-task-card .progress-bar {
+    flex: 1;
+    height: 4px;
+}
+
+.progress-text {
+    font-size: 12px;
+    font-weight: 600;
+    color: #6C63FF;
+    min-width: 35px;
+}
+
+.my-task-card.completed .progress-text {
+    color: #10B981;
+}
+
+.task-time {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: #6b7280;
+    margin-bottom: 12px;
+}
+
+.task-reward-earned {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: #10B981;
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+
+.continue-btn {
+    width: 100%;
+    padding: 8px 16px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.btn-success {
+    background: #10B981;
+    color: white;
+    border: 1px solid #10B981;
+}
+
+.btn-success:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
 }
