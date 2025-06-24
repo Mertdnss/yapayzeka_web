@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>AI Sohbet - AssistAI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/chat.css">
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                        <rect width="32" height="32" rx="8" fill="url(#logoGradient)"/>
+                        <path d="M8 12h16v2H8v-2zm0 4h12v2H8v-2zm0 4h16v2H8v-2z" fill="white"/>
+                        <circle cx="20" cy="8" r="3" fill="#FFD700"/>
+                        <defs>
+                            <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#6C63FF"/>
+                                <stop offset="100%" style="stop-color:#3F8EFC"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <span class="logo-text">AssistAI</span>
+            </div>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M3 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4zM3 10a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-6zM13 9a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1h-3z" fill="currentColor"/>
+                        </svg>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="cv-builder.html" class="nav-link">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M4 4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            <path d="M6 8h8M6 12h8M6 16h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        <span>CV Oluşturucu</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="voice-cloning.html" class="nav-link">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M10 2a8 8 0 0 1 8 8v2a8 8 0 0 1-8 8 8 8 0 0 1-8-8v-2a8 8 0 0 1 8-8z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            <path d="M7 10a3 3 0 0 1 6 0v2a3 3 0 0 1-6 0v-2z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        </svg>
+                        <span>Ses Klonlama</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="tasks.html" class="nav-link">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        </svg>
+                        <span>Görevler</span>
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a href="chat.html" class="nav-link">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                            <path d="M7 10h.01M10 10h.01M13 10h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>AI Sohbet</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/profil" class="nav-link">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        </svg>
+                        <span>Profil</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/ayarlar" class="nav-link">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                            <path d="M8 12a4 4 0 108 0 4 4 0 00-8 0z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        </svg>
+                        <span>Ayarlar</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="user-avatar">
+                    <img src="https://via.placeholder.com/40" alt="Kullanıcı">
+                </div>
+                <div class="user-details">
+                    <div class="user-name">Mert Demir</div>
+                    <div class="user-plan">Pro Plan</div>
+                </div>
+            </div>
+            <button class="logout-btn">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M6 14H3a1 1 0 01-1-1V3a1 1 0 011-1h3M11 11l3-3-3-3M9 8h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <button class="sidebar-toggle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+                <div class="page-title">
+                    <h1>AI Sohbet</h1>
+                    <p>Yapay zeka ile sohbet edin ve sorularınızı sorun</p>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="user-points">
+                    <div class="points-display">
+                        <span class="points-label">Puanım</span>
+                        <span class="points-value">2,450</span>
+                    </div>
+                </div>
+                <div class="notification-container">
+                    <button class="notification-btn">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M10 2C7.8 2 6 3.8 6 6v4l-2 2v1h12v-1l-2-2V6c0-2.2-1.8-4-4-4zM8.5 15.5v.5c0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5v-.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="notification-badge">3</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Chat Container -->
+        <div class="chat-container">
+            <!-- Chat Sidebar -->
+            <div class="chat-sidebar">
+                <div class="chat-sidebar-header">
+                    <button class="new-chat-btn">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M8 1v14M1 8h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        Yeni Sohbet
+                    </button>
+                </div>
+                
+                <div class="chat-history">
+                    <div class="chat-history-item active">
+                        <div class="chat-preview">
+                            <div class="chat-title">React Projesi Yardımı</div>
+                            <div class="chat-last-message">Component nasıl oluştururum?</div>
+                            <div class="chat-time">2 dakika önce</div>
+                        </div>
+                        <button class="chat-delete">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                <path d="M10.5 3.5L3.5 10.5M3.5 3.5l7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <div class="chat-history-item">
+                        <div class="chat-preview">
+                            <div class="chat-title">Python Öğrenme</div>
+                            <div class="chat-last-message">Liste comprehension nedir?</div>
+                            <div class="chat-time">1 saat önce</div>
+                        </div>
+                        <button class="chat-delete">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                <path d="M10.5 3.5L3.5 10.5M3.5 3.5l7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <div class="chat-history-item">
+                        <div class="chat-preview">
+                            <div class="chat-title">CSS Grid Layout</div>
+                            <div class="chat-last-message">Grid sistemini açıklar mısın?</div>
+                            <div class="chat-time">3 saat önce</div>
+                        </div>
+                        <button class="chat-delete">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                <path d="M10.5 3.5L3.5 10.5M3.5 3.5l7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Main -->
+            <div class="chat-main">
+                <!-- Model Selector -->
+                <div class="model-selector">
+                    <div class="model-selector-label">AI Model:</div>
+                    <select class="model-select" id="modelSelect">
+                        <option value="gpt-4">GPT-4 (En Gelişmiş)</option>
+                        <option value="gpt-3.5">GPT-3.5 (Hızlı)</option>
+                        <option value="claude">Claude (Analitik)</option>
+                        <option value="gemini">Gemini (Google)</option>
+                    </select>
+                    <div class="model-info">
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                            <circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M7 10V6M7 4h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        <span class="model-description">En gelişmiş dil modeli, karmaşık görevler için ideal</span>
+                    </div>
+                </div>
+
+                <!-- Chat Messages -->
+                <div class="chat-messages" id="chatMessages">
+                    <div class="welcome-message">
+                        <div class="welcome-icon">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                <rect width="48" height="48" rx="12" fill="url(#welcomeGradient)"/>
+                                <path d="M16 20h16v2H16v-2zm0 4h12v2H16v-2zm0 4h16v2H16v-2z" fill="white"/>
+                                <circle cx="32" cy="16" r="4" fill="#FFD700"/>
+                                <defs>
+                                    <linearGradient id="welcomeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#6C63FF"/>
+                                        <stop offset="100%" style="stop-color:#3F8EFC"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        <h3>AssistAI'ya Hoş Geldiniz!</h3>
+                        <p>Size nasıl yardımcı olabilirim? Herhangi bir sorunuz varsa çekinmeden sorun.</p>
+                        <div class="quick-actions">
+                            <button class="quick-action" data-prompt="Merhaba! Bana kendini tanıt.">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM8 11V7M8 5h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                </svg>
+                                Kendini Tanıt
+                            </button>
+                            <button class="quick-action" data-prompt="Bana kod yazma konusunda nasıl yardımcı olabilirsin?">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <path d="M5 3L1 7l4 4M11 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Kod Yardımı
+                            </button>
+                            <button class="quick-action" data-prompt="Yaratıcı yazma konusunda bana yardım edebilir misin?">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <path d="M12 3l1 1-8 8-4 1 1-4 8-8 1 1M9 6l1 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Yaratıcı Yazma
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat Input -->
+                <div class="chat-input-container">
+                    <div class="chat-input-wrapper">
+                        <textarea 
+                            class="chat-input" 
+                            id="chatInput" 
+                            placeholder="Mesajınızı yazın... (Shift + Enter ile yeni satır)"
+                            rows="1"
+                        ></textarea>
+                        <div class="chat-input-actions">
+                            <button class="attach-btn" title="Dosya Ekle">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M10 1v18M1 10h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </button>
+                            <button class="send-btn" id="sendBtn" title="Gönder">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M18 2L9 11M18 2l-7 18-2-8-8-2 17-8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="chat-input-info">
+                        <span class="char-count">0 / 4000</span>
+                        <span class="model-indicator">GPT-4 ile sohbet ediyorsunuz</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/script.js"></script>
+    <script src="js/chat.js"></script>
+</body>
+</html>
