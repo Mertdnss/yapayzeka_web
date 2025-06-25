@@ -3166,76 +3166,7 @@ textarea::placeholder {
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
-    .sidebar {
-        transform: translateX(-100%);
-    }
-    
-    .sidebar.active {
-        transform: translateX(0);
-    }
-    
-    .main-content {
-        margin-left: 0;
-    }
-    
-    .mobile-overlay {
-        display: block;
-    }
-    
-    .mobile-overlay.active {
-        opacity: 1;
-        visibility: visible;
-    }
-    
-    .sidebar-toggle {
-        display: flex;
-    }
-    
-    .dashboard-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .operations-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .search-box {
-        display: none;
-    }
-    
-    /* Voice Cloning Mobile Adjustments */
-    .voice-cloning-page .voice-cloning-grid,
-    .voice-cloning-page .processing-results-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-    
-    .voice-cloning-page .sample-voices-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .voice-cloning-page .projects-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .voice-cloning-page .recording-controls {
-        flex-direction: column;
-        align-items: stretch;
-    }
-    
-    .voice-cloning-page .action-buttons {
-        flex-direction: column;
-    }
-    
-    .voice-cloning-page .voice-comparison {
-        grid-template-columns: 1fr;
-    }
-}
+
 
 /* Tasks Page Styles */
 .user-points {

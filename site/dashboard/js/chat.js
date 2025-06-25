@@ -134,41 +134,39 @@ class ChatManager {
     }
 
     setupMobileResponsive() {
-        // Create mobile toggle button
-        const toggleBtn = document.createElement('button');
-        toggleBtn.className = 'chat-sidebar-toggle';
-        toggleBtn.innerHTML = `
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-        `;
-        document.body.appendChild(toggleBtn);
-
-        // Create mobile overlay
-        const overlay = document.createElement('div');
-        overlay.className = 'chat-mobile-overlay';
-        document.body.appendChild(overlay);
-
+        // Use existing elements from HTML
+        const toggleBtn = document.getElementById('chatSidebarToggle');
+        const overlay = document.getElementById('chatMobileOverlay');
         const sidebar = document.querySelector('.chat-sidebar');
+        const closeSidebarBtn = document.getElementById('closeSidebarBtn');
+        
+        if (!toggleBtn || !overlay || !sidebar) {
+            console.warn('Mobile responsive elements not found');
+            return;
+        }
         
         toggleBtn.addEventListener('click', () => {
-            sidebar.classList.add('open');
+            sidebar.classList.add('active');
             overlay.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent background scrolling
         });
 
         overlay.addEventListener('click', () => {
-            sidebar.classList.remove('open');
+            sidebar.classList.remove('active');
             overlay.classList.remove('active');
-            document.body.style.overflow = ''; // Restore scrolling
         });
+        
+        if (closeSidebarBtn) {
+            closeSidebarBtn.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+        }
         
         // Close sidebar on escape key
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && sidebar.classList.contains('open')) {
-                sidebar.classList.remove('open');
+            if (e.key === 'Escape' && sidebar.classList.contains('active')) {
+                sidebar.classList.remove('active');
                 overlay.classList.remove('active');
-                document.body.style.overflow = '';
             }
         });
     }
