@@ -66,25 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Search functionality
-    const searchInput = document.querySelector('.search-box input');
-    
-    if (searchInput) {
-        searchInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                // Implement search functionality here
-                console.log('Searching for:', this.value);
-            }
-        });
 
-        searchInput.addEventListener('input', function() {
-            // Real-time search suggestions
-            if (this.value.length > 2) {
-                // Implement search suggestions here
-                console.log('Search suggestions for:', this.value);
-            }
-        });
-    }
 
     // Notification functionality
     const notificationBtn = document.querySelector('.notification-btn');
@@ -478,4 +460,4 @@ const rippleStyles = `
 // Add styles to document
 const styleSheet = document.createElement('style');
 styleSheet.textContent = rippleStyles;
-document.head.appendChild(styleSheet); 
+document.head.appendChild(styleSheet);

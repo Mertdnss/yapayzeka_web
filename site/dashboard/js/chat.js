@@ -668,7 +668,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Add message to chat
-    function addMessage(role, content) {
+    function addMessage(role, content, model = null) {
         if (!chatMessages) return;
         
         // Remove welcome message if exists
@@ -679,13 +679,44 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const messageDiv = document.createElement('div');
         messageDiv.className = `message ${role}`;
-        messageDiv.innerHTML = `
-            <div class="message-content">
-                <div class="message-bubble">
-                    ${content}
+        
+        // Get current time
+        const now = new Date();
+        const timeString = now.toLocaleTimeString('tr-TR', { 
+            hour: '2-digit', 
+            minute: '2-digit' 
+        });
+        
+        if (role === 'assistant') {
+            messageDiv.innerHTML = `
+                <div class="message-avatar">
+                    <i class="fas fa-robot"></i>
                 </div>
-            </div>
-        `;
+                <div class="message-content">
+                    <div class="message-header">
+                        <span class="model-name">${model || 'GPT-4'}</span>
+                        <span class="message-time">${timeString}</span>
+                    </div>
+                    <div class="message-bubble">
+                        ${content}
+                    </div>
+                </div>
+            `;
+        } else {
+            messageDiv.innerHTML = `
+                <div class="message-content">
+                    <div class="message-header">
+                        <span class="message-time">${timeString}</span>
+                    </div>
+                    <div class="message-bubble">
+                        ${content}
+                    </div>
+                </div>
+                <div class="message-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+            `;
+        }
         
         chatMessages.appendChild(messageDiv);
         chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -708,7 +739,11 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Simulate AI response
         setTimeout(() => {
-            addMessage('assistant', 'Bu bir test yanıtıdır. Mesajınız alındı: "' + message + '"');
+            // Get selected model from dropdown
+            const modelSelect = document.getElementById('modelSelect');
+            const selectedModel = modelSelect ? modelSelect.value : 'GPT-4';
+            
+            addMessage('assistant', 'Bu bir test yanıtıdır. Mesajınız alındı: "' + message + '"', selectedModel);
         }, 1000);
     }
     

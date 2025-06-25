@@ -257,33 +257,7 @@ body {
     gap: 16px;
 }
 
-.search-box {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
 
-.search-box svg {
-    position: absolute;
-    left: 16px;
-    color: #6b7280;
-}
-
-.search-box input {
-    padding: 12px 16px 12px 48px;
-    border: 2px solid rgba(0, 0, 0, 0.05);
-    border-radius: 12px;
-    background: white;
-    font-size: 14px;
-    width: 300px;
-    transition: all 0.2s ease;
-}
-
-.search-box input:focus {
-    outline: none;
-    border-color: #6C63FF;
-    box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.1);
-}
 
 /* Notification Container */
 .notification-container {
@@ -3934,6 +3908,36 @@ textarea::placeholder {
     flex: 1;
 }
 
+.message-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 12px;
+}
+
+.message.user .message-header {
+    justify-content: flex-end;
+}
+
+.model-name {
+    background: linear-gradient(135deg, #6C63FF, #3F8EFC);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 4px rgba(108, 99, 255, 0.2);
+}
+
+.message-time {
+    color: #94a3b8;
+    font-size: 11px;
+    font-weight: 500;
+}
+
 .message-bubble {
     padding: 16px 20px;
     border-radius: 18px;
@@ -4033,6 +4037,42 @@ textarea::placeholder {
     border-radius: 16px;
     padding: 12px 16px;
     transition: all 0.2s ease;
+    position: relative;
+}
+
+.embedded-model-selector {
+    position: absolute;
+    top: 8px;
+    left: 12px;
+    z-index: 10;
+}
+
+.model-select-embedded {
+    background: linear-gradient(135deg, #6C63FF, #3F8EFC);
+    color: white;
+    border: none;
+    padding: 3px 6px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 4px rgba(108, 99, 255, 0.2);
+    transition: all 0.2s ease;
+    opacity: 0.85;
+}
+
+.model-select-embedded:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(108, 99, 255, 0.3);
+}
+
+.model-select-embedded option {
+    background: white;
+    color: #374151;
+    padding: 8px;
 }
 
 .chat-input-wrapper:focus-within {
@@ -4048,6 +4088,8 @@ textarea::placeholder {
     outline: none;
     font-size: 15px;
     line-height: 1.5;
+    padding-top: 24px;
+    padding-left: 0;
     color: #374151;
     min-height: 24px;
     max-height: 120px;

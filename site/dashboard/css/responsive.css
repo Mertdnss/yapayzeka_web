@@ -174,9 +174,7 @@
         font-size: 24px;
     }
     
-    .search-box input {
-        width: 200px;
-    }
+
     
     .dashboard-content {
         padding: 20px;
@@ -209,9 +207,7 @@
         gap: 8px;
     }
     
-    .search-box {
-        display: none;
-    }
+
     
     .stats-grid {
         gap: 12px;
@@ -520,9 +516,7 @@
         gap: 8px;
     }
     
-    .search-box {
-        display: none;
-    }
+
     
     .tasks-grid {
         grid-template-columns: 1fr;
@@ -738,7 +732,40 @@
     }
     
     .chat-input-wrapper {
-        padding: 10px 12px;
+        padding: 12px;
+    }
+    
+    .message-header {
+        margin-bottom: 6px;
+    }
+    
+    .model-name {
+        font-size: 10px;
+        padding: 3px 8px;
+    }
+    
+    .message-time {
+        font-size: 10px;
+    }
+    
+    .embedded-model-selector {
+        top: 6px;
+        left: 8px;
+    }
+    
+    .model-select-embedded {
+        font-size: 9px;
+        padding: 2px 5px;
+    }
+    
+    .model-select-embedded {
+        font-size: 10px;
+        padding: 3px 6px;
+    }
+    
+    .chat-input {
+        padding-top: 20px;
+        padding-left: 0;
     }
     
     .chat-input-info {
@@ -824,9 +851,7 @@
         grid-template-columns: repeat(2, 1fr);
     }
     
-    .search-box {
-        display: none;
-    }
+
     
     /* Voice Cloning Mobile Adjustments */
     .voice-cloning-page .voice-cloning-grid,

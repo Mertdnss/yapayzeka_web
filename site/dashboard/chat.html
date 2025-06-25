@@ -152,6 +152,68 @@
                         </svg>
                         <span class="notification-badge">3</span>
                     </button>
+                    
+                    <!-- Notification Dropdown -->
+                    <div class="notification-dropdown">
+                        <div class="notification-header">
+                            <h4>Bildirimler</h4>
+                            <button class="mark-all-read">Tümünü Okundu İşaretle</button>
+                        </div>
+                        <div class="notification-list">
+                            <div class="notification-item unread">
+                                <div class="notification-icon success">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M13 4L6 11L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <div class="notification-content">
+                                    <div class="notification-title">Yeni mesaj alındı</div>
+                                    <div class="notification-text">AI asistanınızdan yeni bir yanıt geldi</div>
+                                    <div class="notification-time">2 dakika önce</div>
+                                </div>
+                                <div class="notification-actions">
+                                    <button class="notification-action">Görüntüle</button>
+                                </div>
+                            </div>
+
+                            <div class="notification-item unread">
+                                <div class="notification-icon info">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="2"/>
+                                        <path d="M8 11V7M8 5h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <div class="notification-content">
+                                    <div class="notification-title">Sohbet geçmişi kaydedildi</div>
+                                    <div class="notification-text">Son sohbetiniz başarıyla kaydedildi</div>
+                                    <div class="notification-time">1 saat önce</div>
+                                </div>
+                                <div class="notification-actions">
+                                    <button class="notification-action">İncele</button>
+                                </div>
+                            </div>
+
+                            <div class="notification-item">
+                                <div class="notification-icon warning">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M8 1L1 15h14L8 1z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M8 6v3M8 12h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <div class="notification-content">
+                                    <div class="notification-title">Günlük limit yaklaşıyor</div>
+                                    <div class="notification-text">Bugün 8/10 mesaj hakkınızı kullandınız</div>
+                                    <div class="notification-time">3 saat önce</div>
+                                </div>
+                                <div class="notification-actions">
+                                    <button class="notification-action">Planı Yükselt</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="notification-footer">
+                            <button class="view-all-notifications">Tüm Bildirimleri Görüntüle</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </header>
@@ -220,23 +282,6 @@
 
             <!-- Chat Main -->
             <div class="chat-main">
-                <!-- Model Selector -->
-                <div class="model-selector">
-                    <div class="model-selector-label">AI Model:</div>
-                    <select class="model-select" id="modelSelect">
-                        <option value="gpt-4">GPT-4 (En Gelişmiş)</option>
-                        <option value="gpt-3.5">GPT-3.5 (Hızlı)</option>
-                        <option value="claude">Claude (Analitik)</option>
-                        <option value="gemini">Gemini (Google)</option>
-                    </select>
-                    <div class="model-info">
-                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                            <circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.5"/>
-                            <path d="M7 10V6M7 4h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                        </svg>
-                        <span class="model-description">En gelişmiş dil modeli, karmaşık görevler için ideal</span>
-                    </div>
-                </div>
 
                 <!-- Chat Messages -->
                 <div class="chat-messages" id="chatMessages">
@@ -282,6 +327,15 @@
                 <!-- Chat Input -->
                 <div class="chat-input-container">
                     <div class="chat-input-wrapper">
+                        <!-- Embedded Model Selector -->
+                        <div class="embedded-model-selector">
+                            <select class="model-select-embedded" id="modelSelect">
+                                <option value="gpt-4">GPT-4</option>
+                                <option value="gpt-3.5">GPT-3.5</option>
+                                <option value="claude">Claude</option>
+                                <option value="gemini">Gemini</option>
+                            </select>
+                        </div>
                         <textarea 
                             class="chat-input" 
                             id="chatInput" 
