@@ -242,6 +242,13 @@
 }
 
 /* CV Builder Mobile Styles */
+@media (max-width: 920px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+}
+
 @media (max-width: 768px) {
     .cv-builder-container {
         padding: 10px;
@@ -309,11 +316,6 @@
 
     .step-content {
         padding: 15px;
-    }
-
-    .form-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
     }
 
     .experience-item,
@@ -622,5 +624,127 @@
     
     .reward-label {
         font-size: 9px;
+    }
+}
+
+/* Chat Page Mobile Responsive */
+@media (max-width: 918px) {
+    .chat-sidebar-toggle {
+        display: flex;
+    }
+    
+    .chat-mobile-overlay {
+        display: block;
+    }
+    
+    .close-sidebar-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .chat-container {
+        height: calc(100vh - 60px);
+        border-radius: 0;
+    }
+    
+    .chat-sidebar {
+        position: fixed;
+        left: -300px;
+        top: 0;
+        height: 100vh;
+        z-index: 9999;
+        transition: left 0.3s ease;
+        background: #ffffff;
+        border-right: 1px solid var(--border-color);
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .chat-sidebar.active {
+        left: 0;
+    }
+    
+    .chat-main {
+        width: 100%;
+    }
+    
+    .model-selector {
+        padding: 12px 16px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .model-select {
+        width: 100%;
+        min-width: auto;
+    }
+    
+    .model-info {
+        width: 100%;
+    }
+    
+    .chat-messages {
+        padding: 16px;
+    }
+    
+    .message {
+        max-width: 90%;
+    }
+    
+    .welcome-message {
+        padding: 20px 10px;
+    }
+    
+    .welcome-message h3 {
+        font-size: 20px;
+    }
+    
+    .welcome-message p {
+        font-size: 14px;
+    }
+    
+    .quick-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .quick-action {
+        justify-content: center;
+    }
+    
+    .chat-input-container {
+        padding: 16px;
+    }
+    
+    .chat-input-wrapper {
+        padding: 10px 12px;
+    }
+    
+    .chat-input-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+}
+
+@media (max-width: 480px) {
+    .chat-sidebar {
+        width: 280px;
+        left: -280px;
+    }
+    
+    .message-bubble {
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+    
+    .message-avatar {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .chat-input {
+        font-size: 14px;
     }
 }

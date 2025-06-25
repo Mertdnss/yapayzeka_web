@@ -6,12 +6,21 @@ class ChatManager {
         this.conversations = this.loadConversations();
         this.currentConversationId = null;
         this.isTyping = false;
+        this.eventsbound = false;
         
         this.init();
     }
 
     init() {
+        this.chatMessagesElement = document.getElementById('chatMessages');
+        
+        if (!this.chatMessagesElement) {
+            console.error('chatMessages element not found');
+            return;
+        }
+        
         this.bindEvents();
+        this.bindChatHistoryEvents();
         this.updateModelInfo();
         this.setupMobileResponsive();
         
@@ -24,6 +33,9 @@ class ChatManager {
     }
 
     bindEvents() {
+        // Check if events are already bound
+        if (this.eventsbound) return;
+        
         // Model selector
         const modelSelect = document.getElementById('modelSelect');
         if (modelSelect) {
@@ -56,18 +68,6 @@ class ChatManager {
             });
         }
 
-        // Quick actions
-        document.querySelectorAll('.quick-action').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const prompt = e.currentTarget.dataset.prompt;
-                if (prompt) {
-                    chatInput.value = prompt;
-                    this.updateCharCount();
-                    this.sendMessage();
-                }
-            });
-        });
-
         // New chat button
         const newChatBtn = document.querySelector('.new-chat-btn');
         if (newChatBtn) {
@@ -78,29 +78,59 @@ class ChatManager {
 
         // Chat history items
         this.bindChatHistoryEvents();
-    }
-
-    bindChatHistoryEvents() {
-        document.querySelectorAll('.chat-history-item').forEach(item => {
-            item.addEventListener('click', (e) => {
-                if (!e.target.closest('.chat-delete')) {
-                    const conversationId = item.dataset.conversationId;
-                    if (conversationId) {
-                        this.loadConversation(conversationId);
+        
+        // Quick actions event delegation
+        if (this.chatMessagesElement) {
+            this.chatMessagesElement.addEventListener('click', (e) => {
+                if (e.target.closest('.quick-action')) {
+                    const quickAction = e.target.closest('.quick-action');
+                    const prompt = quickAction.dataset.prompt;
+                    if (prompt) {
+                        const chatInput = document.getElementById('chatInput');
+                        if (chatInput) {
+                            chatInput.value = prompt;
+                            this.updateCharCount();
+                            this.sendMessage();
+                        }
                     }
                 }
             });
-        });
+        }
+        
+        // Mark events as bound
+        this.eventsbound = true;
+    }
 
-        document.querySelectorAll('.chat-delete').forEach(btn => {
-            btn.addEventListener('click', (e) => {
+    bindChatHistoryEvents() {
+        const chatHistory = document.querySelector('.chat-history');
+        if (!chatHistory) return;
+        
+        // Check if event listener is already bound
+        if (chatHistory.hasAttribute('data-events-bound')) return;
+        
+        // Use event delegation to avoid multiple listeners
+        chatHistory.addEventListener('click', (e) => {
+            const historyItem = e.target.closest('.chat-history-item');
+            if (!historyItem) return;
+            
+            if (e.target.closest('.chat-delete')) {
+                // Delete conversation
                 e.stopPropagation();
-                const conversationId = e.target.closest('.chat-history-item').dataset.conversationId;
+                const conversationId = historyItem.dataset.conversationId;
                 if (conversationId) {
                     this.deleteConversation(conversationId);
                 }
-            });
+            } else {
+                // Load conversation
+                const conversationId = historyItem.dataset.conversationId;
+                if (conversationId) {
+                    this.loadConversation(conversationId);
+                }
+            }
         });
+        
+        // Mark as bound to prevent duplicate listeners
+        chatHistory.setAttribute('data-events-bound', 'true');
     }
 
     setupMobileResponsive() {
@@ -268,8 +298,9 @@ class ChatManager {
     }
 
     addMessage(role, content, model = null) {
-        const chatMessages = document.getElementById('chatMessages');
-        const welcomeMessage = chatMessages.querySelector('.welcome-message');
+        if (!this.chatMessagesElement) return;
+        
+        const welcomeMessage = this.chatMessagesElement.querySelector('.welcome-message');
         
         // Remove welcome message if it exists
         if (welcomeMessage) {
@@ -290,7 +321,7 @@ class ChatManager {
             messageDiv.appendChild(content_div);
         }
         
-        chatMessages.appendChild(messageDiv);
+        this.chatMessagesElement.appendChild(messageDiv);
         this.scrollToBottom();
         
         // Save to conversation
@@ -353,7 +384,7 @@ class ChatManager {
     }
 
     addSystemMessage(content) {
-        const chatMessages = document.getElementById('chatMessages');
+        if (!this.chatMessagesElement) return;
         
         const systemDiv = document.createElement('div');
         systemDiv.className = 'system-message';
@@ -369,15 +400,14 @@ class ChatManager {
         `;
         systemDiv.textContent = content;
         
-        chatMessages.appendChild(systemDiv);
+        this.chatMessagesElement.appendChild(systemDiv);
         this.scrollToBottom();
     }
 
     showTypingIndicator() {
-        if (document.querySelector('.typing-indicator')) return;
+        if (document.querySelector('.typing-indicator') || !this.chatMessagesElement) return;
         
         this.isTyping = true;
-        const chatMessages = document.getElementById('chatMessages');
         
         const typingDiv = document.createElement('div');
         typingDiv.className = 'typing-indicator';
@@ -397,7 +427,7 @@ class ChatManager {
         typingDiv.appendChild(avatar);
         typingDiv.appendChild(typingBubble);
         
-        chatMessages.appendChild(typingDiv);
+        this.chatMessagesElement.appendChild(typingDiv);
         this.scrollToBottom();
     }
 
@@ -410,8 +440,8 @@ class ChatManager {
     }
 
     scrollToBottom() {
-        const chatMessages = document.getElementById('chatMessages');
-        chatMessages.scrollTop = chatMessages.scrollHeight;
+        if (!this.chatMessagesElement) return;
+        this.chatMessagesElement.scrollTop = this.chatMessagesElement.scrollHeight;
     }
 
     // Conversation Management
@@ -437,8 +467,8 @@ class ChatManager {
         if (!conversation) return;
         
         // Clear current messages
-        const chatMessages = document.getElementById('chatMessages');
-        chatMessages.innerHTML = '';
+        if (!this.chatMessagesElement) return;
+        this.chatMessagesElement.innerHTML = '';
         
         // Load messages or show welcome
         if (conversation.messages.length === 0) {
@@ -534,8 +564,6 @@ class ChatManager {
             
             chatHistory.appendChild(item);
         });
-        
-        this.bindChatHistoryEvents();
     }
 
     getTimeAgo(dateString) {
@@ -555,8 +583,8 @@ class ChatManager {
     }
 
     showWelcomeMessage() {
-        const chatMessages = document.getElementById('chatMessages');
-        chatMessages.innerHTML = `
+        if (!this.chatMessagesElement) return;
+        this.chatMessagesElement.innerHTML = `
             <div class="welcome-message">
                 <div class="welcome-icon">
                     <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
@@ -595,19 +623,6 @@ class ChatManager {
                 </div>
             </div>
         `;
-        
-        // Re-bind quick action events
-        document.querySelectorAll('.quick-action').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const prompt = e.currentTarget.dataset.prompt;
-                if (prompt) {
-                    const chatInput = document.getElementById('chatInput');
-                    chatInput.value = prompt;
-                    this.updateCharCount();
-                    this.sendMessage();
-                }
-            });
-        });
     }
 
     // Local Storage Management
@@ -630,7 +645,123 @@ class ChatManager {
     }
 }
 
-// Initialize chat when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    new ChatManager();
+// ChatManager temporarily disabled to prevent crashes
+
+// Simple Mobile Chat Sidebar Toggle
+// Simple chat functionality without ChatManager
+document.addEventListener('DOMContentLoaded', function() {
+    const chatInput = document.getElementById('chatInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const chatMessages = document.getElementById('chatMessages');
+    const charCount = document.querySelector('.char-count');
+    
+    // Update character count
+    function updateCharCount() {
+        if (chatInput && charCount) {
+            const count = chatInput.value.length;
+            charCount.textContent = `${count} / 4000`;
+        }
+    }
+    
+    // Auto resize textarea
+    function autoResize(textarea) {
+        textarea.style.height = 'auto';
+        textarea.style.height = Math.min(textarea.scrollHeight, 120) + 'px';
+    }
+    
+    // Add message to chat
+    function addMessage(role, content) {
+        if (!chatMessages) return;
+        
+        // Remove welcome message if exists
+        const welcomeMessage = chatMessages.querySelector('.welcome-message');
+        if (welcomeMessage) {
+            welcomeMessage.remove();
+        }
+        
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${role}`;
+        messageDiv.innerHTML = `
+            <div class="message-content">
+                <div class="message-bubble">
+                    ${content}
+                </div>
+            </div>
+        `;
+        
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    
+    // Send message
+    function sendMessage() {
+        if (!chatInput) return;
+        
+        const message = chatInput.value.trim();
+        if (!message) return;
+        
+        // Add user message
+        addMessage('user', message);
+        
+        // Clear input
+        chatInput.value = '';
+        updateCharCount();
+        autoResize(chatInput);
+        
+        // Simulate AI response
+        setTimeout(() => {
+            addMessage('assistant', 'Bu bir test yanıtıdır. Mesajınız alındı: "' + message + '"');
+        }, 1000);
+    }
+    
+    // Event listeners
+    if (chatInput) {
+        chatInput.addEventListener('input', () => {
+            updateCharCount();
+            autoResize(chatInput);
+        });
+        
+        chatInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+    }
+    
+    if (sendBtn) {
+        sendBtn.addEventListener('click', sendMessage);
+    }
+    
+    // Sidebar functionality
+    const toggleBtn = document.getElementById('chatSidebarToggle');
+    const closeBtn = document.getElementById('closeSidebarBtn');
+    const overlay = document.getElementById('chatMobileOverlay');
+    const sidebar = document.querySelector('.chat-sidebar');
+    
+    function openSidebar() {
+        if (sidebar && overlay && toggleBtn) {
+            sidebar.classList.add('active');
+            overlay.classList.add('active');
+            toggleBtn.style.display = 'none';
+        }
+    }
+    
+    function closeSidebar() {
+        if (sidebar && overlay && toggleBtn) {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+            toggleBtn.style.display = 'flex';
+        }
+    }
+    
+    if (toggleBtn && overlay && sidebar) {
+        toggleBtn.addEventListener('click', openSidebar);
+        
+        if (closeBtn) {
+            closeBtn.addEventListener('click', closeSidebar);
+        }
+        
+        overlay.addEventListener('click', closeSidebar);
+    }
 });
