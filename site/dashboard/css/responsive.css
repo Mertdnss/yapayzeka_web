@@ -629,8 +629,28 @@
 
 /* Chat Page Mobile Responsive */
 @media (max-width: 918px) {
+    /* Chat Page Header Mobile Adjustments */
+    .header-left {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    
+    .page-title h1 {
+        font-size: 20px;
+    }
+    
+    .page-title p {
+        font-size: 12px;
+    }
+    
     .chat-sidebar-toggle {
         display: flex;
+        font-size: 11px;
+        padding: 6px 10px;
+    }
+    
+    .chat-sidebar-toggle span {
+        display: none;
     }
     
     .chat-mobile-overlay {
@@ -729,6 +749,22 @@
 }
 
 @media (max-width: 480px) {
+    /* Chat Page Extra Small Mobile Adjustments */
+    .header-left {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+    
+    .page-title {
+        order: 1;
+    }
+    
+    .chat-sidebar-toggle {
+        order: 2;
+        align-self: flex-start;
+    }
+    
     .chat-sidebar {
         width: 280px;
         left: -280px;
