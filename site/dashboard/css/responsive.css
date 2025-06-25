@@ -9,7 +9,7 @@
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 958px) {
     /* Sidebar mobile overlay */
     .sidebar {
         transform: translateX(-100%);
@@ -50,6 +50,18 @@
     .mobile-overlay.active {
         opacity: 1;
         visibility: visible;
+    }
+    
+    /* Notification badge mobile adjustments */
+    .notification-badge {
+        top: 5px;
+        right: 5px;
+        font-size: 8px;
+        padding: 1px 4px;
+        min-width: 12px;
+        height: 12px;
+        line-height: 10px;
+        border-radius: 7px;
     }
     
     /* Voice Cloning Responsive Styles */
@@ -205,7 +217,7 @@
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 630px) {
     .header-right {
         gap: 8px;
     }
@@ -233,7 +245,7 @@
 
 /* Specific support for gesture navigation */
 @supports (padding: max(0px)) {
-    @media (max-width: 768px) {
+    @media (max-width: 958px) {
         .sidebar-footer {
             padding-bottom: max(calc(5vh + env(safe-area-inset-bottom, 0px)), 8vh) !important;
         }
@@ -248,7 +260,7 @@
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 958px) {
     .cv-builder-container {
         padding: 10px;
     }
@@ -363,7 +375,7 @@
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 630px) {
     /* CV Builder Mobile Styles */
     .cv-progress-bar {
         flex-direction: column;
@@ -481,7 +493,7 @@
 }
 
 /* Tasks Page Responsive Styles */
-@media (max-width: 768px) {
+@media (max-width: 958px) {
     .user-points {
         display: flex;
         margin-right: 8px;
@@ -579,7 +591,7 @@
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 630px) {
     .stats-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -628,18 +640,27 @@
 }
 
 /* Chat Page Mobile Responsive */
-@media (max-width: 918px) {
+@media (max-width: 958px) {
     /* Chat Page Header Mobile Adjustments */
     .header-left {
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
         gap: 8px;
     }
     
+    .page-title {
+        flex-shrink: 1;
+        min-width: 0;
+        max-width: 60%;
+    }
+    
     .page-title h1 {
-        font-size: 18px;
+        font-size: 16px;
         line-height: 1.2;
         word-wrap: break-word;
         overflow-wrap: break-word;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     
     .page-title p {
@@ -708,7 +729,8 @@
     }
     
     .dashboard-page .page-title {
-        max-width: 55%;
+        flex: 1;
+        min-width: 0;
     }
     
     .dashboard-page .header-left {
@@ -731,7 +753,8 @@
     }
     
     .cv-builder-page .page-title {
-        max-width: 55%;
+        flex: 1;
+        min-width: 0;
     }
     
     .cv-builder-page .header-left {
@@ -776,7 +799,8 @@
     }
     
     .voice-cloning-page .page-title {
-        max-width: 55%;
+        flex: 1;
+        min-width: 0;
     }
     
     .voice-cloning-page .header-left {
@@ -943,16 +967,20 @@
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 630px) {
     /* Chat Page Extra Small Mobile Adjustments */
     .header-left {
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction: row;
+        align-items: center;
         gap: 4px;
+        flex-wrap: nowrap;
     }
     
     .page-title {
         order: 1;
+        flex-shrink: 1;
+        min-width: 0;
+        max-width: 70%;
     }
     
     .chat-sidebar-toggle {
@@ -978,10 +1006,22 @@
     .chat-input {
         font-size: 14px;
     }
+    
+    /* Mobile notification badge adjustments */
+    .notification-badge {
+        top: 4px;
+        right: 4px;
+        font-size: 7px;
+        padding: 1px 3px;
+        min-width: 10px;
+        height: 10px;
+        line-height: 8px;
+        border-radius: 6px;
+    }
 }
 
 /* Dashboard Mobile Styles */
-@media (max-width: 768px) {
+@media (max-width: 958px) {
     .sidebar {
         transform: translateX(-100%);
     }
@@ -1042,7 +1082,8 @@
     }
     
     .chat-page .page-title {
-        max-width: 60%;
+        flex: 1;
+        min-width: 0;
     }
     
     .chat-page .user-points {
@@ -1088,7 +1129,8 @@
     }
     
     .tasks-page .page-title {
-        max-width: 60%;
+        flex: 1;
+        min-width: 0;
     }
     
     .tasks-page .user-points {
@@ -1134,7 +1176,8 @@
     }
     
     .dashboard-page .page-title {
-        max-width: 60%;
+        flex: 1;
+        min-width: 0;
     }
     
     .dashboard-page .user-points {
@@ -1180,7 +1223,8 @@
     }
     
     .cv-builder-page .page-title {
-        max-width: 60%;
+        flex: 1;
+        min-width: 0;
     }
     
     .cv-builder-page .user-points {
@@ -1226,7 +1270,8 @@
     }
     
     .voice-cloning-page .page-title {
-        max-width: 60%;
+        flex: 1;
+        min-width: 0;
     }
     
     .voice-cloning-page .voice-cloning-grid,
