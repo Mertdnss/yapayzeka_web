@@ -171,7 +171,10 @@
     }
     
     .page-title h1 {
-        font-size: 24px;
+        font-size: 22px;
+        line-height: 1.3;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
     
 
@@ -252,7 +255,10 @@
 
     /* Dashboard Mobile Styles */
     .dashboard-header h1 {
-        font-size: 24px;
+        font-size: 22px;
+        line-height: 1.3;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 
     .stats-grid {
@@ -630,11 +636,173 @@
     }
     
     .page-title h1 {
-        font-size: 20px;
+        font-size: 18px;
+        line-height: 1.2;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
     
     .page-title p {
         font-size: 12px;
+    }
+    
+    .chat-page .page-title h1 {
+        font-size: 13px;
+        line-height: 1.0;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        margin: 0;
+    }
+    
+    .chat-page .page-title p {
+        font-size: 8px;
+        line-height: 1.1;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    
+    .chat-page .page-title {
+        max-width: 55%;
+    }
+    
+    .chat-page .header-left {
+        gap: 4px;
+    }
+    
+    .tasks-page .page-title h1 {
+        font-size: 13px;
+        line-height: 1.0;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        margin: 0;
+    }
+    
+    .tasks-page .page-title p {
+        font-size: 8px;
+        line-height: 1.1;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    
+    .tasks-page .page-title {
+        max-width: 55%;
+    }
+    
+    .tasks-page .header-left {
+        gap: 4px;
+    }
+    
+    .dashboard-page .page-title h1 {
+        font-size: 13px;
+        line-height: 1.0;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        margin: 0;
+    }
+    
+    .dashboard-page .page-title p {
+        font-size: 8px;
+        line-height: 1.1;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    
+    .dashboard-page .page-title {
+        max-width: 55%;
+    }
+    
+    .dashboard-page .header-left {
+        gap: 4px;
+    }
+    
+    .cv-builder-page .page-title h1 {
+        font-size: 13px;
+        line-height: 1.0;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        margin: 0;
+    }
+    
+    .cv-builder-page .page-title p {
+        font-size: 8px;
+        line-height: 1.1;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    
+    .cv-builder-page .page-title {
+        max-width: 55%;
+    }
+    
+    .cv-builder-page .header-left {
+        gap: 4px;
+    }
+    
+    .cv-builder-page .user-points {
+        font-size: 11px;
+    }
+    
+    .cv-builder-page .points-label {
+        font-size: 8px;
+    }
+    
+    .cv-builder-page .points-value {
+        font-size: 12px;
+    }
+    
+    .cv-builder-page .notification-btn {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .cv-builder-page .notification-btn svg {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .voice-cloning-page .page-title h1 {
+        font-size: 13px;
+        line-height: 1.0;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        margin: 0;
+    }
+    
+    .voice-cloning-page .page-title p {
+        font-size: 8px;
+        line-height: 1.1;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    
+    .voice-cloning-page .page-title {
+        max-width: 55%;
+    }
+    
+    .voice-cloning-page .header-left {
+        gap: 4px;
+    }
+    
+    .voice-cloning-page .user-points {
+        font-size: 11px;
+    }
+    
+    .voice-cloning-page .points-label {
+        font-size: 8px;
+    }
+    
+    .voice-cloning-page .points-value {
+        font-size: 12px;
+    }
+    
+    .voice-cloning-page .notification-btn {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .voice-cloning-page .notification-btn svg {
+        width: 16px;
+        height: 16px;
     }
     
     .chat-sidebar-toggle {
@@ -853,7 +1021,214 @@
     
 
     
+    /* Chat Page Mobile Adjustments */
+    .chat-page .page-title h1 {
+        font-size: 16px;
+        line-height: 1.1;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        margin: 0;
+    }
+    
+    .chat-page .page-title p {
+        font-size: 9px;
+        line-height: 1.2;
+        margin-top: 1px;
+        margin-bottom: 0;
+    }
+    
+    .chat-page .header-left {
+        gap: 6px;
+    }
+    
+    .chat-page .page-title {
+        max-width: 60%;
+    }
+    
+    .chat-page .user-points {
+        font-size: 11px;
+    }
+    
+    .chat-page .points-label {
+        font-size: 8px;
+    }
+    
+    .chat-page .points-value {
+        font-size: 12px;
+    }
+    
+    .chat-page .notification-btn {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .chat-page .notification-btn svg {
+        width: 16px;
+        height: 16px;
+    }
+    
+    /* Tasks Page Mobile Adjustments */
+    .tasks-page .page-title h1 {
+        font-size: 16px;
+        line-height: 1.1;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        margin: 0;
+    }
+    
+    .tasks-page .page-title p {
+        font-size: 9px;
+        line-height: 1.2;
+        margin-top: 1px;
+        margin-bottom: 0;
+    }
+    
+    .tasks-page .header-left {
+        gap: 6px;
+    }
+    
+    .tasks-page .page-title {
+        max-width: 60%;
+    }
+    
+    .tasks-page .user-points {
+        font-size: 11px;
+    }
+    
+    .tasks-page .points-label {
+        font-size: 8px;
+    }
+    
+    .tasks-page .points-value {
+        font-size: 12px;
+    }
+    
+    .tasks-page .notification-btn {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .tasks-page .notification-btn svg {
+        width: 16px;
+        height: 16px;
+    }
+    
+    /* Dashboard Page Mobile Adjustments */
+    .dashboard-page .page-title h1 {
+        font-size: 16px;
+        line-height: 1.1;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        margin: 0;
+    }
+    
+    .dashboard-page .page-title p {
+        font-size: 9px;
+        line-height: 1.2;
+        margin-top: 1px;
+        margin-bottom: 0;
+    }
+    
+    .dashboard-page .header-left {
+        gap: 6px;
+    }
+    
+    .dashboard-page .page-title {
+        max-width: 60%;
+    }
+    
+    .dashboard-page .user-points {
+        font-size: 11px;
+    }
+    
+    .dashboard-page .points-label {
+        font-size: 8px;
+    }
+    
+    .dashboard-page .points-value {
+        font-size: 12px;
+    }
+    
+    .dashboard-page .notification-btn {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .dashboard-page .notification-btn svg {
+        width: 16px;
+        height: 16px;
+    }
+    
+    /* CV Builder Mobile Adjustments */
+    .cv-builder-page .page-title h1 {
+        font-size: 16px;
+        line-height: 1.1;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        margin: 0;
+    }
+    
+    .cv-builder-page .page-title p {
+        font-size: 9px;
+        line-height: 1.2;
+        margin-top: 1px;
+        margin-bottom: 0;
+    }
+    
+    .cv-builder-page .header-left {
+        gap: 6px;
+    }
+    
+    .cv-builder-page .page-title {
+        max-width: 60%;
+    }
+    
+    .cv-builder-page .user-points {
+        font-size: 11px;
+    }
+    
+    .cv-builder-page .points-label {
+        font-size: 8px;
+    }
+    
+    .cv-builder-page .points-value {
+        font-size: 12px;
+    }
+    
+    .cv-builder-page .notification-btn {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .cv-builder-page .notification-btn svg {
+        width: 16px;
+        height: 16px;
+    }
+    
     /* Voice Cloning Mobile Adjustments */
+    .voice-cloning-page .page-title h1 {
+        font-size: 16px;
+        line-height: 1.1;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        margin: 0;
+    }
+    
+    .voice-cloning-page .page-title p {
+        font-size: 9px;
+        line-height: 1.2;
+        margin-top: 1px;
+        margin-bottom: 0;
+    }
+    
+    .voice-cloning-page .header-left {
+        gap: 6px;
+    }
+    
+    .voice-cloning-page .page-title {
+        max-width: 60%;
+    }
+    
     .voice-cloning-page .voice-cloning-grid,
     .voice-cloning-page .processing-results-grid {
         grid-template-columns: 1fr;

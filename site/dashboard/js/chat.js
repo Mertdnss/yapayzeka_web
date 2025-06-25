@@ -597,7 +597,7 @@ class ChatManager {
                         </defs>
                     </svg>
                 </div>
-                <h3>AssistAI'ya Hoş Geldiniz!</h3>
+                <h3>CraftingAI'ya Hoş Geldiniz!</h3>
                 <p>Size nasıl yardımcı olabilirim? Herhangi bir sorunuz varsa çekinmeden sorun.</p>
                 <div class="quick-actions">
                     <button class="quick-action" data-prompt="Merhaba! Bana kendini tanıt.">

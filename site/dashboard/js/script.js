@@ -424,7 +424,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Welcome message
     setTimeout(() => {
-        console.log('Dashboard loaded successfully! Welcome to AssistAI Dashboard 🚀');
+        console.log('Dashboard loaded successfully! Welcome to CraftingAI Dashboard 🚀');
     }, 1000);
 });
 
