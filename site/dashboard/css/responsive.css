@@ -222,7 +222,20 @@
         gap: 8px;
     }
     
-
+    .content-header {
+        margin-top: 24px;
+        margin-bottom: 32px;
+    }
+    
+    .header-content h2 {
+        font-size: 26px;
+        font-weight: 800;
+    }
+    
+    .header-content p {
+        font-size: 15px;
+        font-weight: 500;
+    }
     
     .stats-grid {
         gap: 12px;
@@ -1299,5 +1312,268 @@
     
     .voice-cloning-page .voice-comparison {
         grid-template-columns: 1fr;
+    }
+}
+
+/* Games Page Responsive Styles */
+@media (max-width: 958px) {
+    .games-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+    }
+    
+    .game-card {
+        padding: 20px;
+    }
+    
+    .game-categories {
+        gap: 8px;
+        margin-bottom: 24px;
+    }
+    
+    .category-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-container {
+        padding: 0 16px;
+    }
+    
+    .content-header {
+        margin-top: 32px;
+        margin-bottom: 40px;
+    }
+    
+    .header-content h2 {
+        font-size: 30px;
+        font-weight: 800;
+    }
+    
+    .header-content p {
+        font-size: 16px;
+        font-weight: 500;
+    }
+    
+    .games-section {
+        gap: 24px;
+    }
+    
+    .categories-wrapper {
+        padding: 20px;
+        border-radius: 16px;
+    }
+    
+    .games-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 4px;
+    }
+    
+    .game-card {
+        padding: 24px;
+        border-radius: 20px;
+    }
+    
+    .game-icon {
+        width: 64px;
+        height: 64px;
+        margin-bottom: 20px;
+    }
+    
+    .game-info h3 {
+        font-size: 20px;
+    }
+    
+    .game-info p {
+        font-size: 14px;
+    }
+    
+    .game-categories {
+        gap: 12px;
+        justify-content: center;
+    }
+    
+    .category-btn {
+        padding: 12px 20px;
+        font-size: 13px;
+        border-radius: 12px;
+    }
+    
+    .category-icon {
+        font-size: 16px;
+    }
+    
+    .play-btn {
+        padding: 14px 28px;
+        font-size: 15px;
+    }
+    
+    .game-stats {
+        gap: 12px;
+    }
+    
+    .game-stats span {
+        font-size: 11px;
+        padding: 3px 10px;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 20px;
+    }
+    
+    .modal-header {
+        padding: 20px;
+    }
+    
+    .modal-header h2 {
+        font-size: 20px;
+    }
+    
+    .modal-body {
+        padding: 20px;
+        max-height: 50vh;
+    }
+    
+    .game-area {
+        min-height: 300px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 630px) {
+    .game-categories {
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 20px;
+    }
+    
+    .category-btn {
+        padding: 12px 16px;
+        text-align: center;
+    }
+    
+    .games-grid {
+        gap: 12px;
+    }
+    
+    .game-card {
+        padding: 16px;
+    }
+    
+    .game-info h3 {
+        font-size: 16px;
+        margin-bottom: 6px;
+    }
+    
+    .game-info p {
+        font-size: 12px;
+        margin-bottom: 12px;
+    }
+    
+    .game-stats {
+        gap: 8px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .game-stats span {
+        font-size: 10px;
+        padding: 2px 8px;
+    }
+    
+    .play-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+    
+    .modal-content {
+        width: 98%;
+        margin: 10px;
+        max-height: 95vh;
+    }
+    
+    .modal-header {
+        padding: 16px;
+    }
+    
+    .modal-header h2 {
+        font-size: 18px;
+    }
+    
+    .modal-body {
+        padding: 16px;
+        max-height: 60vh;
+    }
+    
+    .game-area {
+        min-height: 250px;
+        font-size: 13px;
+        padding: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .games-container {
+        padding: 0 8px;
+    }
+    
+    .game-categories {
+        margin-bottom: 16px;
+    }
+    
+    .category-btn {
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+    
+    .game-card {
+        padding: 14px;
+        border-radius: 16px;
+    }
+    
+    .game-icon svg {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .game-info h3 {
+        font-size: 15px;
+    }
+    
+    .game-info p {
+        font-size: 11px;
+    }
+    
+    .play-btn {
+        padding: 8px 16px;
+        font-size: 13px;
+        border-radius: 10px;
+    }
+    
+    .modal-content {
+        border-radius: 16px;
+    }
+    
+    .modal-header {
+        padding: 14px;
+    }
+    
+    .modal-header h2 {
+        font-size: 16px;
+    }
+    
+    .modal-body {
+        padding: 14px;
+    }
+    
+    .game-area {
+        min-height: 200px;
+        font-size: 12px;
+        padding: 12px;
+        border-radius: 10px;
     }
 }

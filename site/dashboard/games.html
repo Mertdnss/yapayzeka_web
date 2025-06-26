@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Oyunlar - CraftingAI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="dashboard-page">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                        <rect width="32" height="32" rx="8" fill="url(#logoGradient)"/>
+                        <path d="M8 12h16v2H8v-2zm0 4h12v2H8v-2zm0 4h16v2H8v-2z" fill="white"/>
+                        <circle cx="20" cy="8" r="3" fill="#FFD700"/>
+                        <defs>
+                            <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#6C63FF"/>
+                                <stop offset="100%" style="stop-color:#3F8EFC"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <span class="logo-text">CraftingAI</span>
+            </div>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M3 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4zM3 10a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-6zM13 9a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1h-3z" fill="currentColor"/>
+                        </svg>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="cv-builder.html" class="nav-link">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M4 4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            <path d="M6 8h8M6 12h8M6 16h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        <span>CV Oluşturucu</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="voice-cloning.html" class="nav-link">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M10 2a3 3 0 0 1 3 3v5a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            <path d="M5 10a5 5 0 0 0 10 0M10 15v3M7 18h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        <span>Ses Klonlama</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="tasks.html" class="nav-link">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        </svg>
+                        <span>Görevler</span>
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a href="games.html" class="nav-link">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 000 1.788l4 2a1 1 0 000-1.788l-4-2A1 1 0 0011 9.236V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z" fill="currentColor"/>
+                        </svg>
+                        <span>Oyunlar</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="chat.html" class="nav-link">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            <circle cx="7" cy="10" r="1" fill="currentColor"/>
+                            <circle cx="10" cy="10" r="1" fill="currentColor"/>
+                            <circle cx="13" cy="10" r="1" fill="currentColor"/>
+                        </svg>
+                        <span>AI Sohbet</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <circle cx="10" cy="10" r="3" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            <circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            <path d="M10 1v2M10 17v2M18.66 6l-1.73 1M3.07 13l-1.73 1M18.66 14l-1.73-1M3.07 7l-1.73-1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        <span>Profil</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Ayarlar</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="user-avatar">
+                    <img src="https://via.placeholder.com/40" alt="Kullanıcı">
+                </div>
+                <div class="user-details">
+                    <div class="user-name">Mert Demir</div>
+                    <div class="user-plan">Pro Plan</div>
+                </div>
+            </div>
+            <button class="logout-btn">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M6 14H3a1 1 0 01-1-1V3a1 1 0 011-1h3M11 11l3-3-3-3M9 8h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+                <div class="page-title">
+                    <h1>AI Oyunları</h1>
+                    <p>Yapay zeka ile etkileşimli oyunlar oynayın</p>
+                </div>
+            </div>
+            <div class="header-right">
+
+                <div class="user-points">
+                    <div class="points-display">
+                        <span class="points-label">Puanım</span>
+                        <span class="points-value">2,450</span>
+                    </div>
+                </div>
+                <div class="notification-container">
+                    <button class="notification-btn">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M10 2C7.8 2 6 3.8 6 6v4l-2 2v1h12v-1l-2-2V6c0-2.2-1.8-4-4-4zM8.5 15.5v.5c0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5v-.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="notification-badge">3</span>
+                    </button>
+                    
+                    <!-- Notification Dropdown -->
+                    <div class="notification-dropdown">
+                        <div class="notification-header">
+                            <h4>Bildirimler</h4>
+                            <button class="mark-all-read">Tümünü Okundu İşaretle</button>
+                        </div>
+                        <div class="notification-list">
+                            <div class="notification-item unread">
+                                <div class="notification-icon success">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M13 4L6 11L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <div class="notification-content">
+                                    <div class="notification-title">CV'niz başarıyla oluşturuldu</div>
+                                    <div class="notification-text">Software Developer CV'si hazır ve indirilebilir</div>
+                                    <div class="notification-time">2 dakika önce</div>
+                                </div>
+                                <div class="notification-actions">
+                                    <button class="action-view">Görüntüle</button>
+                                </div>
+                            </div>
+
+                            <div class="notification-item unread">
+                                <div class="notification-icon info">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="2"/>
+                                        <path d="M8 11V7M8 5h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <div class="notification-content">
+                                    <div class="notification-title">Yeni AI önerisi mevcut</div>
+                                    <div class="notification-text">Profilinizi güncellemek için önerilerimiz var</div>
+                                    <div class="notification-time">1 saat önce</div>
+                                </div>
+                                <div class="notification-actions">
+                                    <button class="action-view">İncele</button>
+                                </div>
+                            </div>
+
+                            <div class="notification-item">
+                                <div class="notification-icon warning">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M8 1L1 15h14L8 1z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M8 6v3M8 12h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <div class="notification-content">
+                                    <div class="notification-title">Plan sınırına yaklaşıyorsunuz</div>
+                                    <div class="notification-text">Bu ay 8/10 CV oluşturma hakkınızı kullandınız</div>
+                                    <div class="notification-time">3 saat önce</div>
+                                </div>
+                                <div class="notification-actions">
+                                    <button class="action-view">Planı Yükselt</button>
+                                </div>
+                            </div>
+
+                            <div class="notification-item">
+                                <div class="notification-icon info">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="2"/>
+                                        <path d="M8 11V7M8 5h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <div class="notification-content">
+                                    <div class="notification-title">Ses klonlama işlemi tamamlandı</div>
+                                    <div class="notification-text">5 dakikalık ses kaydınız işlendi ve hazır</div>
+                                    <div class="notification-time">1 gün önce</div>
+                                </div>
+                                <div class="notification-actions">
+                                    <button class="action-view">Dinle</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="notification-footer">
+                            <button class="view-all-notifications">Tüm Bildirimleri Görüntüle</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Games Content -->
+        <div class="content-wrapper">
+            <div class="page-container">
+                <div class="content-header">
+                    <div class="header-content">
+                        <h2>Oyun Kategorileri</h2>
+                        <p>Yapay zeka destekli oyunlar arasından seçim yapın</p>
+                    </div>
+                </div>
+                
+                <div class="games-section">
+                    <!-- Game Categories -->
+                    <div class="categories-wrapper">
+                        <div class="game-categories">
+                            <button class="category-btn active" data-category="all">
+                                <span class="category-icon">🎮</span>
+                                <span>Tümü</span>
+                            </button>
+                            <button class="category-btn" data-category="strategy">
+                                <span class="category-icon">♟️</span>
+                                <span>Strateji</span>
+                            </button>
+                            <button class="category-btn" data-category="puzzle">
+                                <span class="category-icon">🧩</span>
+                                <span>Bulmaca</span>
+                            </button>
+                            <button class="category-btn" data-category="trivia">
+                                <span class="category-icon">🧠</span>
+                                <span>Bilgi</span>
+                            </button>
+                            <button class="category-btn" data-category="creative">
+                                <span class="category-icon">✨</span>
+                                <span>Yaratıcı</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Games Grid -->
+                    <div class="games-container">
+                        <div class="games-grid">
+                    <!-- AI Chess Game -->
+                    <div class="game-card" data-category="strategy">
+                        <div class="game-icon">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                <rect width="48" height="48" rx="12" fill="#6C63FF"/>
+                                <path d="M24 12l3 6h6l-5 4 2 6-6-4-6 4 2-6-5-4h6l3-6z" fill="white"/>
+                            </svg>
+                        </div>
+                        <div class="game-info">
+                            <h3>AI Satranç</h3>
+                            <p>Yapay zeka ile satranç oynayın. Farklı zorluk seviyeleri mevcut.</p>
+                            <div class="game-stats">
+                                <span class="difficulty">Zorluk: Orta</span>
+                                <span class="players">1-2 Oyuncu</span>
+                                <span class="multiplayer">Arkadaşlarla Oynanabilir</span>
+                            </div>
+                        </div>
+                        <button class="play-btn">Oyna</button>
+                    </div>
+
+                    <!-- Word Puzzle Game -->
+                    <div class="game-card" data-category="puzzle">
+                        <div class="game-icon">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                <rect width="48" height="48" rx="12" fill="#FF6B6B"/>
+                                <path d="M16 20h16v2H16v-2zm0 4h12v2H16v-2zm0 4h14v2H16v-2z" fill="white"/>
+                            </svg>
+                        </div>
+                        <div class="game-info">
+                            <h3>Kelime Bulmaca</h3>
+                            <p>AI tarafından oluşturulan kelime bulmacalarını çözün.</p>
+                            <div class="game-stats">
+                                <span class="difficulty">Zorluk: Kolay</span>
+                                <span class="players">1-6 Oyuncu</span>
+                                <span class="multiplayer">Arkadaşlarla Oynanabilir</span>
+                            </div>
+                        </div>
+                        <button class="play-btn">Oyna</button>
+                    </div>
+
+                    <!-- Trivia Game -->
+                    <div class="game-card" data-category="trivia">
+                        <div class="game-icon">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                <rect width="48" height="48" rx="12" fill="#4ECDC4"/>
+                                <circle cx="24" cy="18" r="3" fill="white"/>
+                                <path d="M24 26v8" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div class="game-info">
+                            <h3>AI Bilgi Yarışması</h3>
+                            <p>Çeşitli konularda AI ile bilgi yarışması yapın.</p>
+                            <div class="game-stats">
+                                <span class="difficulty">Zorluk: Değişken</span>
+                                <span class="players">1-4 Oyuncu</span>
+                                <span class="multiplayer">Arkadaşlarla Oynanabilir</span>
+                            </div>
+                        </div>
+                        <button class="play-btn">Oyna</button>
+                    </div>
+
+                    <!-- Story Creator Game -->
+                    <div class="game-card" data-category="creative">
+                        <div class="game-icon">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                <rect width="48" height="48" rx="12" fill="#FFD93D"/>
+                                <path d="M16 16h16v16H16V16z" stroke="white" stroke-width="2" fill="none"/>
+                                <path d="M20 20h8M20 24h6M20 28h8" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div class="game-info">
+                            <h3>Hikaye Yaratıcısı</h3>
+                            <p>AI ile birlikte interaktif hikayeler oluşturun.</p>
+                            <div class="game-stats">
+                                <span class="difficulty">Zorluk: Kolay</span>
+                                <span class="players">1 Oyuncu</span>
+                            </div>
+                        </div>
+                        <button class="play-btn">Oyna</button>
+                    </div>
+
+                    <!-- Number Puzzle Game -->
+                    <div class="game-card" data-category="puzzle">
+                        <div class="game-icon">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                <rect width="48" height="48" rx="12" fill="#9B59B6"/>
+                                <text x="24" y="30" text-anchor="middle" fill="white" font-size="20" font-weight="bold">2048</text>
+                            </svg>
+                        </div>
+                        <div class="game-info">
+                            <h3>Sayı Bulmacası</h3>
+                            <p>AI destekli sayı bulmacalarını çözmeye çalışın.</p>
+                            <div class="game-stats">
+                                <span class="difficulty">Zorluk: Zor</span>
+                                <span class="players">1-3 Oyuncu</span>
+                                <span class="multiplayer">Arkadaşlarla Oynanabilir</span>
+                            </div>
+                        </div>
+                        <button class="play-btn">Oyna</button>
+                    </div>
+
+                    <!-- AI Debate Game -->
+                    <div class="game-card" data-category="strategy">
+                        <div class="game-icon">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                <rect width="48" height="48" rx="12" fill="#E74C3C"/>
+                                <path d="M18 20c0-3.314 2.686-6 6-6s6 2.686 6 6c0 2.21-1.79 4-4 4h-4c-2.21 0-4-1.79-4-4z" fill="white"/>
+                                <path d="M20 28h8v4h-8v-4z" fill="white"/>
+                            </svg>
+                        </div>
+                        <div class="game-info">
+                            <h3>AI Tartışma</h3>
+                            <p>Çeşitli konularda AI ile tartışma yapın ve argümanlarınızı geliştirin.</p>
+                            <div class="game-stats">
+                                <span class="difficulty">Zorluk: Zor</span>
+                                <span class="players">1 Oyuncu</span>
+                            </div>
+                        </div>
+                        <button class="play-btn">Oyna</button>
+                    </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Game Modal -->
+    <div class="game-modal" id="gameModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Oyun</h2>
+                <button class="close-btn" id="closeModal">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="game-area" id="gameArea">
+                    <p>Oyun yükleniyor...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script src="js/games.js"></script>
+</body>
+</html>
