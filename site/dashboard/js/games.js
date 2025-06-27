@@ -68,39 +68,325 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ESC key to close modal
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && gameModal.classList.contains('active')) {
-            closeGameModal();
+        if (e.key === 'Escape') {
+            const exitConfirmModal = document.getElementById('exitConfirmModal');
+            if (exitConfirmModal && exitConfirmModal.classList.contains('active')) {
+                hideExitConfirmModal();
+            } else if (gameModal.classList.contains('active')) {
+                closeGameModal();
+            }
         }
     });
 
     function closeGameModal() {
+        showExitConfirmModal();
+    }
+    
+    function forceCloseGameModal() {
         gameModal.classList.remove('active');
         document.body.style.overflow = 'auto';
         gameArea.innerHTML = '<p>Oyun yükleniyor...</p>';
+        
+        // Clean up game instance
+        if (currentGameInstance && typeof currentGameInstance.destroy === 'function') {
+            currentGameInstance.destroy();
+        }
+        currentGameInstance = null;
+    }
+    
+    function showExitConfirmModal() {
+        // Create modal if it doesn't exist
+        let confirmModal = document.getElementById('exitConfirmModal');
+        if (!confirmModal) {
+            confirmModal = createExitConfirmModal();
+            document.body.appendChild(confirmModal);
+        }
+        
+        confirmModal.style.display = 'flex';
+        setTimeout(() => {
+            confirmModal.classList.add('active');
+        }, 10);
+    }
+    
+    function hideExitConfirmModal() {
+        const confirmModal = document.getElementById('exitConfirmModal');
+        if (confirmModal) {
+            confirmModal.classList.remove('active');
+            setTimeout(() => {
+                confirmModal.style.display = 'none';
+            }, 300);
+        }
+    }
+    
+    function createExitConfirmModal() {
+        const modal = document.createElement('div');
+        modal.id = 'exitConfirmModal';
+        modal.className = 'exit-confirm-modal';
+        modal.innerHTML = `
+            <div class="exit-confirm-content">
+                <div class="exit-confirm-icon">⚠️</div>
+                <h3>Oyundan Çıkış</h3>
+                <p>Oyundan çıkmak istediğinizden emin misiniz?<br>Kaydedilmemiş ilerlemeniz kaybolabilir.</p>
+                <div class="exit-confirm-buttons">
+                    <button id="confirmExit" class="exit-btn confirm">Evet, Çık</button>
+                    <button id="cancelExit" class="exit-btn cancel">İptal</button>
+                </div>
+            </div>
+        `;
+        
+        // Add event listeners
+        modal.querySelector('#confirmExit').addEventListener('click', () => {
+            hideExitConfirmModal();
+            forceCloseGameModal();
+        });
+        
+        modal.querySelector('#cancelExit').addEventListener('click', hideExitConfirmModal);
+        
+        // Close on outside click
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                hideExitConfirmModal();
+            }
+        });
+        
+        return modal;
+    }
+    
+    // Add CSS styles for exit confirmation modal
+    const exitModalStyles = document.createElement('style');
+    exitModalStyles.textContent = `
+        .exit-confirm-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .exit-confirm-modal.active {
+            opacity: 1;
+        }
+        
+        .exit-confirm-content {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+        
+        .exit-confirm-modal.active .exit-confirm-content {
+            transform: scale(1);
+        }
+        
+        .exit-confirm-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .exit-confirm-content h3 {
+            margin: 0 0 15px 0;
+            color: #333;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        
+        .exit-confirm-content p {
+            margin: 0 0 25px 0;
+            color: #666;
+            line-height: 1.5;
+            font-size: 16px;
+        }
+        
+        .exit-confirm-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .exit-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 120px;
+        }
+        
+        .exit-btn.confirm {
+            background: #ff4757;
+            color: white;
+        }
+        
+        .exit-btn.confirm:hover {
+            background: #ff3742;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 71, 87, 0.4);
+        }
+        
+        .exit-btn.cancel {
+            background: #f1f2f6;
+            color: #333;
+        }
+        
+        .exit-btn.cancel:hover {
+            background: #ddd;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        @media (max-width: 480px) {
+            .exit-confirm-content {
+                padding: 25px 20px;
+                margin: 20px;
+            }
+            
+            .exit-confirm-buttons {
+                flex-direction: column;
+            }
+            
+            .exit-btn {
+                width: 100%;
+            }
+        }
+    `;
+    document.head.appendChild(exitModalStyles);
+
+    // Game module loader
+    const gameModules = {
+        'AI Satranç': {
+            jsFile: 'js/games/chess.js',
+            className: 'ChessGame'
+        },
+        'Kelime Bulmaca': {
+            jsFile: 'js/games/wordpuzzle.js',
+            cssFile: 'css/wordpuzzle.css',
+            className: 'WordPuzzleGame'
+        },
+        'AI Bilgi Yarışması': {
+            jsFile: 'js/games/trivia.js',
+            cssFile: 'css/trivia.css',
+            className: 'TriviaGame'
+        },
+        'Hikaye Yaratıcısı': {
+            jsFile: 'js/games/story.js',
+            cssFile: 'css/story.css',
+            className: 'StoryGame'
+        },
+        'Sayı Bulmacası': {
+            jsFile: 'js/games/numberpuzzle.js',
+            cssFile: 'css/numberpuzzle.css',
+            className: 'NumberPuzzleGame'
+        },
+        'AI Tartışma': {
+            jsFile: 'js/games/debate.js',
+            cssFile: 'css/debate.css',
+            className: 'DebateGame'
+        }
+    };
+
+    let currentGameInstance = null;
+    let loadedModules = new Set();
+
+    window.loadGameModule = async function(gameTitle) {
+        const module = gameModules[gameTitle];
+        if (!module) {
+            gameArea.innerHTML = '<p>Bu oyun henüz mevcut değil.</p>';
+            return;
+        }
+
+        // Show loading
+        gameArea.innerHTML = `
+            <div class="game-loading">
+                <div class="loading-spinner"></div>
+                <p>Oyun yükleniyor...</p>
+            </div>
+        `;
+
+        try {
+            // Load CSS if not already loaded and cssFile exists
+            if (module.cssFile && !loadedModules.has(module.cssFile)) {
+                await loadCSS(module.cssFile);
+                loadedModules.add(module.cssFile);
+            }
+
+            // Load JS if not already loaded
+            if (!loadedModules.has(module.jsFile)) {
+                await loadJS(module.jsFile);
+                loadedModules.add(module.jsFile);
+            }
+
+            // Initialize game
+            if (window[module.className]) {
+                currentGameInstance = new window[module.className](gameArea);
+            } else {
+                throw new Error(`Game class ${module.className} not found`);
+            }
+        } catch (error) {
+            console.error('Error loading game module:', error);
+            gameArea.innerHTML = `
+                <div class="game-error">
+                    <p>Oyun yüklenirken bir hata oluştu.</p>
+                    <button class="retry-btn" onclick="loadGameModule('${gameTitle}')">Tekrar Dene</button>
+                </div>
+            `;
+        }
+    };
+
+    function loadCSS(href) {
+        return new Promise((resolve, reject) => {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = href;
+            link.onload = resolve;
+            link.onerror = reject;
+            document.head.appendChild(link);
+        });
+    }
+
+    function loadJS(src) {
+        return new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = src;
+            script.onload = resolve;
+            script.onerror = reject;
+            document.head.appendChild(script);
+        });
     }
 
     function setGameContent(gameTitle) {
+        // Clean up previous game instance
+        if (currentGameInstance && typeof currentGameInstance.destroy === 'function') {
+            currentGameInstance.destroy();
+        }
+        currentGameInstance = null;
+
+        // Load the appropriate game module
+        loadGameModule(gameTitle);
+    }
+
+    // Legacy fallback for games without modules
+    function setLegacyGameContent(gameTitle) {
         switch(gameTitle) {
-            case 'AI Satranç':
-                gameArea.innerHTML = `
-                    <div class="chess-game">
-                        <h3>🏆 AI Satranç Oyunu</h3>
-                        <div class="chess-board">
-                            <div class="board-placeholder">
-                                <p>♔ ♕ ♖ ♗ ♘ ♙</p>
-                                <p>Satranç tahtası burada görünecek</p>
-                                <div class="game-controls">
-                                    <button class="game-btn">Yeni Oyun</button>
-                                    <button class="game-btn">Zorluk: Orta</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="game-info">
-                            <p>🤖 AI ile satranç oynayın. Hamlenizi yapın ve AI'nın cevabını bekleyin.</p>
-                        </div>
-                    </div>
-                `;
-                break;
             
             case 'Kelime Bulmaca':
                 gameArea.innerHTML = `

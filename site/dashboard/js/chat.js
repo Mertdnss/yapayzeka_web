@@ -172,6 +172,7 @@ class ChatManager {
     }
 
     changeModel(newModel) {
+        console.log('Model değiştiriliyor:', this.currentModel, '->', newModel);
         this.currentModel = newModel;
         this.updateModelInfo();
         
@@ -179,6 +180,7 @@ class ChatManager {
         if (this.currentConversationId) {
             this.addSystemMessage(`Model ${this.getModelDisplayName(newModel)} olarak değiştirildi.`);
         }
+        console.log('Yeni model ayarlandı:', this.currentModel);
     }
 
     updateModelInfo() {
@@ -211,8 +213,8 @@ class ChatManager {
                 description: 'Analitik düşünme ve uzun metinler için optimize edilmiş'
             },
             'gemini': {
-                name: 'Gemini',
-                description: 'Google\'ın çok modlu AI modeli, görsel analiz destekli'
+                name: 'Gemini 2.0 Flash',
+                description: 'Google\'ın en gelişmiş çok modlu AI modeli, görsel analiz destekli'
             }
         };
         
@@ -281,18 +283,89 @@ class ChatManager {
     }
 
     async callAI(message) {
-        // Simulate API call delay
+        console.log('callAI çağrıldı, mevcut model:', this.currentModel);
+        
+        // If Gemini is selected, use real API
+        if (this.currentModel === 'gemini') {
+            console.log('Gemini API çağrısına yönlendiriliyor...');
+            return await this.callGeminiAPI(message);
+        }
+        
+        console.log('Mock yanıt kullanılıyor, model:', this.currentModel);
+        
+        // Simulate API call delay for other models
         await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 2000));
         
         // Mock responses based on model
         const responses = {
             'gpt-4': `GPT-4 olarak size yardımcı olmaya çalışacağım. "${message}" sorunuz hakkında detaylı bir açıklama yapabilirim. Bu konuda daha spesifik ne öğrenmek istiyorsunuz?`,
             'gpt-3.5': `Merhaba! GPT-3.5 olarak "${message}" konusunda size yardımcı olabilirim. Hızlı ve etkili çözümler sunmaya odaklanıyorum.`,
-            'claude': `Claude olarak analitik bir yaklaşımla "${message}" konusunu ele alalım. Bu konuyu derinlemesine inceleyebilir ve yapılandırılmış bir yanıt verebilirim.`,
-            'gemini': `Gemini olarak "${message}" hakkında çok boyutlu bir perspektif sunabilirim. Görsel ve metinsel analiz yeteneklerimi kullanarak kapsamlı bir yanıt hazırlayabilirim.`
+            'claude': `Claude olarak analitik bir yaklaşımla "${message}" konusunu ele alalım. Bu konuyu derinlemesine inceleyebilir ve yapılandırılmış bir yanıt verebilirim.`
         };
         
         return responses[this.currentModel] || responses['gpt-4'];
+    }
+
+    async callGeminiAPI(message) {
+        const GEMINI_API_KEY = 'AIzaSyBscfSecswV2hdqaRtA4IXHSR7xWsr6OJw';
+        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${GEMINI_API_KEY}`;
+        
+        console.log('Gemini API çağrısı başlatılıyor...', { message, API_URL });
+        
+        try {
+            const requestBody = {
+                contents: [{
+                    parts: [{
+                        text: message
+                    }]
+                }],
+                generationConfig: {
+                    temperature: 0.7,
+                    topK: 40,
+                    topP: 0.95,
+                    maxOutputTokens: 2048,
+                }
+            };
+            
+            console.log('Request body:', JSON.stringify(requestBody, null, 2));
+            
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestBody)
+            });
+            
+            console.log('Response status:', response.status);
+            console.log('Response headers:', response.headers);
+            
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('API Error Response:', errorText);
+                throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
+            }
+            
+            const data = await response.json();
+            console.log('API Response:', data);
+            
+            if (data.candidates && data.candidates[0] && data.candidates[0].content) {
+                const result = data.candidates[0].content.parts[0].text;
+                console.log('Gemini yanıtı alındı:', result);
+                return result;
+            } else {
+                console.error('Geçersiz API yanıtı:', data);
+                throw new Error('Geçersiz API yanıtı');
+            }
+            
+        } catch (error) {
+            console.error('Gemini API Error:', error);
+            // CORS hatası durumunda alternatif mesaj
+            if (error.message.includes('CORS') || error.message.includes('fetch')) {
+                throw new Error('Tarayıcı güvenlik kısıtlaması nedeniyle Gemini API\'ye doğrudan erişim sağlanamıyor. Bu özellik sunucu tarafında çalışmalıdır.');
+            }
+            throw new Error(`Gemini API hatası: ${error.message}`);
+        }
     }
 
     addMessage(role, content, model = null) {
@@ -646,8 +719,87 @@ class ChatManager {
 // ChatManager temporarily disabled to prevent crashes
 
 // Simple Mobile Chat Sidebar Toggle
-// Simple chat functionality without ChatManager
-document.addEventListener('DOMContentLoaded', function() {
+// Global variables for chat functionality
+    let currentModel = 'gpt-4';
+    
+    // Global callAI function
+    async function callAI(message) {
+        console.log('callAI çağrıldı, mevcut model:', currentModel);
+        
+        // If Gemini is selected, use real API
+        if (currentModel === 'gemini') {
+            console.log('Gemini API çağrısına yönlendiriliyor...');
+            return await callGeminiAPI(message);
+        }
+        
+        console.log('Mock yanıt kullanılıyor, model:', currentModel);
+        
+        // Simulate API call delay for other models
+        await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 2000));
+        
+        // Mock responses based on model
+        const responses = {
+            'gpt-4': `GPT-4 olarak size yardımcı olmaya çalışacağım. "${message}" sorunuz hakkında detaylı bir açıklama yapabilirim. Bu konuda daha spesifik ne öğrenmek istiyorsunuz?`,
+            'gpt-3.5': `Merhaba! GPT-3.5 olarak "${message}" konusunda size yardımcı olabilirim. Hızlı ve etkili çözümler sunmaya odaklanıyorum.`,
+            'claude': `Claude olarak analitik bir yaklaşımla "${message}" konusunu ele alalım. Bu konuyu derinlemesine inceleyebilir ve yapılandırılmış bir yanıt verebilirim.`
+        };
+        
+        return responses[currentModel] || responses['gpt-4'];
+    }
+    
+    // Global callGeminiAPI function
+    async function callGeminiAPI(message) {
+        const GEMINI_API_KEY = 'AIzaSyBscfSecswV2hdqaRtA4IXHSR7xWsr6OJw';
+        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${GEMINI_API_KEY}`;
+        
+        console.log('Gemini API çağrısı başlatılıyor...', { message, API_URL });
+        
+        try {
+            const requestBody = {
+                contents: [{
+                    parts: [{
+                        text: message
+                    }]
+                }]
+            };
+            
+            console.log('Request body:', requestBody);
+            
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestBody)
+            });
+            
+            console.log('Response status:', response.status);
+            console.log('Response headers:', response.headers);
+            
+            if (!response.ok) {
+                if (response.status === 0 || !response.status) {
+                    throw new Error('CORS hatası: API çağrısı engellenmiş olabilir');
+                }
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            console.log('API yanıtı:', data);
+            
+            if (data.candidates && data.candidates[0] && data.candidates[0].content) {
+                return data.candidates[0].content.parts[0].text;
+            } else {
+                throw new Error('Geçersiz API yanıtı formatı');
+            }
+            
+        } catch (error) {
+            console.error('Gemini API Hatası:', error);
+            throw error;
+        }
+    }
+    
+    // Simple chat functionality without ChatManager
+    document.addEventListener('DOMContentLoaded', function() {
     const chatInput = document.getElementById('chatInput');
     const sendBtn = document.getElementById('sendBtn');
     const chatMessages = document.getElementById('chatMessages');
@@ -729,6 +881,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const message = chatInput.value.trim();
         if (!message) return;
         
+        // Disable send button to prevent spam
+        const sendBtn = document.getElementById('sendBtn');
+        if (sendBtn) {
+            sendBtn.disabled = true;
+            sendBtn.style.opacity = '0.5';
+            sendBtn.style.cursor = 'not-allowed';
+        }
+        
         // Add user message
         addMessage('user', message);
         
@@ -737,14 +897,31 @@ document.addEventListener('DOMContentLoaded', function() {
         updateCharCount();
         autoResize(chatInput);
         
-        // Simulate AI response
-        setTimeout(() => {
-            // Get selected model from dropdown
+        // Call AI API
+        callAI(message).then((response) => {
+            // Add AI response to chat
             const modelSelect = document.getElementById('modelSelect');
-            const selectedModel = modelSelect ? modelSelect.value : 'GPT-4';
+            const selectedModel = modelSelect ? modelSelect.value : currentModel;
+            addMessage('assistant', response, selectedModel);
             
-            addMessage('assistant', 'Bu bir test yanıtıdır. Mesajınız alındı: "' + message + '"', selectedModel);
-        }, 1000);
+            // Re-enable send button after AI response
+            if (sendBtn) {
+                sendBtn.disabled = false;
+                sendBtn.style.opacity = '1';
+                sendBtn.style.cursor = 'pointer';
+            }
+        }).catch((error) => {
+            console.error('AI API Error:', error);
+            // Add error message to chat
+            addMessage('assistant', 'Üzgünüm, bir hata oluştu. Lütfen tekrar deneyin.', currentModel);
+            
+            // Re-enable send button even if there's an error
+            if (sendBtn) {
+                sendBtn.disabled = false;
+                sendBtn.style.opacity = '1';
+                sendBtn.style.cursor = 'pointer';
+            }
+        });
     }
     
     // Event listeners
@@ -757,6 +934,11 @@ document.addEventListener('DOMContentLoaded', function() {
         chatInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
+                // Check if send button is disabled to prevent spam
+                const sendBtn = document.getElementById('sendBtn');
+                if (sendBtn && sendBtn.disabled) {
+                    return; // Don't send if button is disabled
+                }
                 sendMessage();
             }
         });
@@ -764,6 +946,17 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (sendBtn) {
         sendBtn.addEventListener('click', sendMessage);
+    }
+    
+    // Model selector functionality
+    const modelSelect = document.getElementById('modelSelect');
+    if (modelSelect) {
+        modelSelect.addEventListener('change', (e) => {
+            const oldModel = currentModel;
+            currentModel = e.target.value;
+            console.log('Model değiştiriliyor:', oldModel, '->', currentModel);
+            console.log('Yeni model ayarlandı:', currentModel);
+        });
     }
     
     // Sidebar functionality
