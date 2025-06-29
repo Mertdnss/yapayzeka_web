@@ -413,14 +413,48 @@ class ChessGame {
 
             const pieceDirections = directions[piece] || [];
             
+            // Sliding pieces (Rook, Bishop, Queen) can move multiple squares
+            const slidingPieces = ['R', 'r', 'B', 'b', 'Q', 'q'];
+            const isSlidingPiece = slidingPieces.includes(piece);
+            
             pieceDirections.forEach(([dRow, dCol]) => {
-                const newRow = row + dRow;
-                const newCol = col + dCol;
-                
-                if (newRow >= 0 && newRow < 8 && newCol >= 0 && newCol < 8) {
-                    const targetPiece = this.board[newRow][newCol];
-                    if (!targetPiece || !this.isPieceOwnedByCurrentPlayer(targetPiece)) {
-                        moves.push({row: newRow, col: newCol});
+                if (isSlidingPiece) {
+                    // For sliding pieces, continue in direction until blocked
+                    let distance = 1;
+                    while (true) {
+                        const newRow = row + (dRow * distance);
+                        const newCol = col + (dCol * distance);
+                        
+                        // Check if position is within board
+                        if (newRow < 0 || newRow >= 8 || newCol < 0 || newCol >= 8) {
+                            break;
+                        }
+                        
+                        const targetPiece = this.board[newRow][newCol];
+                        
+                        if (!targetPiece) {
+                            // Empty square, can move here
+                            moves.push({row: newRow, col: newCol});
+                            distance++;
+                        } else if (!this.isPieceOwnedByCurrentPlayer(targetPiece)) {
+                            // Enemy piece, can capture but can't continue
+                            moves.push({row: newRow, col: newCol});
+                            break;
+                        } else {
+                            // Own piece, can't move here or continue
+                            break;
+                        }
+                    }
+                } else {
+                    // For non-sliding pieces (King, Knight), move only one step
+                    const newRow = row + dRow;
+                    const newCol = col + dCol;
+                    
+                    if (newRow >= 0 && newRow < 8 && newCol >= 0 && newCol < 8) {
+                        const targetPiece = this.board[newRow][newCol];
+                        if (!targetPiece || !this.isPieceOwnedByCurrentPlayer(targetPiece)) {
+                            moves.push({row: newRow, col: newCol});
+                        }
                     }
                 }
             });

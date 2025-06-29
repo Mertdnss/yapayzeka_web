@@ -721,6 +721,39 @@ class ChatManager {
 // Simple Mobile Chat Sidebar Toggle
 // Global variables for chat functionality
     let currentModel = 'gpt-4';
+    let chatHistory = []; // Store conversation history for context
+    
+    // Function to clear chat history
+    function clearChatHistory() {
+        chatHistory = [];
+        console.log('Sohbet geçmişi temizlendi');
+        
+        // Clear chat messages from UI
+        const chatMessages = document.getElementById('chatMessages');
+        if (chatMessages) {
+            // Keep welcome message, remove all others
+            const welcomeMessage = chatMessages.querySelector('.welcome-message');
+            chatMessages.innerHTML = '';
+            if (welcomeMessage) {
+                chatMessages.appendChild(welcomeMessage);
+            }
+        }
+    }
+    
+    // Modern popup functions
+    function showClearHistoryPopup() {
+        const popup = document.getElementById('clearHistoryPopup');
+        if (popup) {
+            popup.classList.add('active');
+        }
+    }
+    
+    function hideClearHistoryPopup() {
+        const popup = document.getElementById('clearHistoryPopup');
+        if (popup) {
+            popup.classList.remove('active');
+        }
+    }
     
     // Global callAI function
     async function callAI(message) {
@@ -754,13 +787,15 @@ class ChatManager {
         
         console.log('Gemini API çağrısı başlatılıyor...', { message, API_URL });
         
+        // Add user message to chat history
+        chatHistory.push({
+            role: 'user',
+            parts: [{ text: message }]
+        });
+        
         try {
             const requestBody = {
-                contents: [{
-                    parts: [{
-                        text: message
-                    }]
-                }]
+                contents: chatHistory
             };
             
             console.log('Request body:', requestBody);
@@ -787,7 +822,15 @@ class ChatManager {
             console.log('API yanıtı:', data);
             
             if (data.candidates && data.candidates[0] && data.candidates[0].content) {
-                return data.candidates[0].content.parts[0].text;
+                const aiResponse = data.candidates[0].content.parts[0].text;
+                
+                // Add AI response to chat history
+                chatHistory.push({
+                    role: 'model',
+                    parts: [{ text: aiResponse }]
+                });
+                
+                return aiResponse;
             } else {
                 throw new Error('Geçersiz API yanıtı formatı');
             }
@@ -956,6 +999,41 @@ class ChatManager {
             currentModel = e.target.value;
             console.log('Model değiştiriliyor:', oldModel, '->', currentModel);
             console.log('Yeni model ayarlandı:', currentModel);
+        });
+    }
+    
+    // Clear history button functionality
+    const clearHistoryBtn = document.getElementById('clearHistoryBtn');
+    if (clearHistoryBtn) {
+        clearHistoryBtn.addEventListener('click', () => {
+            showClearHistoryPopup();
+        });
+    }
+    
+    // Modern popup event listeners
+    const cancelClearHistory = document.getElementById('cancelClearHistory');
+    const confirmClearHistory = document.getElementById('confirmClearHistory');
+    const clearHistoryPopup = document.getElementById('clearHistoryPopup');
+    
+    if (cancelClearHistory) {
+        cancelClearHistory.addEventListener('click', () => {
+            hideClearHistoryPopup();
+        });
+    }
+    
+    if (confirmClearHistory) {
+        confirmClearHistory.addEventListener('click', () => {
+            clearChatHistory();
+            hideClearHistoryPopup();
+        });
+    }
+    
+    // Close popup when clicking outside
+    if (clearHistoryPopup) {
+        clearHistoryPopup.addEventListener('click', (e) => {
+            if (e.target === clearHistoryPopup) {
+                hideClearHistoryPopup();
+            }
         });
     }
     

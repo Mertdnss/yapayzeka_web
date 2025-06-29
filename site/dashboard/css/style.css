@@ -4049,6 +4049,9 @@ textarea::placeholder {
     top: 8px;
     left: 12px;
     z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
 .model-select-embedded {
@@ -4077,6 +4080,142 @@ textarea::placeholder {
     background: white;
     color: #374151;
     padding: 8px;
+}
+
+.clear-history-btn {
+    background: rgba(239, 68, 68, 0.9);
+    color: white;
+    border: none;
+    padding: 3px 6px;
+    border-radius: 6px;
+    font-size: 10px;
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0 2px 4px rgba(239, 68, 68, 0.2);
+    transition: all 0.2s ease;
+    opacity: 0.85;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.clear-history-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(239, 68, 68, 0.3);
+    opacity: 1;
+}
+
+.clear-history-btn svg {
+    width: 12px;
+    height: 12px;
+}
+
+/* Modern Popup Styles */
+.modern-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.modern-popup-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modern-popup {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+.modern-popup-overlay.active .modern-popup {
+    transform: translateY(0);
+}
+
+.modern-popup-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.modern-popup-icon {
+    width: 32px;
+    height: 32px;
+    background: rgba(239, 68, 68, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+}
+
+.modern-popup-icon svg {
+    width: 18px;
+    height: 18px;
+    color: #EF4444;
+}
+
+.modern-popup-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.modern-popup-content {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.modern-popup-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.modern-popup-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.modern-popup-btn-cancel {
+    background: #f1f5f9;
+    color: #64748b;
+    border: none;
+}
+
+.modern-popup-btn-cancel:hover {
+    background: #e2e8f0;
+}
+
+.modern-popup-btn-confirm {
+    background: #EF4444;
+    color: white;
+    border: none;
+}
+
+.modern-popup-btn-confirm:hover {
+    background: #dc2626;
 }
 
 .chat-input-wrapper:focus-within {
