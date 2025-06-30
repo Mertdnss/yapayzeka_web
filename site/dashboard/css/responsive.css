@@ -1651,3 +1651,47 @@
         border-radius: 10px;
     }
 }
+
+/* Profile Page Responsive */
+@media (max-width: 768px) {
+    .profile-page .main-content {
+        margin-left: 0;
+    }
+    
+    .profile-container {
+        padding: 16px;
+    }
+    
+    .profile-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .profile-info {
+        padding: 0 16px 24px;
+    }
+    
+    .profile-stats {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+    }
+    
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .plan-actions {
+        flex-direction: column;
+    }
+    
+    .security-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+}

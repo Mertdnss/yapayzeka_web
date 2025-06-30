@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Profil - CraftingAI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="profile-page">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                        <rect width="32" height="32" rx="8" fill="url(#logoGradient)"/>
+                        <path d="M8 12h16v2H8v-2zm0 4h12v2H8v-2zm0 4h16v2H8v-2z" fill="white"/>
+                        <circle cx="20" cy="8" r="3" fill="#FFD700"/>
+                        <defs>
+                            <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#6C63FF"/>
+                                <stop offset="100%" style="stop-color:#3F8EFC"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <span class="logo-text">CraftingAI</span>
+            </div>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M3 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4zM3 10a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-6zM13 9a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1h-3z" fill="currentColor"/>
+                        </svg>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="cv-builder.html" class="nav-link">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M4 4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            <path d="M6 8h8M6 12h8M6 16h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        <span>CV Oluşturucu</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="voice-cloning.html" class="nav-link">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M10 2a8 8 0 0 1 8 8v2a8 8 0 0 1-8 8 8 8 0 0 1-8-8v-2a8 8 0 0 1 8-8z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            <path d="M7 10a3 3 0 0 1 6 0v2a3 3 0 0 1-6 0v-2z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        </svg>
+                        <span>Ses Klonlama</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="tasks.html" class="nav-link">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        </svg>
+                        <span>Görevler</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="games.html" class="nav-link">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 000 1.788l4 2a1 1 0 000-1.788l-4-2A1 1 0 0011 9.236V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z" fill="currentColor"/>
+                        </svg>
+                        <span>Oyunlar</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="chat.html" class="nav-link">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                            <path d="M7 10h.01M10 10h.01M13 10h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>AI Sohbet</span>
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a href="profile.html" class="nav-link">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        </svg>
+                        <span>Profil</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="user-avatar">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face&auto=format&q=80" alt="Kullanıcı">
+                </div>
+                <div class="user-details">
+                    <div class="user-name">Mert Demir</div>
+                    <div class="user-plan">Pro Plan</div>
+                </div>
+            </div>
+            <button class="logout-btn">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M6 14H3a1 1 0 01-1-1V3a1 1 0 011-1h3M11 11l3-3-3-3M9 8h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay"></div>
+    <div class="chat-mobile-overlay" id="chatMobileOverlay"></div>
+    
+    <!-- Modern Popup for Clear History -->
+    <div class="modern-popup-overlay" id="clearHistoryPopup">
+        <div class="modern-popup">
+            <div class="modern-popup-header">
+                <div class="modern-popup-icon">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                        <path d="M2 4h14M6 4V2.5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1V4M8 8v6M10 8v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M3 4h12l-.5 10a1 1 0 0 1-1 1H5.5a1 1 0 0 1-1-1L3 4z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="modern-popup-title">Sohbet Geçmişini Temizle</div>
+            </div>
+            <div class="modern-popup-content">
+                <p>Tüm sohbet geçmişinizi silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.</p>
+            </div>
+            <div class="modern-popup-actions">
+                <button class="modern-btn modern-btn-secondary" onclick="closePopup('clearHistoryPopup')">İptal</button>
+                <button class="modern-btn modern-btn-danger" onclick="clearChatHistory()">Temizle</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content-wrapper">
+            <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <button class="sidebar-toggle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+                <div class="page-title">
+                    <h1>Profil</h1>
+                    <p>Hesap bilgilerinizi yönetin</p>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="user-points">
+                    <div class="points-display">
+                        <span class="points-label">Puanım</span>
+                        <span class="points-value">2,450</span>
+                    </div>
+                </div>
+                <div class="notification-container">
+                    <button class="notification-btn">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M10 2C7.8 2 6 3.8 6 6v4l-2 2v1h12v-1l-2-2V6c0-2.2-1.8-4-4-4zM8.5 15.5v.5c0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5v-.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="notification-badge">3</span>
+                    </button>
+                    
+                    <!-- Notification Dropdown -->
+                    <div class="notification-dropdown">
+                        <div class="notification-header">
+                            <h4>Bildirimler</h4>
+                            <button class="mark-all-read">Tümünü Okundu İşaretle</button>
+                        </div>
+                        <div class="notification-list">
+                            <div class="notification-item unread">
+                                <div class="notification-icon success">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M13 4L6 11L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <div class="notification-content">
+                                    <div class="notification-title">Profil güncellendi</div>
+                                    <div class="notification-text">Profil bilgileriniz başarıyla güncellendi</div>
+                                    <div class="notification-time">5 dakika önce</div>
+                                </div>
+                                <div class="notification-actions">
+                                    <button class="action-view">Görüntüle</button>
+                                </div>
+                            </div>
+                            <div class="notification-item">
+                                <div class="notification-icon info">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/>
+                                        <path d="M8 6v4M8 4h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                    </svg>
+                                </div>
+                                <div class="notification-content">
+                                    <div class="notification-title">Güvenlik uyarısı</div>
+                                    <div class="notification-text">Hesabınızda yeni bir giriş tespit edildi</div>
+                                    <div class="notification-time">1 saat önce</div>
+                                </div>
+                                <div class="notification-actions">
+                                    <button class="action-view">İncele</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="notification-footer">
+                            <a href="#" class="view-all-notifications">Tüm bildirimleri görüntüle</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+            <!-- Profile Content -->
+            <div class="profile-container">
+                <!-- Profile Header Card -->
+                <div class="profile-header-card">
+                    <div class="profile-cover">
+                        <div class="cover-gradient"></div>
+                        <button class="edit-cover-btn">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M11.013 1.427a1.75 1.75 0 012.474 0l1.086 1.086a1.75 1.75 0 010 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 01-.927-.928l.929-3.25a1.75 1.75 0 01.445-.758l8.61-8.61z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="profile-info">
+                        <div class="profile-avatar-section">
+                            <div class="profile-avatar">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop&crop=face&auto=format&q=80" alt="Profil Fotoğrafı" id="profileImage">
+                                <button class="edit-avatar-btn">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z" stroke="currentColor" stroke-width="1.5"/>
+                                        <path d="M1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0z" stroke="currentColor" stroke-width="1.5"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="profile-details">
+                            <h2 class="profile-name">Mert Demir</h2>
+                            <p class="profile-email">mert@example.com</p>
+                            <div class="profile-badges">
+                                <span class="badge badge-pro">Pro Plan</span>
+                                <span class="badge badge-verified">Doğrulanmış</span>
+                            </div>
+                        </div>
+                        <div class="profile-stats">
+                            <div class="stat">
+                                <div class="stat-value">1,247</div>
+                                <div class="stat-label">AI Sohbeti</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">23</div>
+                                <div class="stat-label">CV Oluşturuldu</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">156</div>
+                                <div class="stat-label">Görev Tamamlandı</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profile Content Grid -->
+                <div class="profile-grid">
+                    <!-- Personal Information -->
+                    <div class="profile-card">
+                        <div class="card-header">
+                            <h3>Kişisel Bilgiler</h3>
+                            <button class="edit-btn" onclick="toggleEdit('personal')">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <path d="M11.013 1.427a1.75 1.75 0 012.474 0l1.086 1.086a1.75 1.75 0 010 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 01-.927-.928l.929-3.25a1.75 1.75 0 01.445-.758l8.61-8.61z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Düzenle
+                            </button>
+                        </div>
+                        <div class="card-content">
+                            <div class="form-group">
+                                <label>Ad Soyad</label>
+                                <input type="text" value="Mert Demir" readonly id="fullName">
+                            </div>
+                            <div class="form-group">
+                                <label>E-posta</label>
+                                <input type="email" value="mert@example.com" readonly id="email">
+                            </div>
+                            <div class="form-group">
+                                <label>Telefon</label>
+                                <input type="tel" value="+90 555 123 45 67" readonly id="phone">
+                            </div>
+                            <div class="form-group">
+                                <label>Doğum Tarihi</label>
+                                <input type="date" value="1995-06-15" readonly id="birthDate">
+                            </div>
+                            <div class="form-actions" id="personalActions" style="display: none;">
+                                <button class="btn btn-secondary" onclick="cancelEdit('personal')">İptal</button>
+                                <button class="btn btn-primary" onclick="saveEdit('personal')">Kaydet</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Account Settings -->
+                    <div class="profile-card">
+                        <div class="card-header">
+                            <h3>Hesap Ayarları</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>İki Faktörlü Doğrulama</h4>
+                                    <p>Hesabınızı ekstra güvenlik katmanı ile koruyun</p>
+                                </div>
+                                <label class="toggle">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>E-posta Bildirimleri</h4>
+                                    <p>Önemli güncellemeler için e-posta alın</p>
+                                </div>
+                                <label class="toggle">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>Masaüstü Bildirimleri</h4>
+                                    <p>Tarayıcı bildirimleri alın</p>
+                                </div>
+                                <label class="toggle">
+                                    <input type="checkbox">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Subscription Info -->
+                    <div class="profile-card">
+                        <div class="card-header">
+                            <h3>Abonelik Bilgileri</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="subscription-info">
+                                <div class="plan-badge">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.719c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" fill="currentColor"/>
+                                    </svg>
+                                    Pro Plan
+                                </div>
+                                <div class="plan-details">
+                                    <p><strong>Aylık:</strong> ₺99.99</p>
+                                    <p><strong>Yenileme:</strong> 15 Şubat 2024</p>
+                                    <p><strong>Durum:</strong> <span class="status-active">Aktif</span></p>
+                                </div>
+                            </div>
+                            <div class="plan-features">
+                                <h4>Plan Özellikleri</h4>
+                                <ul>
+                                    <li>✓ Sınırsız AI Sohbeti</li>
+                                    <li>✓ Gelişmiş CV Şablonları</li>
+                                    <li>✓ Ses Klonlama</li>
+                                    <li>✓ Öncelikli Destek</li>
+                                </ul>
+                            </div>
+                            <div class="plan-actions">
+                                <button class="btn btn-outline">Planı Değiştir</button>
+                                <button class="btn btn-danger">Aboneliği İptal Et</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Security -->
+                    <div class="profile-card">
+                        <div class="card-header">
+                            <h3>Güvenlik</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="security-item">
+                                <div class="security-info">
+                                    <h4>Şifre</h4>
+                                    <p>Son değiştirilme: 2 ay önce</p>
+                                </div>
+                                <button class="btn btn-outline">Şifreyi Değiştir</button>
+                            </div>
+                            <div class="security-item">
+                                <div class="security-info">
+                                    <h4>Oturum Geçmişi</h4>
+                                    <p>Aktif oturumlarınızı görüntüleyin</p>
+                                </div>
+                                <button class="btn btn-outline">Oturumları Görüntüle</button>
+                            </div>
+                            <div class="security-item">
+                                <div class="security-info">
+                                    <h4>Hesabı Sil</h4>
+                                    <p>Hesabınızı kalıcı olarak silin</p>
+                                </div>
+                                <button class="btn btn-danger">Hesabı Sil</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity -->
+                    <div class="profile-card">
+                        <div class="card-header">
+                            <h3>Son Aktiviteler</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="activity-list">
+                                <div class="activity-item">
+                                    <div class="activity-icon">
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                            <path d="M14 8c0 2.21-1.79 4-4 4s-4-1.79-4-4 1.79-4 4-4 4 1.79 4 4z" stroke="currentColor" stroke-width="1.5"/>
+                                            <path d="M8 6v2l1.5 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                        </svg>
+                                    </div>
+                                    <div class="activity-content">
+                                        <p><strong>AI Sohbeti başlattınız</strong></p>
+                                        <span class="activity-time">2 saat önce</span>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon">
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                            <path d="M3 3a1 1 0 011-1h8a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V3z" stroke="currentColor" stroke-width="1.5"/>
+                                            <path d="M5 6h6M5 8h6M5 10h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                        </svg>
+                                    </div>
+                                    <div class="activity-content">
+                                        <p><strong>CV oluşturdunuz</strong></p>
+                                        <span class="activity-time">1 gün önce</span>
+                                    </div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-icon">
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                            <path d="M8 1a7 7 0 100 14A7 7 0 008 1z" stroke="currentColor" stroke-width="1.5"/>
+                                            <path d="M6 8l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
+                                    <div class="activity-content">
+                                        <p><strong>Görev tamamladınız</strong></p>
+                                        <span class="activity-time">3 gün önce</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/profile.js"></script>
+</body>
+</html>

@@ -13,6 +13,15 @@ class ChessGame {
         this.isRoomHost = false;
         this.waitingForPlayer = false;
         this.playerColor = 'white'; // Oda modunda oyuncunun rengi
+        
+        // Chess special moves tracking
+        this.castlingRights = {
+            white: { kingside: true, queenside: true },
+            black: { kingside: true, queenside: true }
+        };
+        this.enPassantTarget = null; // {row, col} of the square where en passant capture is possible
+        this.kingPositions = { white: {row: 7, col: 4}, black: {row: 0, col: 4} };
+        
         this.init();
     }
 
@@ -380,6 +389,13 @@ class ChessGame {
             if (row > 0 && col < 7 && this.board[row - 1][col + 1] && this.board[row - 1][col + 1] === this.board[row - 1][col + 1].toLowerCase()) {
                 moves.push({row: row - 1, col: col + 1});
             }
+            // En passant capture for white pawns
+            if (this.enPassantTarget && row === 3) {
+                if ((col > 0 && this.enPassantTarget.row === row - 1 && this.enPassantTarget.col === col - 1) ||
+                    (col < 7 && this.enPassantTarget.row === row - 1 && this.enPassantTarget.col === col + 1)) {
+                    moves.push({row: this.enPassantTarget.row, col: this.enPassantTarget.col, isEnPassant: true});
+                }
+            }
         } else if (piece === 'p') { // Black pawn
             // Move forward (down the board, row increases)
             if (row < 7 && !this.board[row + 1][col]) {
@@ -395,6 +411,13 @@ class ChessGame {
             }
             if (row < 7 && col < 7 && this.board[row + 1][col + 1] && this.board[row + 1][col + 1] === this.board[row + 1][col + 1].toUpperCase()) {
                 moves.push({row: row + 1, col: col + 1});
+            }
+            // En passant capture for black pawns
+            if (this.enPassantTarget && row === 4) {
+                if ((col > 0 && this.enPassantTarget.row === row + 1 && this.enPassantTarget.col === col - 1) ||
+                    (col < 7 && this.enPassantTarget.row === row + 1 && this.enPassantTarget.col === col + 1)) {
+                    moves.push({row: this.enPassantTarget.row, col: this.enPassantTarget.col, isEnPassant: true});
+                }
             }
         } else {
             // Other pieces
@@ -438,7 +461,12 @@ class ChessGame {
                             distance++;
                         } else if (!this.isPieceOwnedByCurrentPlayer(targetPiece)) {
                             // Enemy piece, can capture but can't continue
-                            moves.push({row: newRow, col: newCol});
+                            // Don't allow capturing the king directly
+                            if (targetPiece.toLowerCase() === 'k') {
+                                // Skip this move - can't capture king directly
+                            } else {
+                                moves.push({row: newRow, col: newCol});
+                            }
                             break;
                         } else {
                             // Own piece, can't move here or continue
@@ -453,7 +481,40 @@ class ChessGame {
                     if (newRow >= 0 && newRow < 8 && newCol >= 0 && newCol < 8) {
                         const targetPiece = this.board[newRow][newCol];
                         if (!targetPiece || !this.isPieceOwnedByCurrentPlayer(targetPiece)) {
-                            moves.push({row: newRow, col: newCol});
+                            // Don't allow capturing the king directly
+                            if (targetPiece && targetPiece.toLowerCase() === 'k') {
+                                // Skip this move - can't capture king directly
+                            } else {
+                                moves.push({row: newRow, col: newCol});
+                            }
+                        }
+                    }
+                    
+                    // Add castling moves for king
+                    if (piece.toLowerCase() === 'k') {
+                        const isWhite = piece === 'K';
+                        const kingRow = isWhite ? 7 : 0;
+                        
+                        if (row === kingRow && col === 4) { // King is in starting position
+                            // Check kingside castling
+                            if (this.castlingRights[isWhite ? 'whiteKingside' : 'blackKingside']) {
+                                if (!this.board[kingRow][5] && !this.board[kingRow][6] && this.board[kingRow][7] === (isWhite ? 'R' : 'r')) {
+                                    // Check if king is not in check and doesn't pass through check
+                                    if (!this.isKingInCheck(isWhite ? 'white' : 'black')) {
+                                        moves.push({row: kingRow, col: 6, isCastling: true, castlingSide: 'kingside'});
+                                    }
+                                }
+                            }
+                            
+                            // Check queenside castling
+                            if (this.castlingRights[isWhite ? 'whiteQueenside' : 'blackQueenside']) {
+                                if (!this.board[kingRow][3] && !this.board[kingRow][2] && !this.board[kingRow][1] && this.board[kingRow][0] === (isWhite ? 'R' : 'r')) {
+                                    // Check if king is not in check and doesn't pass through check
+                                    if (!this.isKingInCheck(isWhite ? 'white' : 'black')) {
+                                        moves.push({row: kingRow, col: 2, isCastling: true, castlingSide: 'queenside'});
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -461,6 +522,116 @@ class ChessGame {
         }
 
         return moves;
+    }
+
+    // Check if a king is in check
+    isKingInCheck(player) {
+        // Find the king
+        let kingPos = null;
+        const kingPiece = player === 'white' ? 'K' : 'k';
+        
+        for (let row = 0; row < 8; row++) {
+            for (let col = 0; col < 8; col++) {
+                if (this.board[row][col] === kingPiece) {
+                    kingPos = {row, col};
+                    break;
+                }
+            }
+            if (kingPos) break;
+        }
+        
+        if (!kingPos) return false; // No king found
+        
+        // Check if any opponent piece can attack the king
+        const opponent = player === 'white' ? 'black' : 'white';
+        const opponentMoves = this.getAllPossibleMoves(opponent);
+        
+        return opponentMoves.some(move => 
+            move.to.row === kingPos.row && move.to.col === kingPos.col
+        );
+    }
+
+    // Check if a move would put own king in check
+    wouldMoveResultInCheck(from, to, player) {
+        // Make a temporary move
+        const originalPiece = this.board[to.row][to.col];
+        const movingPiece = this.board[from.row][from.col];
+        
+        this.board[to.row][to.col] = movingPiece;
+        this.board[from.row][from.col] = null;
+        
+        // Check if king is in check after this move
+        const inCheck = this.isKingInCheck(player);
+        
+        // Restore board
+        this.board[from.row][from.col] = movingPiece;
+        this.board[to.row][to.col] = originalPiece;
+        
+        return inCheck;
+    }
+
+    // Check if player is in checkmate
+    isCheckmate(player) {
+        if (!this.isKingInCheck(player)) {
+            return false; // Not in check, so not checkmate
+        }
+        
+        // Check if any legal move can get out of check
+        const allMoves = this.getAllPossibleMoves(player);
+        
+        for (let move of allMoves) {
+            if (!this.wouldMoveResultInCheck(move.from, move.to, player)) {
+                return false; // Found a legal move
+            }
+        }
+        
+        return true; // No legal moves, it's checkmate
+    }
+
+    // Check if player is in stalemate
+    isStalemate(player) {
+        if (this.isKingInCheck(player)) {
+            return false; // In check, so not stalemate
+        }
+        
+        // Check if any legal move exists
+        const allMoves = this.getAllPossibleMoves(player);
+        
+        for (let move of allMoves) {
+            if (!this.wouldMoveResultInCheck(move.from, move.to, player)) {
+                return false; // Found a legal move
+            }
+        }
+        
+        return true; // No legal moves and not in check = stalemate
+    }
+
+    // Show game end modal
+    showGameEndModal(result, winner = null) {
+        const modal = document.createElement('div');
+        modal.className = 'chess-modal show';
+        modal.innerHTML = `
+            <div class="chess-modal-content">
+                <h3>${result === 'checkmate' ? 'Şah Mat!' : result === 'stalemate' ? 'Pat!' : 'Oyun Bitti'}</h3>
+                <p>${result === 'checkmate' ? 
+                    `${winner === 'white' ? 'Beyaz' : 'Siyah'} kazandı!` : 
+                    result === 'stalemate' ? 'Oyun berabere bitti.' : 
+                    'Oyun sona erdi.'}</p>
+                <div class="chess-modal-buttons">
+                    <button class="chess-modal-btn confirm" onclick="this.closest('.chess-modal').remove(); window.location.reload();">Yeni Oyun</button>
+                    <button class="chess-modal-btn cancel" onclick="this.closest('.chess-modal').remove();">Kapat</button>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+        
+        // Auto remove after 10 seconds
+        setTimeout(() => {
+            if (modal.parentNode) {
+                modal.remove();
+            }
+        }, 10000);
     }
 
     makeMove(from, to) {
@@ -474,26 +645,143 @@ class ChessGame {
         
         // Check if the move is in possible moves
         const possibleMoves = this.getPossibleMoves(piece, from.row, from.col);
-        const isValidMove = possibleMoves.some(move => move.row === to.row && move.col === to.col);
+        const validMove = possibleMoves.find(move => move.row === to.row && move.col === to.col);
         
-        if (!isValidMove) {
+        if (!validMove) {
             return false;
         }
         
-        // Move piece
-        this.board[to.row][to.col] = piece;
-        this.board[from.row][from.col] = null;
+        // Check if trying to capture the king directly (not allowed)
+        if (capturedPiece && (capturedPiece.toLowerCase() === 'k')) {
+            this.showNotification('Şahı direkt yakalayamazsınız! Önce şah çekmelisiniz.', 'error');
+            return false;
+        }
+        
+        // Check if this move would put own king in check
+        const currentPlayerColor = this.currentPlayer;
+        if (this.wouldMoveResultInCheck(from, to, currentPlayerColor)) {
+            this.showNotification('Bu hamle şahınızı tehlikeye atar!', 'error');
+            return false;
+        }
+        
+        // Reset en passant target
+        this.enPassantTarget = null;
+        
+        // Handle special moves
+        if (validMove.isCastling) {
+            // Castling move
+            const isWhite = piece === 'K';
+            const kingRow = isWhite ? 7 : 0;
+            const rookCol = validMove.castlingSide === 'kingside' ? 7 : 0;
+            const newRookCol = validMove.castlingSide === 'kingside' ? 5 : 3;
+            
+            // Move king
+            this.board[to.row][to.col] = piece;
+            this.board[from.row][from.col] = null;
+            
+            // Move rook
+            this.board[kingRow][newRookCol] = this.board[kingRow][rookCol];
+            this.board[kingRow][rookCol] = null;
+            
+            // Update castling rights
+            if (isWhite) {
+                this.castlingRights.whiteKingside = false;
+                this.castlingRights.whiteQueenside = false;
+            } else {
+                this.castlingRights.blackKingside = false;
+                this.castlingRights.blackQueenside = false;
+            }
+        } else if (validMove.isEnPassant) {
+            // En passant capture
+            const isWhite = piece === 'P';
+            const capturedPawnRow = isWhite ? to.row + 1 : to.row - 1;
+            const capturedPawn = this.board[capturedPawnRow][to.col];
+            
+            // Move pawn
+            this.board[to.row][to.col] = piece;
+            this.board[from.row][from.col] = null;
+            
+            // Remove captured pawn
+            this.board[capturedPawnRow][to.col] = null;
+            
+            // Add captured pawn to captured pieces
+            if (capturedPawn) {
+                this.addCapturedPiece(capturedPawn);
+            }
+        } else {
+            // Regular move
+            this.board[to.row][to.col] = piece;
+            this.board[from.row][from.col] = null;
+            
+            // Check for pawn double move (set en passant target)
+            if (piece.toLowerCase() === 'p' && Math.abs(to.row - from.row) === 2) {
+                this.enPassantTarget = {
+                    row: (from.row + to.row) / 2,
+                    col: to.col
+                };
+            }
+            
+            // Check for pawn promotion
+            if (piece.toLowerCase() === 'p') {
+                const isWhite = piece === 'P';
+                const promotionRow = isWhite ? 0 : 7;
+                
+                if (to.row === promotionRow) {
+                    // Promote to queen by default (can be enhanced with user choice)
+                    this.board[to.row][to.col] = isWhite ? 'Q' : 'q';
+                }
+            }
+        }
+        
+        // Update castling rights if king or rook moves
+        if (piece.toLowerCase() === 'k') {
+            const isWhite = piece === 'K';
+            if (isWhite) {
+                this.castlingRights.whiteKingside = false;
+                this.castlingRights.whiteQueenside = false;
+            } else {
+                this.castlingRights.blackKingside = false;
+                this.castlingRights.blackQueenside = false;
+            }
+        } else if (piece.toLowerCase() === 'r') {
+            const isWhite = piece === 'R';
+            if (from.row === (isWhite ? 7 : 0)) {
+                if (from.col === 0) {
+                    // Queenside rook
+                    if (isWhite) this.castlingRights.whiteQueenside = false;
+                    else this.castlingRights.blackQueenside = false;
+                } else if (from.col === 7) {
+                    // Kingside rook
+                    if (isWhite) this.castlingRights.whiteKingside = false;
+                    else this.castlingRights.blackKingside = false;
+                }
+            }
+        }
         
         // Add to move history
         this.addMoveToHistory(piece, from, to, capturedPiece);
         
-        // Update captured pieces
-        if (capturedPiece) {
+        // Update captured pieces (for regular captures)
+        if (capturedPiece && !validMove.isEnPassant) {
             this.addCapturedPiece(capturedPiece);
         }
         
         // Switch players
         this.currentPlayer = this.currentPlayer === 'white' ? 'black' : 'white';
+        
+        // Check for check, checkmate, or stalemate
+        const opponent = this.currentPlayer;
+        if (this.isKingInCheck(opponent)) {
+            if (this.isCheckmate(opponent)) {
+                this.showGameEndModal('checkmate', currentPlayerColor);
+                return true;
+            } else {
+                this.showNotification(`${opponent === 'white' ? 'Beyaz' : 'Siyah'} şah!`, 'warning');
+            }
+        } else if (this.isStalemate(opponent)) {
+            this.showGameEndModal('stalemate');
+            return true;
+        }
         
         // Re-render board
         this.updateBoard();
@@ -555,63 +843,329 @@ class ChessGame {
     }
     
     getRandomMove(moves) {
+        // Kolay seviye: Tamamen rastgele, bazen kötü hamleler bile yapar
+        // %30 ihtimalle kendi taşını tehlikeye atan hamle yapar
+        if (Math.random() < 0.3) {
+            const riskyMoves = moves.filter(move => {
+                // Değerli taşları tehlikeli yerlere koyma
+                const piece = move.piece.toLowerCase();
+                if (piece === 'q' || piece === 'r') {
+                    return this.isSquareUnderAttack(move.to, this.currentPlayer === 'white' ? 'black' : 'white');
+                }
+                return false;
+            });
+            if (riskyMoves.length > 0) {
+                return riskyMoves[Math.floor(Math.random() * riskyMoves.length)];
+            }
+        }
+        
+        // Basit taş alma varsa %50 ihtimalle kaçırır
+        const captureMoves = moves.filter(move => move.capturedPiece);
+        if (captureMoves.length > 0 && Math.random() < 0.5) {
+            return captureMoves[Math.floor(Math.random() * captureMoves.length)];
+        }
+        
         return moves[Math.floor(Math.random() * moves.length)];
     }
     
     getMediumMove(moves) {
-        // Önce taş alma hamlelerini kontrol et
-        const captureMoves = moves.filter(move => move.capturedPiece);
-        if (captureMoves.length > 0) {
+        // Orta seviye: Temel strateji, taş alma önceliği, basit taktikler
+        
+        // Şah mat fırsatı varsa kesinlikle kullan
+        const checkmateMove = this.findCheckmateMove(moves);
+        if (checkmateMove) {
+            return checkmateMove;
+        }
+        
+        // Şah çekme hamlelerini öncelikle
+        const checkMoves = moves.filter(move => {
+            return this.wouldMoveGiveCheck(move);
+        });
+        if (checkMoves.length > 0 && Math.random() < 0.7) {
+            return this.getRandomMove(checkMoves);
+        }
+        
+        // Değerli taş alma (vezir, kale öncelikli)
+        const valuableCaptures = moves.filter(move => {
+            if (!move.capturedPiece) return false;
+            const piece = move.capturedPiece.toLowerCase();
+            return piece === 'q' || piece === 'r';
+        });
+        if (valuableCaptures.length > 0) {
+            return this.getRandomMove(valuableCaptures);
+        }
+        
+        // Herhangi bir taş alma
+        const captureMoves = moves.filter(move => move.capturedPiece || move.to.isEnPassant);
+        if (captureMoves.length > 0 && Math.random() < 0.8) {
             return this.getRandomMove(captureMoves);
         }
         
-        // Merkezi kontrol eden hamleleri tercih et
+        // Castling fırsatı
+        const castlingMoves = moves.filter(move => move.to.isCastling);
+        if (castlingMoves.length > 0 && Math.random() < 0.6) {
+            return this.getRandomMove(castlingMoves);
+        }
+        
+        // Merkez kontrolü (d4, d5, e4, e5)
         const centerMoves = moves.filter(move => {
             const {row, col} = move.to;
             return (row >= 3 && row <= 4 && col >= 3 && col <= 4);
         });
-        
-        if (centerMoves.length > 0) {
+        if (centerMoves.length > 0 && Math.random() < 0.6) {
             return this.getRandomMove(centerMoves);
+        }
+        
+        // Taş geliştirme (at ve fil)
+        const developmentMoves = moves.filter(move => {
+            const piece = move.piece.toLowerCase();
+            const fromRow = move.from.row;
+            const startingRow = this.currentPlayer === 'white' ? 7 : 0;
+            return (piece === 'n' || piece === 'b') && fromRow === startingRow;
+        });
+        if (developmentMoves.length > 0) {
+            return this.getRandomMove(developmentMoves);
         }
         
         return this.getRandomMove(moves);
     }
     
     getHardMove(moves) {
-        // Taş alma hamlelerini değerlendir
-        const captureMoves = moves.filter(move => move.capturedPiece);
-        if (captureMoves.length > 0) {
-            // En değerli taşı al
-            const pieceValues = {'p': 1, 'n': 3, 'b': 3, 'r': 5, 'q': 9, 'k': 100};
-            captureMoves.sort((a, b) => {
-                const valueA = pieceValues[a.capturedPiece.toLowerCase()] || 0;
-                const valueB = pieceValues[b.capturedPiece.toLowerCase()] || 0;
-                return valueB - valueA;
-            });
-            return captureMoves[0];
+        // Zor seviye: İleri düzey strateji, değer hesaplamaları, taktik fırsatlar
+        const pieceValues = {'p': 1, 'n': 3, 'b': 3.25, 'r': 5, 'q': 9, 'k': 100};
+        
+        // Şah mat fırsatı varsa kesinlikle kullan
+        const checkmateMove = this.findCheckmateMove(moves);
+        if (checkmateMove) {
+            return checkmateMove;
         }
         
-        // Şahı tehdit eden hamleleri kontrol et
-        const threateningMoves = moves.filter(move => {
-            return this.isThreateningKing(move);
+        // Çatal hamlesi (bir hamle ile birden fazla taşı tehdit etme)
+        const forkMoves = this.findForkMoves(moves);
+        if (forkMoves.length > 0) {
+            // En değerli çatalı seç
+            forkMoves.sort((a, b) => b.value - a.value);
+            return forkMoves[0];
+        }
+        
+        // Şah çekme hamlesi
+        const checkMoves = moves.filter(move => {
+            return this.wouldMoveGiveCheck(move);
+        });
+        if (checkMoves.length > 0) {
+            // Şah çekerken aynı zamanda taş alan hamleyi tercih et
+            const capturingCheckMoves = checkMoves.filter(move => move.capturedPiece);
+            if (capturingCheckMoves.length > 0) {
+                // En değerli taşı alarak şah çek
+                capturingCheckMoves.sort((a, b) => {
+                    const valueA = pieceValues[a.capturedPiece.toLowerCase()] || 0;
+                    const valueB = pieceValues[b.capturedPiece.toLowerCase()] || 0;
+                    return valueB - valueA;
+                });
+                return capturingCheckMoves[0];
+            }
+            return checkMoves[0];
+        }
+        
+        // Taş değiş tokuşu değerlendirme (değer kazanma)
+        const exchangeMoves = moves.filter(move => move.capturedPiece).map(move => {
+            const capturedValue = pieceValues[move.capturedPiece.toLowerCase()] || 0;
+            const movingPieceValue = pieceValues[move.piece.toLowerCase()] || 0;
+            
+            // Taş değiş tokuşu sonrası kare güvenli mi?
+            const isSafeSquare = !this.isSquareUnderAttack(move.to, this.currentPlayer === 'white' ? 'black' : 'white');
+            
+            // Güvenli değilse, taş kaybı olabilir
+            const exchangeValue = isSafeSquare ? capturedValue : (capturedValue - movingPieceValue);
+            
+            return {...move, exchangeValue};
         });
         
-        if (threateningMoves.length > 0) {
-            return this.getRandomMove(threateningMoves);
+        // Pozitif değer kazanan hamleler
+        const positiveExchanges = exchangeMoves.filter(move => move.exchangeValue > 0);
+        if (positiveExchanges.length > 0) {
+            // En yüksek değer kazancı sağlayan hamleyi seç
+            positiveExchanges.sort((a, b) => b.exchangeValue - a.exchangeValue);
+            return positiveExchanges[0];
         }
         
-        // Merkezi kontrol et
+        // Castling (rok) hamlesi - erken oyunda güvenlik için
+        const castlingMoves = moves.filter(move => move.to.isCastling);
+        if (castlingMoves.length > 0 && this.moveHistory.length < 15) {
+            return castlingMoves[0];
+        }
+        
+        // Taş geliştirme (erken oyun)
+        if (this.moveHistory.length < 10) {
+            // Merkez piyonları ilerletme
+            const centerPawnMoves = moves.filter(move => {
+                const piece = move.piece.toLowerCase();
+                const {col} = move.from;
+                return piece === 'p' && (col === 3 || col === 4);
+            });
+            if (centerPawnMoves.length > 0) {
+                return centerPawnMoves[0];
+            }
+            
+            // At ve fil geliştirme
+            const developmentMoves = moves.filter(move => {
+                const piece = move.piece.toLowerCase();
+                const fromRow = move.from.row;
+                const startingRow = this.currentPlayer === 'white' ? 7 : 0;
+                return (piece === 'n' || piece === 'b') && fromRow === startingRow;
+            });
+            if (developmentMoves.length > 0) {
+                return developmentMoves[0];
+            }
+        }
+        
+        // Merkez kontrolü (genişletilmiş merkez)
         const centerMoves = moves.filter(move => {
             const {row, col} = move.to;
             return (row >= 2 && row <= 5 && col >= 2 && col <= 5);
         });
-        
         if (centerMoves.length > 0) {
-            return this.getRandomMove(centerMoves);
+            // Merkezdeki en güvenli kareyi seç
+            const safeCenterMoves = centerMoves.filter(move => {
+                return !this.isSquareUnderAttack(move.to, this.currentPlayer === 'white' ? 'black' : 'white');
+            });
+            if (safeCenterMoves.length > 0) {
+                return safeCenterMoves[0];
+            }
+            return centerMoves[0];
         }
         
+        // Piyon ilerletme (geç oyun)
+        if (this.moveHistory.length > 20) {
+            const pawnAdvanceMoves = moves.filter(move => {
+                const piece = move.piece.toLowerCase();
+                return piece === 'p';
+            }).sort((a, b) => {
+                // Beyaz için en üste, siyah için en alta yakın piyonları tercih et
+                const rankValueA = this.currentPlayer === 'white' ? 7 - a.to.row : a.to.row;
+                const rankValueB = this.currentPlayer === 'white' ? 7 - b.to.row : b.to.row;
+                return rankValueB - rankValueA;
+            });
+            if (pawnAdvanceMoves.length > 0) {
+                return pawnAdvanceMoves[0];
+            }
+        }
+        
+        // Eşit değer takas hamlesi
+        const equalExchanges = exchangeMoves.filter(move => move.exchangeValue === 0);
+        if (equalExchanges.length > 0) {
+            return equalExchanges[0];
+        }
+        
+        // Hiçbir strateji uygulanamadıysa, en güvenli hamleyi yap
+        const safeMoves = moves.filter(move => {
+            return !this.isSquareUnderAttack(move.to, this.currentPlayer === 'white' ? 'black' : 'white');
+        });
+        if (safeMoves.length > 0) {
+            return safeMoves[0];
+        }
+        
+        // Son çare olarak rastgele bir hamle yap
         return this.getRandomMove(moves);
+    }
+    
+    // Şah mat hamlesi bulma
+    findCheckmateMove(moves) {
+        for (let move of moves) {
+            // Geçici olarak hamleyi yap
+            const originalPiece = this.board[move.to.row][move.to.col];
+            this.board[move.to.row][move.to.col] = move.piece;
+            this.board[move.from.row][move.from.col] = null;
+            
+            const opponent = this.currentPlayer === 'white' ? 'black' : 'white';
+            const isCheckmate = this.isCheckmate(opponent);
+            
+            // Hamleyi geri al
+            this.board[move.from.row][move.from.col] = move.piece;
+            this.board[move.to.row][move.to.col] = originalPiece;
+            
+            if (isCheckmate) {
+                return move;
+            }
+        }
+        return null;
+    }
+    
+    // Çatal hamlesi bulma (birden fazla taşı tehdit etme)
+    findForkMoves(moves) {
+        const forkMoves = [];
+        const pieceValues = {'p': 1, 'n': 3, 'b': 3.25, 'r': 5, 'q': 9, 'k': 100};
+        
+        for (let move of moves) {
+            // Geçici olarak hamleyi yap
+            const originalPiece = this.board[move.to.row][move.to.col];
+            this.board[move.to.row][move.to.col] = move.piece;
+            this.board[move.from.row][move.from.col] = null;
+            
+            // Bu pozisyondan tehdit edilen rakip taşları say
+            const threatenedPieces = [];
+            const opponent = this.currentPlayer === 'white' ? 'black' : 'white';
+            
+            for (let row = 0; row < 8; row++) {
+                for (let col = 0; col < 8; col++) {
+                    const piece = this.board[row][col];
+                    if (piece && ((opponent === 'white' && piece === piece.toUpperCase()) || 
+                                 (opponent === 'black' && piece === piece.toLowerCase()))) {
+                        // Bu kare tehdit altında mı?
+                        if (this.isSquareUnderAttack({row, col}, this.currentPlayer)) {
+                            threatenedPieces.push({piece, value: pieceValues[piece.toLowerCase()] || 0});
+                        }
+                    }
+                }
+            }
+            
+            // Hamleyi geri al
+            this.board[move.from.row][move.from.col] = move.piece;
+            this.board[move.to.row][move.to.col] = originalPiece;
+            
+            // Eğer 2 veya daha fazla taş tehdit ediliyorsa, bu bir çatal
+            if (threatenedPieces.length >= 2) {
+                const totalValue = threatenedPieces.reduce((sum, p) => sum + p.value, 0);
+                forkMoves.push({...move, value: totalValue, threatenedCount: threatenedPieces.length});
+            }
+        }
+        
+        return forkMoves;
+    }
+    
+    // Hamlenin şah çekip çekmediğini kontrol et
+    wouldMoveGiveCheck(move) {
+        // Geçici olarak hamleyi yap
+        const originalPiece = this.board[move.to.row][move.to.col];
+        this.board[move.to.row][move.to.col] = move.piece;
+        this.board[move.from.row][move.from.col] = null;
+        
+        const opponent = this.currentPlayer === 'white' ? 'black' : 'white';
+        const isInCheck = this.isKingInCheck(opponent);
+        
+        // Hamleyi geri al
+        this.board[move.from.row][move.from.col] = move.piece;
+        this.board[move.to.row][move.to.col] = originalPiece;
+        
+        return isInCheck;
+    }
+    
+    // Karenin saldırı altında olup olmadığını kontrol et
+    isSquareUnderAttack(square, byPlayer) {
+        // Belirtilen oyuncu tarafından bu kare saldırı altında mı?
+        for (let row = 0; row < 8; row++) {
+            for (let col = 0; col < 8; col++) {
+                const piece = this.board[row][col];
+                if (piece && ((byPlayer === 'white' && piece === piece.toUpperCase()) || 
+                             (byPlayer === 'black' && piece === piece.toLowerCase()))) {
+                    const possibleMoves = this.getPossibleMoves(piece, row, col);
+                    if (possibleMoves.some(move => move.row === square.row && move.col === square.col)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
     
     isThreateningKing(move) {

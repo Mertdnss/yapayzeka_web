@@ -382,7 +382,7 @@ class ChatManager {
         messageDiv.className = `message ${role}`;
         
         const avatar = this.createAvatar(role);
-        const content_div = this.createMessageContent(content, role, model);
+        const content_div = this.createMessageContent(content, role, model, role === 'assistant');
         
         if (role === 'user') {
             messageDiv.appendChild(content_div);
@@ -395,10 +395,43 @@ class ChatManager {
         this.chatMessagesElement.appendChild(messageDiv);
         this.scrollToBottom();
         
+        // For assistant messages, start typewriter effect
+        if (role === 'assistant') {
+            this.startTypewriterEffect(content_div.querySelector('.message-bubble'), content);
+        }
+        
         // Save to conversation
         if (this.currentConversationId) {
             this.saveMessageToConversation(role, content, model);
         }
+    }
+
+    addMessageWithoutTypewriter(role, content, model = null) {
+        if (!this.chatMessagesElement) return;
+        
+        const welcomeMessage = this.chatMessagesElement.querySelector('.welcome-message');
+        
+        // Remove welcome message if it exists
+        if (welcomeMessage) {
+            welcomeMessage.remove();
+        }
+        
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${role}`;
+        
+        const avatar = this.createAvatar(role);
+        const content_div = this.createMessageContent(content, role, model, false); // No typewriter effect
+        
+        if (role === 'user') {
+            messageDiv.appendChild(content_div);
+            messageDiv.appendChild(avatar);
+        } else {
+            messageDiv.appendChild(avatar);
+            messageDiv.appendChild(content_div);
+        }
+        
+        this.chatMessagesElement.appendChild(messageDiv);
+        this.scrollToBottom();
     }
 
     createAvatar(role) {
@@ -423,13 +456,19 @@ class ChatManager {
         return avatar;
     }
 
-    createMessageContent(content, role, model) {
+    createMessageContent(content, role, model, isTypewriter = false) {
         const contentDiv = document.createElement('div');
         contentDiv.className = 'message-content';
         
         const bubble = document.createElement('div');
         bubble.className = 'message-bubble';
-        bubble.textContent = content;
+        
+        // For typewriter effect, start with empty content
+        if (isTypewriter) {
+            bubble.textContent = '';
+        } else {
+            bubble.textContent = content;
+        }
         
         const info = document.createElement('div');
         info.className = 'message-info';
@@ -510,6 +549,33 @@ class ChatManager {
         this.isTyping = false;
     }
 
+    startTypewriterEffect(element, text) {
+        if (!element || !text) return;
+        
+        const words = text.split(' ');
+        let currentWordIndex = 0;
+        
+        const typeNextWord = () => {
+            if (currentWordIndex < words.length) {
+                const currentText = element.textContent;
+                const nextWord = words[currentWordIndex];
+                
+                // Add space before word if not the first word
+                const wordToAdd = currentWordIndex === 0 ? nextWord : ' ' + nextWord;
+                element.textContent = currentText + wordToAdd;
+                
+                currentWordIndex++;
+                this.scrollToBottom();
+                
+                // Continue with next word after a short delay
+                setTimeout(typeNextWord, 50 + Math.random() * 30); // 50-80ms delay between words
+            }
+        };
+        
+        // Start typing effect
+        typeNextWord();
+    }
+
     scrollToBottom() {
         if (!this.chatMessagesElement) return;
         this.chatMessagesElement.scrollTop = this.chatMessagesElement.scrollHeight;
@@ -546,7 +612,7 @@ class ChatManager {
             this.showWelcomeMessage();
         } else {
             conversation.messages.forEach(msg => {
-                this.addMessage(msg.role, msg.content, msg.model);
+                this.addMessageWithoutTypewriter(msg.role, msg.content, msg.model);
             });
         }
         
