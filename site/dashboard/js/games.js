@@ -273,18 +273,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Game module loader
     const gameModules = {
-        'AI Satranç': {
-            jsFile: 'js/games/chess.js',
-            className: 'ChessGame'
+        'XOX (TicTacToe)': {
+            jsFile: 'js/games/tictactoe.js',
+            className: 'TicTacToeGame'
         },
-        'Kelime Bulmaca': {
-            jsFile: 'js/games/wordpuzzle.js',
-            cssFile: 'css/wordpuzzle.css',
-            className: 'WordPuzzleGame'
+
+        'SOS Oyunu': {
+            jsFile: 'js/games/sos.js',
+            className: 'SOSGame'
         },
         'AI Bilgi Yarışması': {
             jsFile: 'js/games/trivia.js',
-            cssFile: 'css/trivia.css',
             className: 'TriviaGame'
         },
         'Hikaye Yaratıcısı': {
@@ -338,6 +337,11 @@ document.addEventListener('DOMContentLoaded', function() {
             // Initialize game
             if (window[module.className]) {
                 currentGameInstance = new window[module.className](gameArea);
+                
+                // Set global reference for TriviaGame
+                if (module.className === 'TriviaGame') {
+                    window.currentTriviaGame = currentGameInstance;
+                }
             } else {
                 throw new Error(`Game class ${module.className} not found`);
             }
@@ -388,28 +392,25 @@ document.addEventListener('DOMContentLoaded', function() {
     function setLegacyGameContent(gameTitle) {
         switch(gameTitle) {
             
-            case 'Kelime Bulmaca':
+            case 'SOS Oyunu':
                 gameArea.innerHTML = `
-                    <div class="word-puzzle-game">
-                        <h3>🧩 Kelime Bulmaca</h3>
-                        <div class="puzzle-area">
-                            <div class="word-grid">
-                                <p>K E L İ M E</p>
-                                <p>A R A M A</p>
-                                <p>B U L M A C A</p>
-                            </div>
-                            <div class="word-list">
-                                <h4>Bulunacak Kelimeler:</h4>
-                                <ul>
-                                    <li>KELİME ✓</li>
-                                    <li>ARAMA</li>
-                                    <li>BULMACA</li>
-                                </ul>
+                    <div class="sos-game">
+                        <h3>🎯 SOS Oyunu</h3>
+                        <div class="sos-info">
+                            <p>S-O-S dizileri oluşturarak puan kazanın!</p>
+                        </div>
+                        <div class="sos-grid">
+                            <div class="grid-5x5">
+                                ${Array(25).fill().map((_, i) => `<button class="sos-cell" data-index="${i}"></button>`).join('')}
                             </div>
                         </div>
                         <div class="game-controls">
-                            <button class="game-btn">Yeni Bulmaca</button>
-                            <button class="game-btn">İpucu Al</button>
+                            <button class="game-btn">Yeni Oyun</button>
+                            <button class="game-btn">S Harfi</button>
+                            <button class="game-btn">O Harfi</button>
+                        </div>
+                        <div class="score-display">
+                            <p>Oyuncu 1: 0 | AI: 0</p>
                         </div>
                     </div>
                 `;
@@ -601,7 +602,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add CSS for game elements
     const gameStyles = document.createElement('style');
     gameStyles.textContent = `
-        .chess-board, .puzzle-area, .question-area, .story-area, .puzzle-grid, .debate-area {
+        .puzzle-area, .question-area, .story-area, .puzzle-grid, .debate-area {
             background: rgba(108, 99, 255, 0.05);
             border-radius: 12px;
             padding: 20px;
