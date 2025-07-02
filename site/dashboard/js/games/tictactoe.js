@@ -18,7 +18,7 @@ class TicTacToeGame {
 
         const style = document.createElement('style');
         style.id = 'tictactoe-game-styles';
-        style.textContent = `.tictactoe-container{max-width:100%;margin:0 auto;padding:20px;background:rgba(255,255,255,0.95);border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.1);backdrop-filter:blur(20px);display:flex;gap:20px;flex-wrap:wrap;position:relative;z-index:1}.game-side{flex:1;min-width:300px}.chat-side{flex:1;min-width:300px;display:flex;flex-direction:column}.tictactoe-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;padding-bottom:15px;border-bottom:2px solid rgba(108,99,255,0.1)}.tictactoe-header h3{font-size:24px;font-weight:700;color:#1a1a1a;margin:0}.tictactoe-board{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px;background:rgba(108,99,255,0.1);padding:10px;border-radius:12px}.tictactoe-cell{aspect-ratio:1;background:white;border:none;border-radius:8px;font-size:40px;font-weight:bold;color:#6C63FF;cursor:pointer;transition:all 0.3s ease;display:flex;align-items:center;justify-content:center}.tictactoe-cell:hover{background:rgba(108,99,255,0.1);transform:scale(1.05)}.tictactoe-cell.X{color:#6C63FF}.tictactoe-cell.O{color:#FF6B6B}.tictactoe-controls{display:flex;gap:10px;margin-bottom:20px}.tictactoe-btn{padding:10px 20px;border:none;border-radius:8px;font-weight:600;cursor:pointer;transition:all 0.2s ease;font-size:14px;background:linear-gradient(135deg,#6C63FF,#3F8EFC);color:white}.tictactoe-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(108,99,255,0.4)}.game-status{font-size:18px;font-weight:600;color:#1a1a1a;margin-bottom:20px;text-align:center}.chat-messages{flex:1;background:white;border-radius:12px;padding:15px;margin-bottom:15px;overflow-y:auto;max-height:300px}.chat-message{margin-bottom:10px;padding:8px 12px;border-radius:8px;background:rgba(108,99,255,0.1)}.chat-message .sender{font-weight:600;color:#6C63FF;margin-bottom:4px}.chat-message .text{color:#1a1a1a}.chat-input{display:flex;gap:10px}.chat-input input{flex:1;padding:10px;border:1px solid rgba(108,99,255,0.2);border-radius:8px;font-size:14px}.chat-input button{padding:10px 20px;border:none;border-radius:8px;background:#6C63FF;color:white;cursor:pointer;transition:all 0.2s ease}.chat-input button:hover{background:#5a52cc}@media (max-width:768px){.tictactoe-container{padding:15px}.tictactoe-cell{font-size:32px}.game-side,.chat-side{min-width:100%}}
+        style.textContent = `.tictactoe-container{max-width:100%;margin:0 auto;padding:20px;background:rgba(255,255,255,0.95);border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.1);backdrop-filter:blur(20px);display:flex;gap:20px;flex-wrap:wrap;position:relative;z-index:1}.game-side{flex:1;min-width:300px}.chat-side{flex:1;min-width:300px;display:flex;flex-direction:column}.tictactoe-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;padding-bottom:15px;border-bottom:2px solid rgba(108,99,255,0.1)}.tictactoe-header h3{font-size:24px;font-weight:700;color:#1a1a1a;margin:0}.tictactoe-board{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px;background:rgba(108,99,255,0.1);padding:10px;border-radius:12px;position:relative}.tictactoe-cell{aspect-ratio:1;background:white;border:none;border-radius:8px;font-size:40px;font-weight:bold;color:#6C63FF;cursor:pointer;transition:all 0.3s ease;display:flex;align-items:center;justify-content:center;position:relative}.tictactoe-cell:hover{background:rgba(108,99,255,0.1)}.tictactoe-cell.X{color:#6C63FF}.tictactoe-cell.O{color:#FF6B6B}.tictactoe-cell.winner{background:linear-gradient(45deg,#FFD700,#FFA500);color:white;animation:winnerPulse 1s ease-in-out infinite alternate}.tictactoe-cell.winner::after{content:'';position:absolute;top:50%;left:50%;width:80%;height:4px;background:linear-gradient(90deg,transparent,#fff,transparent);transform:translate(-50%,-50%);animation:winnerLine 2s ease-in-out infinite}@keyframes winnerPulse{0%{box-shadow:0 0 0 0 rgba(255,215,0,0.7)}100%{box-shadow:0 0 20px 10px rgba(255,215,0,0)}}@keyframes winnerLine{0%,100%{opacity:0;transform:translate(-50%,-50%) scaleX(0)}50%{opacity:1;transform:translate(-50%,-50%) scaleX(1)}}.winning-line{position:absolute;background:linear-gradient(90deg,#FFD700,#FFA500);border-radius:2px;z-index:10;animation:drawLine 1s ease-in-out forwards}.winning-line.horizontal{height:4px;width:0;top:50%;left:0;transform:translateY(-50%)}.winning-line.vertical{width:4px;height:0;left:50%;top:0;transform:translateX(-50%)}.winning-line.diagonal{width:4px;height:0;transform-origin:center}.winning-line.diagonal-1{top:0;left:50%;transform:translateX(-50%) rotate(45deg)}.winning-line.diagonal-2{top:0;left:50%;transform:translateX(-50%) rotate(-45deg)}@keyframes drawLine{to{width:100%;height:100%}}.tictactoe-controls{display:flex;gap:10px;margin-bottom:20px}.tictactoe-btn{padding:10px 20px;border:none;border-radius:8px;font-weight:600;cursor:pointer;transition:all 0.2s ease;font-size:14px;background:linear-gradient(135deg,#6C63FF,#3F8EFC);color:white}.tictactoe-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(108,99,255,0.4)}.game-status{font-size:18px;font-weight:600;color:#1a1a1a;margin-bottom:20px;text-align:center}.chat-messages{flex:1;background:white;border-radius:12px;padding:15px;margin-bottom:15px;overflow-y:auto;max-height:300px}.chat-message{margin-bottom:10px;padding:8px 12px;border-radius:8px;background:rgba(108,99,255,0.1)}.chat-message .sender{font-weight:600;color:#6C63FF;margin-bottom:4px}.chat-message .text{color:#1a1a1a}.chat-input{display:flex;gap:10px}.chat-input input{flex:1;padding:10px;border:1px solid rgba(108,99,255,0.2);border-radius:8px;font-size:14px}.chat-input button{padding:10px 20px;border:none;border-radius:8px;background:#6C63FF;color:white;cursor:pointer;transition:all 0.2s ease}.chat-input button:hover{background:#5a52cc}@media (max-width:768px){.tictactoe-container{padding:15px}.tictactoe-cell{font-size:32px}.game-side,.chat-side{min-width:100%}}
 .modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);backdrop-filter:blur(3px);display:flex;justify-content:center;align-items:center;z-index:9999}.modal{background:white;border-radius:12px;padding:30px;max-width:400px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.4);animation:modalSlideIn 0.3s ease;position:relative;z-index:10000;pointer-events:auto}@keyframes modalSlideIn{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}.modal h3{margin:0 0 20px 0;color:#333;text-align:center;font-size:24px}.modal-buttons{display:flex;flex-direction:column;gap:15px}.modal-btn{padding:15px 20px;border:none;border-radius:8px;font-size:16px;font-weight:600;cursor:pointer;transition:all 0.2s ease}.modal-btn.primary{background:#6c5ce7;color:white}.modal-btn.primary:hover{background:#5a52cc}.modal-btn.secondary{background:#f8f9fa;color:#333;border:2px solid #e9ecef}.modal-btn.secondary:hover{background:#e9ecef}.modal-input{width:100%;padding:12px;border:2px solid #e9ecef;border-radius:8px;font-size:16px;margin:10px 0;box-sizing:border-box}.modal-input:focus{outline:none;border-color:#6c5ce7}.room-code{background:#f8f9fa;padding:15px;border-radius:8px;text-align:center;font-size:24px;font-weight:bold;color:#6c5ce7;letter-spacing:2px;margin:15px 0;border:2px dashed #6c5ce7}.close-btn{position:absolute;top:15px;right:15px;background:none;border:none;font-size:24px;cursor:pointer;color:#999}.close-btn:hover{color:#333}
         `;
         document.head.appendChild(style);
@@ -168,12 +168,69 @@ class TicTacToeGame {
             [0, 4, 8], [2, 4, 6] // Diagonals
         ];
 
-        return winPatterns.some(pattern => {
+        for (let i = 0; i < winPatterns.length; i++) {
+            const pattern = winPatterns[i];
             const [a, b, c] = pattern;
-            return this.board[a] !== '' &&
-                   this.board[a] === this.board[b] &&
-                   this.board[a] === this.board[c];
+            if (this.board[a] !== '' &&
+                this.board[a] === this.board[b] &&
+                this.board[a] === this.board[c]) {
+                this.highlightWinningCells(pattern);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    highlightWinningCells(winningPattern) {
+        // Kazanan hücreleri vurgula
+        winningPattern.forEach(index => {
+            const cell = this.container.querySelector(`[data-index="${index}"]`);
+            if (cell) {
+                cell.classList.add('winner');
+            }
         });
+
+        // Çizgi animasyonu ekle
+        setTimeout(() => {
+            this.drawWinningLine(winningPattern);
+        }, 500);
+    }
+
+    drawWinningLine(winningPattern) {
+        const board = this.container.querySelector('.tictactoe-board');
+        const line = document.createElement('div');
+        line.className = 'winning-line';
+        
+        // Çizgi tipini belirle
+        const [a, b, c] = winningPattern;
+        
+        if (a === 0 && b === 1 && c === 2) { // İlk satır
+            line.classList.add('horizontal');
+            line.style.top = '16.67%';
+        } else if (a === 3 && b === 4 && c === 5) { // İkinci satır
+            line.classList.add('horizontal');
+            line.style.top = '50%';
+        } else if (a === 6 && b === 7 && c === 8) { // Üçüncü satır
+            line.classList.add('horizontal');
+            line.style.top = '83.33%';
+        } else if (a === 0 && b === 3 && c === 6) { // İlk sütun
+            line.classList.add('vertical');
+            line.style.left = '16.67%';
+        } else if (a === 1 && b === 4 && c === 7) { // İkinci sütun
+            line.classList.add('vertical');
+            line.style.left = '50%';
+        } else if (a === 2 && b === 5 && c === 8) { // Üçüncü sütun
+            line.classList.add('vertical');
+            line.style.left = '83.33%';
+        } else if (a === 0 && b === 4 && c === 8) { // Sol üst - sağ alt çapraz
+            line.classList.add('diagonal', 'diagonal-1');
+            line.style.height = '141.42%'; // √2 * 100%
+        } else if (a === 2 && b === 4 && c === 6) { // Sağ üst - sol alt çapraz
+            line.classList.add('diagonal', 'diagonal-2');
+            line.style.height = '141.42%'; // √2 * 100%
+        }
+        
+        board.appendChild(line);
     }
 
     updateGameStatus(message) {
@@ -189,7 +246,25 @@ class TicTacToeGame {
         this.board = ['', '', '', '', '', '', '', '', ''];
         this.currentPlayer = 'X';
         this.gameActive = true;
+        
+        // Animasyonları temizle
+        this.clearWinningAnimations();
+        
         this.render();
+    }
+
+    clearWinningAnimations() {
+        // Kazanan hücre sınıflarını kaldır
+        const cells = this.container.querySelectorAll('.tictactoe-cell');
+        cells.forEach(cell => {
+            cell.classList.remove('winner');
+        });
+        
+        // Çizgi animasyonunu kaldır
+        const winningLines = this.container.querySelectorAll('.winning-line');
+        winningLines.forEach(line => {
+            line.remove();
+        });
     }
 
     toggleGameMode() {

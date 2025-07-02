@@ -287,9 +287,8 @@ document.addEventListener('DOMContentLoaded', function() {
             className: 'TriviaGame'
         },
         'Hikaye Yaratıcısı': {
-            jsFile: 'js/games/story.js',
-            cssFile: 'css/story.css',
-            className: 'StoryGame'
+            jsFile: 'js/games/story-creator.js',
+            className: 'StoryCreatorGame'
         },
         'Sayı Bulmacası': {
             jsFile: 'js/games/numberpuzzle.js',
