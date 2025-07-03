@@ -291,13 +291,11 @@ document.addEventListener('DOMContentLoaded', function() {
             className: 'StoryCreatorGame'
         },
         'Sayı Bulmacası': {
-            jsFile: 'js/games/numberpuzzle.js',
-            cssFile: 'css/numberpuzzle.css',
-            className: 'NumberPuzzleGame'
+            jsFile: 'js/games/number-guessing.js',
+            className: 'NumberGuessingGame'
         },
         'AI Tartışma': {
             jsFile: 'js/games/debate.js',
-            cssFile: 'css/debate.css',
             className: 'DebateGame'
         }
     };

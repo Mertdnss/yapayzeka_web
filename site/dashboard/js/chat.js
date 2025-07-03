@@ -3,10 +3,10 @@
 class ChatManager {
     constructor() {
         this.currentModel = 'gpt-4';
-        this.conversations = this.loadConversations();
-        this.currentConversationId = null;
         this.isTyping = false;
         this.eventsbound = false;
+        this.conversations = this.loadConversations();
+        this.currentConversationId = null;
         
         this.init();
     }
@@ -21,8 +21,8 @@ class ChatManager {
         
         this.bindEvents();
         this.bindChatHistoryEvents();
+        this.setupChatHistoryDrawer();
         this.updateModelInfo();
-        this.setupMobileResponsive();
         
         // Create initial conversation if none exists
         if (this.conversations.length === 0) {
@@ -68,16 +68,7 @@ class ChatManager {
             });
         }
 
-        // New chat button
-        const newChatBtn = document.querySelector('.new-chat-btn');
-        if (newChatBtn) {
-            newChatBtn.addEventListener('click', () => {
-                this.createNewConversation();
-            });
-        }
 
-        // Chat history items
-        this.bindChatHistoryEvents();
         
         // Quick actions event delegation
         if (this.chatMessagesElement) {
@@ -101,86 +92,20 @@ class ChatManager {
         this.eventsbound = true;
     }
 
-    bindChatHistoryEvents() {
-        const chatHistory = document.querySelector('.chat-history');
-        if (!chatHistory) return;
-        
-        // Check if event listener is already bound
-        if (chatHistory.hasAttribute('data-events-bound')) return;
-        
-        // Use event delegation to avoid multiple listeners
-        chatHistory.addEventListener('click', (e) => {
-            const historyItem = e.target.closest('.chat-history-item');
-            if (!historyItem) return;
-            
-            if (e.target.closest('.chat-delete')) {
-                // Delete conversation
-                e.stopPropagation();
-                const conversationId = historyItem.dataset.conversationId;
-                if (conversationId) {
-                    this.deleteConversation(conversationId);
-                }
-            } else {
-                // Load conversation
-                const conversationId = historyItem.dataset.conversationId;
-                if (conversationId) {
-                    this.loadConversation(conversationId);
-                }
-            }
-        });
-        
-        // Mark as bound to prevent duplicate listeners
-        chatHistory.setAttribute('data-events-bound', 'true');
-    }
 
-    setupMobileResponsive() {
-        // Use existing elements from HTML
-        const toggleBtn = document.getElementById('chatSidebarToggle');
-        const overlay = document.getElementById('chatMobileOverlay');
-        const sidebar = document.querySelector('.chat-sidebar');
-        const closeSidebarBtn = document.getElementById('closeSidebarBtn');
-        
-        if (!toggleBtn || !overlay || !sidebar) {
-            console.warn('Mobile responsive elements not found');
-            return;
-        }
-        
-        toggleBtn.addEventListener('click', () => {
-            sidebar.classList.add('active');
-            overlay.classList.add('active');
-        });
 
-        overlay.addEventListener('click', () => {
-            sidebar.classList.remove('active');
-            overlay.classList.remove('active');
-        });
-        
-        if (closeSidebarBtn) {
-            closeSidebarBtn.addEventListener('click', () => {
-                sidebar.classList.remove('active');
-                overlay.classList.remove('active');
-            });
-        }
-        
-        // Close sidebar on escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && sidebar.classList.contains('active')) {
-                sidebar.classList.remove('active');
-                overlay.classList.remove('active');
-            }
-        });
-    }
+
 
     changeModel(newModel) {
         console.log('Model değiştiriliyor:', this.currentModel, '->', newModel);
         this.currentModel = newModel;
         this.updateModelInfo();
+        console.log('Yeni model ayarlandı:', this.currentModel);
         
         // Add system message about model change
         if (this.currentConversationId) {
             this.addSystemMessage(`Model ${this.getModelDisplayName(newModel)} olarak değiştirildi.`);
         }
-        console.log('Yeni model ayarlandı:', this.currentModel);
     }
 
     updateModelInfo() {
@@ -581,143 +506,7 @@ class ChatManager {
         this.chatMessagesElement.scrollTop = this.chatMessagesElement.scrollHeight;
     }
 
-    // Conversation Management
-    createNewConversation() {
-        const conversation = {
-            id: 'conv_' + Date.now(),
-            title: 'Yeni Sohbet',
-            messages: [],
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString()
-        };
-        
-        this.conversations.unshift(conversation);
-        this.saveConversations();
-        this.loadConversation(conversation.id);
-        this.updateChatHistory();
-    }
 
-    loadConversation(conversationId) {
-        this.currentConversationId = conversationId;
-        const conversation = this.conversations.find(c => c.id === conversationId);
-        
-        if (!conversation) return;
-        
-        // Clear current messages
-        if (!this.chatMessagesElement) return;
-        this.chatMessagesElement.innerHTML = '';
-        
-        // Load messages or show welcome
-        if (conversation.messages.length === 0) {
-            this.showWelcomeMessage();
-        } else {
-            conversation.messages.forEach(msg => {
-                this.addMessageWithoutTypewriter(msg.role, msg.content, msg.model);
-            });
-        }
-        
-        // Update active state in history
-        document.querySelectorAll('.chat-history-item').forEach(item => {
-            item.classList.remove('active');
-            if (item.dataset.conversationId === conversationId) {
-                item.classList.add('active');
-            }
-        });
-    }
-
-    saveMessageToConversation(role, content, model) {
-        const conversation = this.conversations.find(c => c.id === this.currentConversationId);
-        if (!conversation) return;
-        
-        const message = {
-            role,
-            content,
-            model,
-            timestamp: new Date().toISOString()
-        };
-        
-        conversation.messages.push(message);
-        conversation.updatedAt = new Date().toISOString();
-        
-        // Update title based on first user message
-        if (role === 'user' && conversation.messages.filter(m => m.role === 'user').length === 1) {
-            conversation.title = content.substring(0, 30) + (content.length > 30 ? '...' : '');
-        }
-        
-        this.saveConversations();
-        this.updateChatHistory();
-    }
-
-    deleteConversation(conversationId) {
-        if (confirm('Bu sohbeti silmek istediğinizden emin misiniz?')) {
-            this.conversations = this.conversations.filter(c => c.id !== conversationId);
-            this.saveConversations();
-            
-            if (this.currentConversationId === conversationId) {
-                if (this.conversations.length > 0) {
-                    this.loadConversation(this.conversations[0].id);
-                } else {
-                    this.createNewConversation();
-                }
-            }
-            
-            this.updateChatHistory();
-        }
-    }
-
-    updateChatHistory() {
-        const chatHistory = document.querySelector('.chat-history');
-        if (!chatHistory) return;
-        
-        chatHistory.innerHTML = '';
-        
-        this.conversations.forEach(conversation => {
-            const item = document.createElement('div');
-            item.className = 'chat-history-item';
-            item.dataset.conversationId = conversation.id;
-            
-            if (conversation.id === this.currentConversationId) {
-                item.classList.add('active');
-            }
-            
-            const lastMessage = conversation.messages.length > 0 
-                ? conversation.messages[conversation.messages.length - 1].content
-                : 'Henüz mesaj yok';
-            
-            const timeAgo = this.getTimeAgo(conversation.updatedAt);
-            
-            item.innerHTML = `
-                <div class="chat-preview">
-                    <div class="chat-title">${conversation.title}</div>
-                    <div class="chat-last-message">${lastMessage.substring(0, 50)}${lastMessage.length > 50 ? '...' : ''}</div>
-                    <div class="chat-time">${timeAgo}</div>
-                </div>
-                <button class="chat-delete">
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                        <path d="M10.5 3.5L3.5 10.5M3.5 3.5l7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                    </svg>
-                </button>
-            `;
-            
-            chatHistory.appendChild(item);
-        });
-    }
-
-    getTimeAgo(dateString) {
-        const now = new Date();
-        const date = new Date(dateString);
-        const diffMs = now - date;
-        const diffMins = Math.floor(diffMs / 60000);
-        const diffHours = Math.floor(diffMs / 3600000);
-        const diffDays = Math.floor(diffMs / 86400000);
-        
-        if (diffMins < 1) return 'Şimdi';
-        if (diffMins < 60) return `${diffMins} dakika önce`;
-        if (diffHours < 24) return `${diffHours} saat önce`;
-        if (diffDays < 7) return `${diffDays} gün önce`;
-        
-        return date.toLocaleDateString('tr-TR');
-    }
 
     showWelcomeMessage() {
         if (!this.chatMessagesElement) return;
@@ -762,24 +551,7 @@ class ChatManager {
         `;
     }
 
-    // Local Storage Management
-    loadConversations() {
-        try {
-            const saved = localStorage.getItem('chat_conversations');
-            return saved ? JSON.parse(saved) : [];
-        } catch (error) {
-            console.error('Error loading conversations:', error);
-            return [];
-        }
-    }
 
-    saveConversations() {
-        try {
-            localStorage.setItem('chat_conversations', JSON.stringify(this.conversations));
-        } catch (error) {
-            console.error('Error saving conversations:', error);
-        }
-    }
 }
 
 // ChatManager temporarily disabled to prevent crashes
@@ -1103,35 +875,619 @@ class ChatManager {
         });
     }
     
-    // Sidebar functionality
-    const toggleBtn = document.getElementById('chatSidebarToggle');
-    const closeBtn = document.getElementById('closeSidebarBtn');
-    const overlay = document.getElementById('chatMobileOverlay');
-    const sidebar = document.querySelector('.chat-sidebar');
+
+});
+
+// Chat History Drawer System (Mobile-First Design)
+document.addEventListener('DOMContentLoaded', function() {
+    // Chat History Variables
+    let conversations = loadConversations();
+    let currentConversationId = null;
     
-    function openSidebar() {
-        if (sidebar && overlay && toggleBtn) {
-            sidebar.classList.add('active');
+    // Setup Chat History Drawer
+    function setupChatHistoryDrawer() {
+        const toggleBtn = document.getElementById('chatHistoryToggle');
+        const overlay = document.getElementById('chatHistoryOverlay');
+        const closeBtn = document.getElementById('closeDrawerBtn');
+        const newChatBtn = document.getElementById('newChatBtn');
+        
+        if (!toggleBtn || !overlay) return;
+        
+        // Toggle drawer
+        toggleBtn.addEventListener('click', () => {
             overlay.classList.add('active');
-            toggleBtn.style.display = 'none';
-        }
-    }
-    
-    function closeSidebar() {
-        if (sidebar && overlay && toggleBtn) {
-            sidebar.classList.remove('active');
-            overlay.classList.remove('active');
-            toggleBtn.style.display = 'flex';
-        }
-    }
-    
-    if (toggleBtn && overlay && sidebar) {
-        toggleBtn.addEventListener('click', openSidebar);
+            updateChatHistory();
+        });
         
+        // Close drawer
         if (closeBtn) {
-            closeBtn.addEventListener('click', closeSidebar);
+            closeBtn.addEventListener('click', () => {
+                overlay.classList.remove('active');
+            });
         }
         
-        overlay.addEventListener('click', closeSidebar);
+        // Close on overlay click
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) {
+                overlay.classList.remove('active');
+            }
+        });
+        
+        // New chat button
+        if (newChatBtn) {
+            newChatBtn.addEventListener('click', () => {
+                createNewConversation();
+                overlay.classList.remove('active');
+            });
+        }
+        
+        // ESC key to close
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && overlay.classList.contains('active')) {
+                overlay.classList.remove('active');
+            }
+        });
+        
+        // Bind chat history item events
+        bindChatHistoryEvents();
+    }
+    
+    function bindChatHistoryEvents() {
+        const chatHistoryList = document.getElementById('chatHistoryList');
+        if (!chatHistoryList) return;
+        
+        // Use event delegation
+        chatHistoryList.addEventListener('click', (e) => {
+            const historyItem = e.target.closest('.chat-history-item');
+            if (!historyItem) return;
+            
+            if (e.target.closest('.chat-item-btn.delete')) {
+                // Delete conversation
+                e.stopPropagation();
+                const conversationId = historyItem.dataset.conversationId;
+                const conversation = conversations.find(c => c.id === conversationId);
+                const title = conversation ? conversation.title : 'Bu sohbet';
+                
+                if (conversationId && confirm(`"${title}" sohbetini silmek istediğinizden emin misiniz?\n\nBu işlem geri alınamaz.`)) {
+                    deleteConversation(conversationId);
+                }
+            } else {
+                // Load conversation
+                const conversationId = historyItem.dataset.conversationId;
+                if (conversationId) {
+                    showLoadingIndicator();
+                    
+                    // Small delay to show loading indicator
+                    setTimeout(() => {
+                        loadConversation(conversationId);
+                        document.getElementById('chatHistoryOverlay').classList.remove('active');
+                        hideLoadingIndicator();
+                    }, 100);
+                }
+            }
+        });
+    }
+    
+    function showLoadingIndicator() {
+        const chatMessages = document.getElementById('chatMessages');
+        if (!chatMessages) return;
+        
+        chatMessages.innerHTML = `
+            <div class="loading-indicator" style="
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 200px;
+                text-align: center;
+                color: #6C63FF;
+                font-size: 14px;
+            ">
+                <div style="
+                    width: 40px;
+                    height: 40px;
+                    border: 3px solid rgba(108, 99, 255, 0.2);
+                    border-top: 3px solid #6C63FF;
+                    border-radius: 50%;
+                    animation: spin 1s linear infinite;
+                    margin-bottom: 16px;
+                "></div>
+                <p style="margin: 0; font-weight: 500;">Sohbet yükleniyor...</p>
+                <span style="font-size: 12px; color: #94a3b8; margin-top: 4px;">Lütfen bekleyiniz</span>
+            </div>
+            
+            <style>
+                @keyframes spin {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                }
+            </style>
+        `;
+    }
+    
+    function hideLoadingIndicator() {
+        const loadingIndicator = document.querySelector('.loading-indicator');
+        if (loadingIndicator) {
+            loadingIndicator.remove();
+        }
+    }
+    
+    // Conversation Management Functions
+    function createNewConversation() {
+        const conversation = {
+            id: 'conv_' + Date.now(),
+            title: 'Yeni Sohbet',
+            messages: [],
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString()
+        };
+        
+        conversations.unshift(conversation);
+        saveConversations();
+        loadConversation(conversation.id);
+        updateChatHistory();
+    }
+    
+    function loadConversation(conversationId) {
+        try {
+            currentConversationId = conversationId;
+            const conversation = conversations.find(c => c.id === conversationId);
+            
+            if (!conversation) {
+                console.warn('Conversation not found:', conversationId);
+                showWelcomeMessage();
+                return;
+            }
+            
+            // Clear current messages
+            const chatMessages = document.getElementById('chatMessages');
+            if (!chatMessages) {
+                console.error('Chat messages element not found');
+                return;
+            }
+            
+            chatMessages.innerHTML = '';
+            
+            // Check if conversation has messages
+            if (!conversation.messages || conversation.messages.length === 0) {
+                showWelcomeMessage();
+                updateChatHistory();
+                return;
+            }
+            
+            const messageCount = conversation.messages.length;
+            console.log(`Loading conversation with ${messageCount} messages`);
+            
+            // Performance protection: Limit messages for large conversations
+            const MAX_MESSAGES = 100; // Limit to last 100 messages for performance
+            let messagesToLoad = conversation.messages;
+            
+            if (messageCount > MAX_MESSAGES) {
+                messagesToLoad = conversation.messages.slice(-MAX_MESSAGES);
+                console.warn(`Large conversation detected (${messageCount} messages). Loading only the last ${MAX_MESSAGES} messages.`);
+                
+                // Add info message about truncated conversation
+                const infoDiv = document.createElement('div');
+                infoDiv.className = 'system-message';
+                infoDiv.style.cssText = `
+                    text-align: center;
+                    padding: 12px 16px;
+                    margin: 16px;
+                    background: linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 152, 0, 0.1));
+                    border: 1px solid rgba(255, 193, 7, 0.3);
+                    border-radius: 12px;
+                    font-size: 13px;
+                    color: #f57c00;
+                    font-weight: 500;
+                `;
+                infoDiv.innerHTML = `
+                    📚 Bu sohbette ${messageCount} mesaj var. Performans için son ${MAX_MESSAGES} mesaj gösteriliyor.
+                `;
+                chatMessages.appendChild(infoDiv);
+            }
+            
+            // Load messages in batches to prevent UI blocking
+            let messageIndex = 0;
+            const BATCH_SIZE = 10;
+            
+            function loadMessageBatch() {
+                const batchEnd = Math.min(messageIndex + BATCH_SIZE, messagesToLoad.length);
+                
+                for (let i = messageIndex; i < batchEnd; i++) {
+                    const msg = messagesToLoad[i];
+                    
+                    // Validate message
+                    if (!msg || typeof msg.role !== 'string' || typeof msg.content !== 'string') {
+                        console.warn('Invalid message found:', msg);
+                        continue;
+                    }
+                    
+                    // Use global addMessage function
+                    if (window.addMessage && typeof window.addMessage === 'function') {
+                        window.addMessage(msg.role, msg.content, msg.model || currentModel);
+                    } else {
+                        // Fallback to direct DOM manipulation
+                        addMessageDirectly(msg.role, msg.content, msg.model || currentModel);
+                    }
+                }
+                
+                messageIndex = batchEnd;
+                
+                // Continue loading next batch or finish
+                if (messageIndex < messagesToLoad.length) {
+                    // Use requestAnimationFrame for smooth loading
+                    requestAnimationFrame(loadMessageBatch);
+                } else {
+                    // All messages loaded
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                    updateChatHistory();
+                    console.log('Conversation loaded successfully');
+                }
+            }
+            
+            // Start batch loading
+            loadMessageBatch();
+            
+        } catch (error) {
+            console.error('Error loading conversation:', error);
+            // Clean fallback
+            const chatMessages = document.getElementById('chatMessages');
+            if (chatMessages) {
+                chatMessages.innerHTML = '';
+                showWelcomeMessage();
+            }
+            updateChatHistory();
+        }
+    }
+    
+    function saveMessageToConversation(role, content, model) {
+        try {
+            if (!currentConversationId) {
+                // Create new conversation if none exists
+                createNewConversation();
+                return; // createNewConversation will handle saving
+            }
+            
+            const conversation = conversations.find(c => c.id === currentConversationId);
+            if (!conversation) {
+                console.warn('Conversation not found:', currentConversationId);
+                return;
+            }
+            
+            // Ensure content is valid
+            if (!content || typeof content !== 'string') {
+                console.warn('Invalid message content:', content);
+                return;
+            }
+            
+            const message = {
+                role,
+                content: content.trim(),
+                model: model || currentModel,
+                timestamp: new Date().toISOString()
+            };
+            
+            conversation.messages.push(message);
+            conversation.updatedAt = new Date().toISOString();
+            
+            // Update title based on first user message
+            if (role === 'user' && conversation.messages.filter(m => m.role === 'user').length === 1) {
+                conversation.title = content.length > 40 ? content.substring(0, 40) + '...' : content;
+            }
+            
+            saveConversations();
+            updateChatHistory();
+        } catch (error) {
+            console.error('Error saving message to conversation:', error);
+        }
+    }
+    
+    function deleteConversation(conversationId) {
+        conversations = conversations.filter(c => c.id !== conversationId);
+        saveConversations();
+        
+        // If we deleted the current conversation, create a new one
+        if (currentConversationId === conversationId) {
+            if (conversations.length > 0) {
+                loadConversation(conversations[0].id);
+            } else {
+                createNewConversation();
+            }
+        }
+        
+        updateChatHistory();
+    }
+    
+    function updateChatHistory() {
+        try {
+            const chatHistoryList = document.getElementById('chatHistoryList');
+            if (!chatHistoryList) return;
+            
+            if (!conversations || conversations.length === 0) {
+                chatHistoryList.innerHTML = `
+                    <div class="empty-state">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                            <circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="2" fill="none"/>
+                            <path d="M16 20h16M16 24h12M16 28h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        <p>Henüz sohbet geçmişi yok</p>
+                        <span>İlk mesajınızı gönderin</span>
+                    </div>
+                `;
+                return;
+            }
+            
+            const historyHTML = conversations.map(conv => {
+                try {
+                    const isActive = conv.id === currentConversationId;
+                    const lastMessage = conv.messages && conv.messages.length > 0 
+                        ? conv.messages[conv.messages.length - 1] 
+                        : null;
+                    
+                    let preview = 'Henüz mesaj yok';
+                    if (lastMessage && lastMessage.content) {
+                        preview = lastMessage.content.length > 60 
+                            ? lastMessage.content.substring(0, 60) + '...' 
+                            : lastMessage.content;
+                    }
+                    
+                    const createdDate = new Date(conv.createdAt);
+                    const timeString = formatChatTime(createdDate);
+                    const title = conv.title || 'Başlıksız Sohbet';
+                    
+                    return `
+                        <div class="chat-history-item ${isActive ? 'active' : ''}" data-conversation-id="${conv.id}">
+                            <div class="chat-item-header">
+                                <h4 class="chat-item-title">${title}</h4>
+                                <div class="chat-item-actions">
+                                    <button class="chat-item-btn delete" title="Sohbeti Sil">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                                            <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="chat-item-preview">${preview}</div>
+                            <div class="chat-item-meta">
+                                <span class="chat-item-time">${timeString}</span>
+                                <span class="chat-item-count">${conv.messages ? conv.messages.length : 0} mesaj</span>
+                            </div>
+                        </div>
+                    `;
+                } catch (itemError) {
+                    console.error('Error rendering conversation item:', itemError, conv);
+                    return ''; // Skip broken items
+                }
+            }).filter(html => html !== '').join('');
+            
+            chatHistoryList.innerHTML = historyHTML;
+        } catch (error) {
+            console.error('Error updating chat history:', error);
+        }
+    }
+    
+    function formatChatTime(date) {
+        const now = new Date();
+        const diff = now - date;
+        const hours = Math.floor(diff / (1000 * 60 * 60));
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        
+        if (days > 0) {
+            if (days === 1) return 'Dün';
+            if (days < 7) return `${days} gün önce`;
+            return date.toLocaleDateString('tr-TR');
+        } else if (hours > 0) {
+            return `${hours} saat önce`;
+        } else {
+            const minutes = Math.floor(diff / (1000 * 60));
+            return minutes < 1 ? 'Şimdi' : `${minutes} dakika önce`;
+        }
+    }
+    
+    // Helper function for direct message addition (fallback)
+    function addMessageDirectly(role, content, model) {
+        const chatMessages = document.getElementById('chatMessages');
+        if (!chatMessages) return;
+        
+        // Remove welcome message if exists
+        const welcomeMessage = chatMessages.querySelector('.welcome-message');
+        if (welcomeMessage) {
+            welcomeMessage.remove();
+        }
+        
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${role}`;
+        
+        const now = new Date();
+        const timeString = now.toLocaleTimeString('tr-TR', { 
+            hour: '2-digit', 
+            minute: '2-digit' 
+        });
+        
+        if (role === 'assistant') {
+            messageDiv.innerHTML = `
+                <div class="message-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="message-content">
+                    <div class="message-header">
+                        <span class="model-name">${model || 'GPT-4'}</span>
+                        <span class="message-time">${timeString}</span>
+                    </div>
+                    <div class="message-bubble">
+                        ${content || ''}
+                    </div>
+                </div>
+            `;
+        } else {
+            messageDiv.innerHTML = `
+                <div class="message-content">
+                    <div class="message-header">
+                        <span class="message-time">${timeString}</span>
+                    </div>
+                    <div class="message-bubble">
+                        ${content || ''}
+                    </div>
+                </div>
+                <div class="message-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+            `;
+        }
+        
+        chatMessages.appendChild(messageDiv);
+    }
+    
+    // Helper function for showing welcome message
+    function showWelcomeMessage() {
+        const chatMessages = document.getElementById('chatMessages');
+        if (!chatMessages) return;
+        
+        chatMessages.innerHTML = `
+            <div class="welcome-message">
+                <div class="welcome-icon">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <rect width="48" height="48" rx="12" fill="url(#welcomeGradient)"/>
+                        <path d="M16 20h16v2H16v-2zm0 4h12v2H16v-2zm0 4h16v2H16v-2z" fill="white"/>
+                        <circle cx="32" cy="16" r="4" fill="#FFD700"/>
+                        <defs>
+                            <linearGradient id="welcomeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#6C63FF"/>
+                                <stop offset="100%" style="stop-color:#3F8EFC"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <h3>CraftingAI'ya Hoş Geldiniz!</h3>
+                <p>Size nasıl yardımcı olabilirim? Herhangi bir sorunuz varsa çekinmeden sorun.</p>
+                <div class="quick-actions">
+                    <button class="quick-action" data-prompt="Merhaba! Bana kendini tanıt.">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM8 11V7M8 5h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        Kendini Tanıt
+                    </button>
+                    <button class="quick-action" data-prompt="Bana kod yazma konusunda nasıl yardımcı olabilirsin?">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M5 3L1 7l4 4M11 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Kod Yardımı
+                    </button>
+                    <button class="quick-action" data-prompt="Yaratıcı yazma konusunda bana yardım edebilir misin?">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M12 3l1 1-8 8-4 1 1-4 8-8 1 1M9 6l1 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Yaratıcı Yazma
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+    
+    // Local Storage Management
+    function loadConversations() {
+        try {
+            const saved = localStorage.getItem('chat_conversations');
+            if (!saved) return [];
+            
+            const conversations = JSON.parse(saved);
+            
+            // Clean up conversations with too many messages to prevent performance issues
+            const MAX_MESSAGES_PER_CONVERSATION = 500;
+            let cleanupPerformed = false;
+            
+            const cleanedConversations = conversations.map(conv => {
+                if (conv.messages && conv.messages.length > MAX_MESSAGES_PER_CONVERSATION) {
+                    console.warn(`Cleaning up conversation "${conv.title}" - reducing ${conv.messages.length} messages to ${MAX_MESSAGES_PER_CONVERSATION}`);
+                    cleanupPerformed = true;
+                    
+                    return {
+                        ...conv,
+                        messages: conv.messages.slice(-MAX_MESSAGES_PER_CONVERSATION),
+                        updatedAt: new Date().toISOString(),
+                        cleanedUp: true
+                    };
+                }
+                return conv;
+            });
+            
+            // Save cleaned conversations back if cleanup was performed
+            if (cleanupPerformed) {
+                console.log('Saving cleaned conversations...');
+                localStorage.setItem('chat_conversations', JSON.stringify(cleanedConversations));
+            }
+            
+            return cleanedConversations;
+        } catch (error) {
+            console.error('Error loading conversations:', error);
+            // If localStorage is corrupted, clear it and start fresh
+            try {
+                localStorage.removeItem('chat_conversations');
+                console.log('Cleared corrupted conversations from localStorage');
+            } catch (clearError) {
+                console.error('Could not clear localStorage:', clearError);
+            }
+            return [];
+        }
+    }
+    
+    function saveConversations() {
+        try {
+            localStorage.setItem('chat_conversations', JSON.stringify(conversations));
+        } catch (error) {
+            console.error('Error saving conversations:', error);
+        }
+    }
+    
+
+    
+    // Temporary flag to prevent double saving during conversation loading
+    let isLoadingConversation = false;
+    
+    // Override existing addMessage function to save to conversation
+    const originalAddMessage = window.addMessage;
+    if (typeof originalAddMessage === 'function') {
+        window.addMessage = function(role, content, model = null) {
+            try {
+                // Call original addMessage
+                originalAddMessage(role, content, model);
+                
+                // Save to conversation only if not loading from history
+                if (!isLoadingConversation && (role === 'user' || role === 'assistant')) {
+                    saveMessageToConversation(role, content, model);
+                }
+            } catch (error) {
+                console.error('Error in addMessage override:', error);
+                // Fallback to original function
+                if (originalAddMessage) {
+                    originalAddMessage(role, content, model);
+                }
+            }
+        };
+    }
+    
+    // Update loadConversation to use the flag
+    const originalLoadConversation = loadConversation;
+    loadConversation = function(conversationId) {
+        isLoadingConversation = true;
+        try {
+            originalLoadConversation(conversationId);
+        } finally {
+            // Reset flag after loading is complete
+            setTimeout(() => {
+                isLoadingConversation = false;
+            }, 100);
+        }
+    };
+    
+    // Initialize chat history drawer
+    setupChatHistoryDrawer();
+    
+    // Create initial conversation if none exists
+    if (conversations.length === 0) {
+        createNewConversation();
+    } else {
+        currentConversationId = conversations[0].id;
+        updateChatHistory();
     }
 });

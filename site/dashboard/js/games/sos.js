@@ -9,7 +9,13 @@ class SOSGame {
         this.gameActive = true;
         this.scores = { player1: 0, player2: 0 };
         this.playerNames = { player1: 'Oyuncu 1', player2: 'AI' };
-        this.chatMessages = [];
+        this.chatMessages = [
+            {
+                sender: 'Sistem',
+                text: 'SOS oyununa hoş geldiniz! 🎯',
+                timestamp: Date.now()
+            }
+        ];
         this.roomCode = null;
         this.selectedLetter = 'S'; // Current letter to place
         this.sosSequences = []; // Found SOS sequences
@@ -25,7 +31,7 @@ class SOSGame {
     addStyles() {
         const style = document.createElement('style');
         style.textContent = `.sos-container{display:flex;gap:30px;max-width:1200px;margin:0 auto;padding:20px;background:white;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.1);position:relative;z-index:1}.game-side{flex:2;min-width:400px}.chat-side{flex:1;min-width:300px;display:flex;flex-direction:column;background:#f8f9fa;border-radius:12px;padding:20px}.sos-header{text-align:center;margin-bottom:20px}.sos-header h3{color:#333;margin:0;font-size:24px}.sos-controls{display:flex;gap:10px;justify-content:center;margin-bottom:20px;flex-wrap:wrap}.sos-btn{padding:10px 20px;border:none;border-radius:8px;background:#6c5ce7;color:white;font-weight:600;cursor:pointer;transition:all 0.2s ease}.sos-btn:hover{background:#5a52cc;transform:translateY(-1px)}.letter-selector{display:flex;gap:10px;justify-content:center;margin-bottom:20px}.letter-btn{width:50px;height:50px;border:2px solid #6c5ce7;border-radius:8px;background:white;color:#6c5ce7;font-size:20px;font-weight:bold;cursor:pointer;transition:all 0.2s ease}.letter-btn.active{background:#6c5ce7;color:white}.letter-btn:hover{transform:scale(1.05)}.game-status{text-align:center;margin-bottom:20px;padding:15px;background:#f8f9fa;border-radius:8px;font-weight:600;color:#333}.score-board{display:flex;justify-content:space-between;margin-bottom:20px;padding:15px;background:#e9ecef;border-radius:8px}.score-item{text-align:center}.score-label{font-size:14px;color:#666;margin-bottom:5px}.score-value{font-size:24px;font-weight:bold;color:#6c5ce7}.sos-board{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;background:#333;border-radius:8px;padding:10px;margin:0 auto;max-width:350px;position:relative}.sos-cell{aspect-ratio:1;background:white;border:none;border-radius:4px;font-size:24px;font-weight:bold;cursor:pointer;transition:all 0.2s ease;display:flex;align-items:center;justify-content:center;min-height:60px}.sos-cell:hover{background:#f0f0f0;transform:scale(1.05)}.sos-cell.player1{color:#6c5ce7}.sos-cell.player2{color:#e74c3c}.sos-cell.highlighted{background:#fff3cd;animation:highlight 0.5s ease}.sos-line{position:absolute;height:4px;background:#ff6b6b;border-radius:2px;z-index:10;pointer-events:none;transition:width 0.3s ease;box-shadow:0 0 8px rgba(255,107,107,0.5)}@keyframes highlight{0%{background:#fff3cd}
-50%{background:#ffc107}100%{background:#fff3cd}}.chat-messages{flex:1;overflow-y:auto;margin-bottom:15px;max-height:300px;border:1px solid #e9ecef;border-radius:8px;padding:15px;background:white}.chat-message{margin-bottom:12px;padding:8px 12px;border-radius:8px;background:#f8f9fa}.chat-message .sender{font-weight:600;color:#6c5ce7;font-size:12px;margin-bottom:4px}.chat-message .text{color:#333;line-height:1.4}.chat-input{display:flex;gap:10px}.chat-input input{flex:1;padding:12px;border:2px solid #e9ecef;border-radius:8px;font-size:14px}.chat-input input:focus{outline:none;border-color:#6c5ce7}.chat-input button{padding:12px 20px;border:none;border-radius:8px;background:#6c5ce7;color:white;font-weight:600;cursor:pointer;transition:all 0.2s ease}.chat-input button:hover{background:#5a52cc}@media (max-width:768px){.sos-container{flex-direction:column;padding:15px}.game-side,.chat-side{min-width:100%}.sos-board{max-width:300px}.sos-cell{font-size:20px;min-height:50px}}.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);backdrop-filter:blur(3px);display:flex;justify-content:center;align-items:center;z-index:9999}.modal{background:white;border-radius:12px;padding:30px;max-width:400px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.4);animation:modalSlideIn 0.3s ease;position:relative;z-index:10000;pointer-events:auto}@keyframes modalSlideIn{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}.modal h3{margin:0 0 20px 0;color:#333;text-align:center;font-size:24px}.modal-buttons{display:flex;flex-direction:column;gap:15px}.modal-btn{padding:15px 20px;border:none;border-radius:8px;font-size:16px;font-weight:600;cursor:pointer;transition:all 0.2s ease}.modal-btn.primary{background:#6c5ce7;color:white}.modal-btn.primary:hover{background:#5a52cc}.modal-btn.secondary{background:#f8f9fa;color:#333;border:2px solid #e9ecef}.modal-btn.secondary:hover{background:#e9ecef}.modal-input{width:100%;padding:12px;border:2px solid #e9ecef;border-radius:8px;font-size:16px;margin:10px 0;box-sizing:border-box}.modal-input:focus{outline:none;border-color:#6c5ce7}.room-code{background:#f8f9fa;padding:15px;border-radius:8px;text-align:center;font-size:24px;font-weight:bold;color:#6c5ce7;letter-spacing:2px;margin:15px 0;border:2px dashed #6c5ce7}.close-btn{position:absolute;top:15px;right:15px;background:none;border:none;font-size:24px;cursor:pointer;color:#999}.close-btn:hover{color:#333}
+50%{background:#ffc107}100%{background:#fff3cd}}.chat-messages{flex:1;overflow-y:auto;margin-bottom:15px;max-height:300px;border:1px solid #e9ecef;border-radius:8px;padding:15px;background:white}.chat-message{margin-bottom:12px;padding:8px 12px;border-radius:8px;background:#f8f9fa}.chat-message .sender{font-weight:600;color:#6c5ce7;font-size:12px;margin-bottom:4px}.chat-message .text{color:#333;line-height:1.4}.chat-input{display:flex;gap:8px;align-items:center}.chat-input input{flex:1;padding:10px 14px;border:2px solid #e9ecef;border-radius:20px;font-size:14px;min-width:0}.chat-input input:focus{outline:none;border-color:#6c5ce7}.chat-input button{padding:8px 14px;border:none;border-radius:18px;background:#6c5ce7;color:white;font-weight:600;cursor:pointer;transition:all 0.2s ease;font-size:13px;white-space:nowrap;flex-shrink:0}.chat-input button:hover{background:#5a52cc}@media (max-width:768px){.sos-container{flex-direction:column;padding:15px}.game-side,.chat-side{min-width:100%}.sos-board{max-width:300px}.sos-cell{font-size:20px;min-height:50px}}.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);backdrop-filter:blur(3px);display:flex;justify-content:center;align-items:center;z-index:9999}.modal{background:white;border-radius:12px;padding:30px;max-width:400px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.4);animation:modalSlideIn 0.3s ease;position:relative;z-index:10000;pointer-events:auto}@keyframes modalSlideIn{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}.modal h3{margin:0 0 20px 0;color:#333;text-align:center;font-size:24px}.modal-buttons{display:flex;flex-direction:column;gap:15px}.modal-btn{padding:15px 20px;border:none;border-radius:8px;font-size:16px;font-weight:600;cursor:pointer;transition:all 0.2s ease}.modal-btn.primary{background:#6c5ce7;color:white}.modal-btn.primary:hover{background:#5a52cc}.modal-btn.secondary{background:#f8f9fa;color:#333;border:2px solid #e9ecef}.modal-btn.secondary:hover{background:#e9ecef}.modal-input{width:100%;padding:12px;border:2px solid #e9ecef;border-radius:8px;font-size:16px;margin:10px 0;box-sizing:border-box}.modal-input:focus{outline:none;border-color:#6c5ce7}.room-code{background:#f8f9fa;padding:15px;border-radius:8px;text-align:center;font-size:24px;font-weight:bold;color:#6c5ce7;letter-spacing:2px;margin:15px 0;border:2px dashed #6c5ce7}.close-btn{position:absolute;top:15px;right:15px;background:none;border:none;font-size:24px;cursor:pointer;color:#999}.close-btn:hover{color:#333}
         `;
         document.head.appendChild(style);
     }
@@ -99,6 +105,7 @@ class SOSGame {
             this.updateScores();
             this.updateLetterSelector();
             this.updateToggleButton();
+            this.updateChatDisplay();
         }
 
         this.updateGameStatus();
@@ -385,6 +392,13 @@ class SOSGame {
         this.scores = { player1: 0, player2: 0 };
         this.sosSequences = [];
         this.selectedLetter = 'S';
+        this.chatMessages = [
+            {
+                sender: 'Sistem',
+                text: 'Yeni oyun başladı! İyi şanslar! 🎮',
+                timestamp: Date.now()
+            }
+        ];
         this.clearSOSLines();
         this.render();
     }
@@ -533,9 +547,10 @@ class SOSGame {
         // Burada gerçek multiplayer bağlantısı kurulabilir
         this.chatMessages.push({
             sender: 'Sistem',
-            text: `Oda ${roomCode} - Çok oyunculu mod aktif!`
+            text: `Oda ${roomCode} - Çok oyunculu mod aktif!`,
+            timestamp: Date.now()
         });
-        this.render();
+        this.updateChatDisplay();
     }
 
     goBackToMainModal() {
@@ -555,15 +570,31 @@ class SOSGame {
         const message = input.value.trim();
 
         if (message) {
+            // Player name'i doğru şekilde al
+            const currentPlayerName = document.querySelector('.user-name')?.textContent || 'Oyuncu';
+            
             this.chatMessages.push({
-                sender: this.playerNames['player' + this.currentPlayer],
-                text: message
+                sender: currentPlayerName,
+                text: message,
+                timestamp: Date.now()
             });
             input.value = '';
-            this.render();
+            this.updateChatDisplay();
+        }
+    }
 
-            const chatMessages = this.container.querySelector('#chatMessages');
-            chatMessages.scrollTop = chatMessages.scrollHeight;
+    updateChatDisplay() {
+        const chatContainer = this.container.querySelector('#chatMessages');
+        if (chatContainer && this.chatMessages.length > 0) {
+            chatContainer.innerHTML = this.chatMessages.map(msg => `
+                <div class="chat-message">
+                    <div class="sender">${msg.sender}</div>
+                    <div class="text">${msg.text}</div>
+                </div>
+            `).join('');
+            
+            // En alta scroll
+            chatContainer.scrollTop = chatContainer.scrollHeight;
         }
     }
 }
