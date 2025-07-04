@@ -154,121 +154,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Add CSS styles for exit confirmation modal
     const exitModalStyles = document.createElement('style');
-    exitModalStyles.textContent = `
-        .exit-confirm-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .exit-confirm-modal.active {
-            opacity: 1;
-        }
-        
-        .exit-confirm-content {
-            background: white;
-            border-radius: 16px;
-            padding: 30px;
-            max-width: 400px;
-            width: 90%;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            transform: scale(0.8);
-            transition: transform 0.3s ease;
-        }
-        
-        .exit-confirm-modal.active .exit-confirm-content {
-            transform: scale(1);
-        }
-        
-        .exit-confirm-icon {
-            font-size: 48px;
-            margin-bottom: 20px;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-        
-        .exit-confirm-content h3 {
-            margin: 0 0 15px 0;
-            color: #333;
-            font-size: 24px;
-            font-weight: 600;
-        }
-        
-        .exit-confirm-content p {
-            margin: 0 0 25px 0;
-            color: #666;
-            line-height: 1.5;
-            font-size: 16px;
-        }
-        
-        .exit-confirm-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-        }
-        
-        .exit-btn {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            min-width: 120px;
-        }
-        
-        .exit-btn.confirm {
-            background: #ff4757;
-            color: white;
-        }
-        
-        .exit-btn.confirm:hover {
-            background: #ff3742;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 71, 87, 0.4);
-        }
-        
-        .exit-btn.cancel {
-            background: #f1f2f6;
-            color: #333;
-        }
-        
-        .exit-btn.cancel:hover {
-            background: #ddd;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        @media (max-width: 480px) {
-            .exit-confirm-content {
-                padding: 25px 20px;
-                margin: 20px;
-            }
-            
-            .exit-confirm-buttons {
-                flex-direction: column;
-            }
-            
-            .exit-btn {
-                width: 100%;
-            }
-        }
-    `;
+    exitModalStyles.textContent = `.exit-confirm-modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);display:none;justify-content:center;align-items:center;z-index:10000;opacity:0;transition:opacity 0.3s ease}.exit-confirm-modal.active{opacity:1}.exit-confirm-content{background:white;border-radius:16px;padding:30px;max-width:400px;width:90%;text-align:center;box-shadow:0 20px 40px rgba(0,0,0,0.3);transform:scale(0.8);transition:transform 0.3s ease}.exit-confirm-modal.active .exit-confirm-content{transform:scale(1)}.exit-confirm-icon{font-size:48px;margin-bottom:20px;animation:pulse 2s infinite}@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}.exit-confirm-content h3{margin:0 0 15px 0;color:#333;font-size:24px;font-weight:600}.exit-confirm-content p{margin:0 0 25px 0;color:#666;line-height:1.5;font-size:16px}.exit-confirm-buttons{display:flex;gap:15px;justify-content:center}.exit-btn{padding:12px 24px;border:none;border-radius:8px;font-size:16px;font-weight:500;cursor:pointer;transition:all 0.3s ease;min-width:120px}.exit-btn.confirm{background:#ff4757;color:white}.exit-btn.confirm:hover{background:#ff3742;transform:translateY(-2px);box-shadow:0 5px 15px rgba(255,71,87,0.4)}.exit-btn.cancel{background:#f1f2f6;color:#333}.exit-btn.cancel:hover{background:#ddd;transform:translateY(-2px);box-shadow:0 5px 15px rgba(0,0,0,0.1)}@media (max-width:480px){.exit-confirm-content{padding:25px 20px;margin:20px}.exit-confirm-buttons{flex-direction:column}.exit-btn{width:100%}}`;
     document.head.appendChild(exitModalStyles);
 
     // Game module loader
@@ -294,9 +180,9 @@ document.addEventListener('DOMContentLoaded', function() {
             jsFile: 'js/games/number-guessing.js',
             className: 'NumberGuessingGame'
         },
-        'AI Tartışma': {
-            jsFile: 'js/games/debate.js',
-            className: 'DebateGame'
+        'AI Kelime Ustası': {
+            jsFile: 'js/games/word-master.js',
+            className: 'WordMasterGame'
         }
     };
 
@@ -598,99 +484,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Add CSS for game elements
     const gameStyles = document.createElement('style');
-    gameStyles.textContent = `
-        .puzzle-area, .question-area, .story-area, .puzzle-grid, .debate-area {
-            background: rgba(108, 99, 255, 0.05);
-            border-radius: 12px;
-            padding: 20px;
-            margin: 16px 0;
-        }
-        
-        .game-btn {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            margin: 4px;
-            transition: all 0.3s ease;
-        }
-        
-        .game-btn:hover {
-            background: var(--primary-hover);
-            transform: translateY(-2px);
-        }
-        
-        .answer-btn {
-            display: block;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.9);
-            border: 2px solid rgba(108, 99, 255, 0.2);
-            padding: 12px;
-            margin: 8px 0;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .answer-btn:hover {
-            border-color: var(--primary-color);
-            background: rgba(108, 99, 255, 0.1);
-        }
-        
-        .answer-btn.selected {
-            background: var(--primary-color);
-            color: white;
-            border-color: var(--primary-color);
-        }
-        
-        .word-grid, .number-grid {
-            font-family: monospace;
-            font-size: 18px;
-            text-align: center;
-            margin: 16px 0;
-        }
-        
-        .grid-row {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin: 4px 0;
-        }
-        
-        .grid-row span {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.9);
-            border: 2px solid rgba(108, 99, 255, 0.2);
-            border-radius: 8px;
-            font-weight: bold;
-        }
-        
-        .story-input textarea {
-            width: 100%;
-            min-height: 80px;
-            padding: 12px;
-            border: 2px solid rgba(108, 99, 255, 0.2);
-            border-radius: 8px;
-            resize: vertical;
-            font-family: inherit;
-        }
-        
-        .word-list ul {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .word-list li {
-            padding: 4px 0;
-            font-weight: 500;
-        }
-    `;
+    gameStyles.textContent = `.puzzle-area,.question-area,.story-area,.puzzle-grid,.debate-area{background:rgba(108,99,255,0.05);border-radius:12px;padding:20px;margin:16px 0}.game-btn{background:var(--primary-color);color:white;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;margin:4px;transition:all 0.3s ease}.game-btn:hover{background:var(--primary-hover);transform:translateY(-2px)}.answer-btn{display:block;width:100%;background:rgba(255,255,255,0.9);border:2px solid rgba(108,99,255,0.2);padding:12px;margin:8px 0;border-radius:8px;cursor:pointer;transition:all 0.3s ease}.answer-btn:hover{border-color:var(--primary-color);background:rgba(108,99,255,0.1)}.answer-btn.selected{background:var(--primary-color);color:white;border-color:var(--primary-color)}.word-grid,.number-grid{font-family:monospace;font-size:18px;text-align:center;margin:16px 0}.grid-row{display:flex;justify-content:center;gap:8px;margin:4px 0}.grid-row span{width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.9);border:2px solid rgba(108,99,255,0.2);border-radius:8px;font-weight:bold}.story-input textarea{width:100%;min-height:80px;padding:12px;border:2px solid rgba(108,99,255,0.2);border-radius:8px;resize:vertical;font-family:inherit}.word-list ul{list-style:none;padding:0}.word-list li{padding:4px 0;font-weight:500}`;
     
     document.head.appendChild(gameStyles);
 });
