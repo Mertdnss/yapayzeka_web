@@ -5,10 +5,6 @@ const filterButtons = document.querySelectorAll('.filter-btn');
 const taskCards = document.querySelectorAll('.task-card');
 const taskStartButtons = document.querySelectorAll('.task-start-btn');
 const continueButtons = document.querySelectorAll('.continue-btn');
-const sidebarToggle = document.querySelector('.sidebar-toggle');
-const sidebar = document.querySelector('.sidebar');
-const mobileOverlay = document.querySelector('.mobile-overlay');
-const mainContent = document.querySelector('.main-content');
 
 // Initialize page
 document.addEventListener('DOMContentLoaded', function() {
@@ -108,7 +104,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     initializeFilters();
     initializeTaskActions();
-    initializeSidebar();
     updateTaskProgress();
 });
 
@@ -408,24 +403,7 @@ function hideNotification(notification) {
     }, 300);
 }
 
-// Sidebar functionality
-function initializeSidebar() {
-    if (sidebarToggle) {
-        sidebarToggle.addEventListener('click', function() {
-            sidebar.classList.toggle('active');
-            mobileOverlay.classList.toggle('active');
-            mainContent.classList.toggle('sidebar-open');
-        });
-    }
-    
-    if (mobileOverlay) {
-        mobileOverlay.addEventListener('click', function() {
-            sidebar.classList.remove('active');
-            mobileOverlay.classList.remove('active');
-            mainContent.classList.remove('sidebar-open');
-        });
-    }
-}
+// Sidebar functionality artık script.js dosyasında global event delegation ile yönetiliyor
 
 // Add CSS for notifications
 const notificationStyles = `
@@ -518,6 +496,6 @@ const notificationStyles = `
 `;
 
 // Add styles to head
-const styleSheet = document.createElement('style');
-styleSheet.textContent = notificationStyles;
-document.head.appendChild(styleSheet);
+const taskNotificationStyleSheet = document.createElement('style');
+taskNotificationStyleSheet.textContent = notificationStyles;
+document.head.appendChild(taskNotificationStyleSheet);
