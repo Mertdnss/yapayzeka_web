@@ -53,8 +53,8 @@ class TicTacToeGame {
                         <div class="chat-header">
                             <div class="status-indicator"></div>
                             <h4>💬 Sohbet</h4>
-                        </div>
-                        <div class="chat-messages" id="chatMessages">
+                    </div>
+                    <div class="chat-messages" id="chatMessages">
                             ${this.chatMessages.map(msg => {
                                 const isOwn = msg.sender === this.playerName;
                                 const isSystem = msg.sender === 'Sistem';
@@ -88,8 +88,8 @@ class TicTacToeGame {
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="chat-input">
+                    </div>
+                    <div class="chat-input">
                             <button class="emoji-btn" type="button">😊</button>
                             <input type="text" class="chat-input-field" id="chatInput" placeholder="Mesajınızı yazın...">
                             <button class="send-btn" id="sendMessage">
@@ -325,12 +325,12 @@ class TicTacToeGame {
             sendBtn.disabled = true;
             
             setTimeout(() => {
-                this.chatMessages.push({
-                    sender: this.playerName,
+            this.chatMessages.push({
+                sender: this.playerName,
                     text: message,
                     timestamp: Date.now()
-                });
-                input.value = '';
+            });
+            input.value = '';
                 this.updateChatDisplay();
                 
                 sendBtn.classList.remove('sending');
@@ -450,7 +450,7 @@ class TicTacToeGame {
             if (!picker.contains(e.target)) {
                 picker.remove();
                 document.removeEventListener('click', closeHandler);
-            }
+        }
         };
         
         setTimeout(() => {

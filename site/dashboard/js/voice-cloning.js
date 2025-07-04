@@ -1,765 +1,768 @@
-// Voice Cloning JavaScript Functionality
-
+// Ses Klonlama JavaScript Fonksiyonları
 class VoiceCloning {
     constructor() {
-        this.isRecording = false;
-        this.mediaRecorder = null;
-        this.audioChunks = [];
-        this.recordingTimer = null;
-        this.recordingStartTime = 0;
-        this.audioContext = null;
-        this.analyser = null;
-        this.microphone = null;
-        this.canvas = null;
-        this.canvasContext = null;
-        this.animationId = null;
+        this.currentAudio = null;
+        this.currentModel = null;
+        this.isModelReady = false;
+        this.uploadedFile = null;
+        this.generatedAudioUrl = null;
+        this.presetModels = {
+            'female-young': 'Genç Kadın Sesi',
+            'male-adult': 'Yetişkin Erkek Sesi', 
+            'female-narrator': 'Anlatıcı Sesi',
+            'male-deep': 'Derin Erkek Sesi'
+        };
         
         this.init();
     }
 
     init() {
         this.setupEventListeners();
-        this.setupAudioVisualizer();
-        this.setupFileUpload();
-        this.setupVoiceSettings();
-        this.setupSampleVoices();
-        this.setupProcessing();
+        this.updateModelStatus('pending');
+        this.updateStepProgress('upload');
     }
 
     setupEventListeners() {
-        // Record button
-        const recordBtn = document.getElementById('recordBtn');
-        if (recordBtn) {
-            recordBtn.addEventListener('click', () => this.toggleRecording());
-        }
-
-        // Start processing button
-        const startProcessingBtn = document.getElementById('startProcessing');
-        if (startProcessingBtn) {
-            startProcessingBtn.addEventListener('click', () => this.startProcessing());
-        }
-
-        // Generate button
-        const generateBtn = document.querySelector('.generate-btn');
-        if (generateBtn) {
-            generateBtn.addEventListener('click', () => this.generateVoice());
-        }
-
-        // Download button
-        const downloadBtn = document.querySelector('.download-btn');
-        if (downloadBtn) {
-            downloadBtn.addEventListener('click', () => this.downloadVoice());
-        }
-    }
-
-    setupAudioVisualizer() {
-        this.canvas = document.getElementById('audioCanvas');
-        if (this.canvas) {
-            this.canvasContext = this.canvas.getContext('2d');
-            this.drawStaticWaveform();
-        }
-    }
-
-    drawStaticWaveform() {
-        if (!this.canvasContext) return;
-        
-        const width = this.canvas.width;
-        const height = this.canvas.height;
-        
-        this.canvasContext.clearRect(0, 0, width, height);
-        this.canvasContext.strokeStyle = '#6C63FF';
-        this.canvasContext.lineWidth = 2;
-        this.canvasContext.beginPath();
-        
-        // Draw a static waveform
-        for (let i = 0; i < width; i += 4) {
-            const amplitude = Math.sin(i * 0.02) * 20 + Math.random() * 10;
-            const y = height / 2 + amplitude;
-            
-            if (i === 0) {
-                this.canvasContext.moveTo(i, y);
-            } else {
-                this.canvasContext.lineTo(i, y);
-            }
-        }
-        
-        this.canvasContext.stroke();
-    }
-
-    drawLiveWaveform(dataArray) {
-        if (!this.canvasContext) return;
-        
-        const width = this.canvas.width;
-        const height = this.canvas.height;
-        
-        this.canvasContext.clearRect(0, 0, width, height);
-        
-        // Create gradient
-        const gradient = this.canvasContext.createLinearGradient(0, 0, width, 0);
-        gradient.addColorStop(0, '#6C63FF');
-        gradient.addColorStop(0.5, '#4FACFE');
-        gradient.addColorStop(1, '#6C63FF');
-        
-        this.canvasContext.strokeStyle = gradient;
-        this.canvasContext.lineWidth = 3;
-        this.canvasContext.beginPath();
-        
-        const sliceWidth = width / dataArray.length;
-        let x = 0;
-        
-        for (let i = 0; i < dataArray.length; i++) {
-            const v = dataArray[i] / 128.0;
-            const y = v * height / 2;
-            
-            if (i === 0) {
-                this.canvasContext.moveTo(x, y);
-            } else {
-                this.canvasContext.lineTo(x, y);
-            }
-            
-            x += sliceWidth;
-        }
-        
-        this.canvasContext.stroke();
-    }
-
-    async toggleRecording() {
-        const recordBtn = document.getElementById('recordBtn');
-        
-        if (!this.isRecording) {
-            await this.startRecording();
-        } else {
-            this.stopRecording();
-        }
-    }
-
-    async startRecording() {
-        try {
-            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-            
-            this.mediaRecorder = new MediaRecorder(stream);
-            this.audioChunks = [];
-            
-            // Setup audio context for visualization
-            this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            this.analyser = this.audioContext.createAnalyser();
-            this.microphone = this.audioContext.createMediaStreamSource(stream);
-            this.microphone.connect(this.analyser);
-            
-            this.analyser.fftSize = 256;
-            const bufferLength = this.analyser.frequencyBinCount;
-            const dataArray = new Uint8Array(bufferLength);
-            
-            this.mediaRecorder.ondataavailable = (event) => {
-                this.audioChunks.push(event.data);
-            };
-            
-            this.mediaRecorder.onstop = () => {
-                const audioBlob = new Blob(this.audioChunks, { type: 'audio/wav' });
-                this.handleRecordedAudio(audioBlob);
-                
-                // Stop visualization
-                if (this.animationId) {
-                    cancelAnimationFrame(this.animationId);
-                }
-                this.drawStaticWaveform();
-            };
-            
-            this.mediaRecorder.start();
-            this.isRecording = true;
-            
-            // Update UI
-            const recordBtn = document.getElementById('recordBtn');
-            recordBtn.classList.add('recording');
-            recordBtn.innerHTML = `
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <rect x="6" y="6" width="12" height="12" fill="currentColor"/>
-                </svg>
-                Kaydı Durdur
-            `;
-            
-            // Start timer
-            this.recordingStartTime = Date.now();
-            this.startRecordingTimer();
-            
-            // Start visualization
-            this.visualize(dataArray);
-            
-        } catch (error) {
-            console.error('Mikrofon erişimi hatası:', error);
-            this.showNotification('Mikrofon erişimi reddedildi', 'error');
-        }
-    }
-
-    stopRecording() {
-        if (this.mediaRecorder && this.isRecording) {
-            this.mediaRecorder.stop();
-            this.isRecording = false;
-            
-            // Stop all tracks
-            this.mediaRecorder.stream.getTracks().forEach(track => track.stop());
-            
-            // Update UI
-            const recordBtn = document.getElementById('recordBtn');
-            recordBtn.classList.remove('recording');
-            recordBtn.innerHTML = `
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
-                    <circle cx="12" cy="12" r="3" fill="currentColor"/>
-                </svg>
-                Kayıt Başlat
-            `;
-            
-            // Stop timer
-            this.stopRecordingTimer();
-        }
-    }
-
-    visualize(dataArray) {
-        if (!this.isRecording) return;
-        
-        this.analyser.getByteTimeDomainData(dataArray);
-        this.drawLiveWaveform(dataArray);
-        
-        this.animationId = requestAnimationFrame(() => this.visualize(dataArray));
-    }
-
-    startRecordingTimer() {
-        const timerElement = document.querySelector('.recording-timer');
-        
-        this.recordingTimer = setInterval(() => {
-            const elapsed = Date.now() - this.recordingStartTime;
-            const minutes = Math.floor(elapsed / 60000);
-            const seconds = Math.floor((elapsed % 60000) / 1000);
-            
-            timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-        }, 1000);
-    }
-
-    stopRecordingTimer() {
-        if (this.recordingTimer) {
-            clearInterval(this.recordingTimer);
-            this.recordingTimer = null;
-        }
-        
-        const timerElement = document.querySelector('.recording-timer');
-        timerElement.textContent = '00:00';
-    }
-
-    handleRecordedAudio(audioBlob) {
-        // Create audio URL
-        const audioUrl = URL.createObjectURL(audioBlob);
-        
-        // Update original audio player
-        const originalPlayer = document.querySelector('.comparison-item:first-child .audio-player');
-        if (originalPlayer) {
-            this.updateAudioPlayer(originalPlayer, audioUrl);
-        }
-        
-        this.showNotification('Ses kaydı tamamlandı', 'success');
-    }
-
-    setupFileUpload() {
-        const uploadZone = document.getElementById('uploadZone');
-        const fileInput = document.getElementById('audioFile');
+        // File Upload
+        const uploadArea = document.getElementById('uploadArea');
+        const audioFile = document.getElementById('audioFile');
         const uploadBtn = document.querySelector('.upload-btn');
+        const removeFileBtn = document.getElementById('removeFile');
+
+        if (uploadArea) uploadArea.addEventListener('click', () => audioFile?.click());
+        if (uploadArea) uploadArea.addEventListener('dragover', this.handleDragOver.bind(this));
+        if (uploadArea) uploadArea.addEventListener('dragleave', this.handleDragLeave.bind(this));
+        if (uploadArea) uploadArea.addEventListener('drop', this.handleDrop.bind(this));
         
-        if (uploadBtn && fileInput) {
-            uploadBtn.addEventListener('click', () => fileInput.click());
-        }
+        if (audioFile) audioFile.addEventListener('change', this.handleFileSelect.bind(this));
+        if (uploadBtn) uploadBtn.addEventListener('click', () => audioFile?.click());
+        if (removeFileBtn) removeFileBtn.addEventListener('click', this.removeFile.bind(this));
+
+        // Model Selection
+        const voiceModelSelect = document.getElementById('voiceModelSelect');
+        if (voiceModelSelect) voiceModelSelect.addEventListener('change', this.handleModelSelection.bind(this));
+
+        // Sample Audio Players
+        document.querySelectorAll('.play-btn').forEach(btn => {
+            btn.addEventListener('click', this.toggleSampleAudio.bind(this));
+        });
+
+        // Model Preview Buttons
+        document.querySelectorAll('.model-preview-btn').forEach(btn => {
+            btn.addEventListener('click', this.previewModel.bind(this));
+        });
+
+        // Text Input
+        const textInput = document.getElementById('textInput');
+        if (textInput) textInput.addEventListener('input', this.updateCharCount.bind(this));
+
+        // Voice Settings
+        const speedSlider = document.getElementById('speechSpeed');
+        const pitchSlider = document.getElementById('voicePitch');
         
-        if (fileInput) {
-            fileInput.addEventListener('change', (e) => this.handleFileUpload(e));
-        }
+        if (speedSlider) speedSlider.addEventListener('input', this.updateSpeedValue.bind(this));
+        if (pitchSlider) pitchSlider.addEventListener('input', this.updatePitchValue.bind(this));
+
+        // Generate Button
+        const generateBtn = document.getElementById('generateBtn');
+        if (generateBtn) generateBtn.addEventListener('click', this.generateVoice.bind(this));
+
+        // Preset Models
+        document.querySelectorAll('.model-select-btn').forEach(btn => {
+            btn.addEventListener('click', this.selectPresetModel.bind(this));
+        });
+
+        // Model Test Button
+        const modelTestBtn = document.getElementById('modelTestBtn');
+        if (modelTestBtn) modelTestBtn.addEventListener('click', this.testSelectedModel.bind(this));
+
+        // Audio Player Controls
+        const audioPlayBtn = document.getElementById('audioPlayBtn');
+        const downloadAudioBtn = document.getElementById('downloadAudioBtn');
         
-        if (uploadZone) {
-            // Drag and drop functionality
-            uploadZone.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                uploadZone.classList.add('dragover');
-            });
-            
-            uploadZone.addEventListener('dragleave', () => {
-                uploadZone.classList.remove('dragover');
-            });
-            
-            uploadZone.addEventListener('drop', (e) => {
-                e.preventDefault();
-                uploadZone.classList.remove('dragover');
-                
-                const files = e.dataTransfer.files;
-                if (files.length > 0) {
-                    this.processUploadedFile(files[0]);
-                }
-            });
+        if (audioPlayBtn) audioPlayBtn.addEventListener('click', this.toggleGeneratedAudio.bind(this));
+        if (downloadAudioBtn) downloadAudioBtn.addEventListener('click', this.downloadGeneratedAudio.bind(this));
+
+        // Refresh Models
+        const refreshBtn = document.getElementById('refreshModels');
+        if (refreshBtn) refreshBtn.addEventListener('click', this.refreshModels.bind(this));
+    }
+
+    // File Upload Handlers
+    handleDragOver(e) {
+        e.preventDefault();
+        e.currentTarget.classList.add('dragover');
+    }
+
+    handleDragLeave(e) {
+        e.preventDefault();
+        e.currentTarget.classList.remove('dragover');
+    }
+
+    handleDrop(e) {
+        e.preventDefault();
+        e.currentTarget.classList.remove('dragover');
+        
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+            this.processFile(files[0]);
         }
     }
 
-    handleFileUpload(event) {
-        const file = event.target.files[0];
+    handleFileSelect(e) {
+        const file = e.target.files[0];
         if (file) {
-            this.processUploadedFile(file);
+            this.processFile(file);
         }
     }
 
-    processUploadedFile(file) {
-        // Validate file type
-        const allowedTypes = ['audio/mp3', 'audio/wav', 'audio/m4a', 'audio/mpeg'];
+    processFile(file) {
+        if (!this.validateFile(file)) return;
+
+        this.uploadedFile = file;
+        this.displayFileInfo(file);
+        this.showNotification('success', 'Dosya Yüklendi', 'Ses dosyası başarıyla yüklendi. Model eğitimi başlıyor...');
+        this.startModelTraining();
+    }
+
+    validateFile(file) {
+        const allowedTypes = ['audio/wav', 'audio/mp3', 'audio/mpeg'];
+        const maxSize = 50 * 1024 * 1024; // 50MB
+
         if (!allowedTypes.includes(file.type)) {
-            this.showNotification('Desteklenmeyen dosya formatı', 'error');
-            return;
+            this.showNotification('error', 'Geçersiz Dosya Formatı', 'Sadece WAV ve MP3 dosyaları desteklenmektedir.');
+            return false;
         }
-        
-        // Validate file size (10MB limit)
-        if (file.size > 10 * 1024 * 1024) {
-            this.showNotification('Dosya boyutu 10MB\'dan büyük olamaz', 'error');
-            return;
+
+        if (file.size > maxSize) {
+            this.showNotification('error', 'Dosya Çok Büyük', 'Dosya boyutu 50MB\'dan küçük olmalıdır.');
+            return false;
         }
-        
-        // Create audio URL
-        const audioUrl = URL.createObjectURL(file);
-        
-        // Update original audio player
-        const originalPlayer = document.querySelector('.comparison-item:first-child .audio-player');
-        if (originalPlayer) {
-            this.updateAudioPlayer(originalPlayer, audioUrl);
-        }
-        
-        this.showNotification('Ses dosyası başarıyla yüklendi', 'success');
+
+        return true;
     }
 
-    updateAudioPlayer(playerElement, audioUrl) {
-        const playBtn = playerElement.querySelector('.play-btn');
-        const duration = playerElement.querySelector('.duration');
+    displayFileInfo(file) {
+        const fileInfo = document.getElementById('fileInfo');
+        const fileName = document.getElementById('fileName');
+        const fileSize = document.getElementById('fileSize');
+        const fileDuration = document.getElementById('fileDuration');
+
+        if (fileName) fileName.textContent = file.name;
+        if (fileSize) fileSize.textContent = this.formatFileSize(file.size);
         
-        // Create audio element
-        const audio = new Audio(audioUrl);
-        
-        audio.addEventListener('loadedmetadata', () => {
-            const minutes = Math.floor(audio.duration / 60);
-            const seconds = Math.floor(audio.duration % 60);
-            duration.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-        });
-        
-        playBtn.addEventListener('click', () => {
-            if (audio.paused) {
-                audio.play();
-                playBtn.innerHTML = `
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <rect x="3" y="2" width="3" height="12" fill="currentColor"/>
-                        <rect x="10" y="2" width="3" height="12" fill="currentColor"/>
-                    </svg>
-                `;
-            } else {
-                audio.pause();
-                playBtn.innerHTML = `
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M3 2l10 6-10 6V2z" fill="currentColor"/>
-                    </svg>
-                `;
-            }
-        });
-        
-        audio.addEventListener('ended', () => {
-            playBtn.innerHTML = `
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <path d="M3 2l10 6-10 6V2z" fill="currentColor"/>
-                </svg>
-            `;
-        });
+        const estimatedDuration = Math.floor(Math.random() * 60) + 20;
+        if (fileDuration) fileDuration.textContent = this.formatDuration(estimatedDuration);
+        if (fileInfo) fileInfo.style.display = 'block';
     }
 
-    setupVoiceSettings() {
-        const speechRate = document.getElementById('speechRate');
-        const pitch = document.getElementById('pitch');
-        const volume = document.getElementById('volume');
+    removeFile() {
+        this.uploadedFile = null;
+        const fileInfo = document.getElementById('fileInfo');
+        const audioFile = document.getElementById('audioFile');
         
-        if (speechRate) {
-            speechRate.addEventListener('input', (e) => {
-                const value = e.target.value;
-                e.target.nextElementSibling.textContent = `${value}x`;
-            });
-        }
+        if (fileInfo) fileInfo.style.display = 'none';
+        if (audioFile) audioFile.value = '';
         
-        if (pitch) {
-            pitch.addEventListener('input', (e) => {
-                const value = e.target.value;
-                e.target.nextElementSibling.textContent = value;
-            });
-        }
-        
-        if (volume) {
-            volume.addEventListener('input', (e) => {
-                const value = e.target.value;
-                e.target.nextElementSibling.textContent = `${value}%`;
-            });
-        }
+        this.updateModelStatus('pending');
+        this.updateStepProgress('upload');
+        this.isModelReady = false;
+        this.toggleGenerationControls(false);
     }
 
-    setupSampleVoices() {
-        const sampleCards = document.querySelectorAll('.sample-voice-card');
-        
-        sampleCards.forEach(card => {
-            const playBtn = card.querySelector('.play-btn');
-            const selectBtn = card.querySelector('.select-btn');
-            
-            if (playBtn) {
-                playBtn.addEventListener('click', () => {
-                    this.playSampleVoice(card);
-                });
-            }
-            
-            if (selectBtn) {
-                selectBtn.addEventListener('click', () => {
-                    this.selectSampleVoice(card);
-                });
-            }
-        });
-    }
-
-    playSampleVoice(card) {
-        const voiceType = card.querySelector('h4').textContent;
-        this.showNotification(`${voiceType} örneği oynatılıyor`, 'info');
-        
-        // Simulate audio playback
-        const playBtn = card.querySelector('.play-btn');
-        playBtn.innerHTML = `
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <rect x="3" y="2" width="3" height="12" fill="currentColor"/>
-                <rect x="10" y="2" width="3" height="12" fill="currentColor"/>
-            </svg>
-        `;
+    startModelTraining() {
+        this.updateModelStatus('training');
+        this.updateStepProgress('train');
         
         setTimeout(() => {
-            playBtn.innerHTML = `
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <path d="M3 2l10 6-10 6V2z" fill="currentColor"/>
-                </svg>
-            `;
-        }, 3000);
+            this.completeModelTraining();
+        }, 5000);
     }
 
-    selectSampleVoice(card) {
-        // Remove previous selections
-        document.querySelectorAll('.sample-voice-card').forEach(c => {
-            c.classList.remove('selected');
-            const btn = c.querySelector('.select-btn');
-            btn.textContent = 'Seç';
-            btn.style.background = 'transparent';
-            btn.style.color = 'var(--primary-color)';
-        });
+    completeModelTraining() {
+        this.isModelReady = true;
+        this.updateModelStatus('ready');
+        this.updateStepProgress('generate');
+        this.toggleGenerationControls(true);
+        this.showNotification('success', 'Model Hazır', 'Ses modeliniz başarıyla oluşturuldu!');
+    }
+
+    updateModelStatus(status) {
+        const statusIndicator = document.querySelector('.status-indicator');
+        const statusText = document.querySelector('.status-text');
         
-        // Select current card
-        card.classList.add('selected');
-        const selectBtn = card.querySelector('.select-btn');
-        selectBtn.textContent = 'Seçildi';
-        selectBtn.style.background = 'var(--primary-color)';
-        selectBtn.style.color = 'white';
+        if (!statusIndicator || !statusText) return;
+
+        statusIndicator.className = `status-indicator ${status}`;
         
-        const voiceType = card.querySelector('h4').textContent;
-        this.showNotification(`${voiceType} seçildi`, 'success');
+        const statusTexts = {
+            pending: 'Model henüz oluşturulmadı',
+            training: 'Model eğitiliyor...',
+            ready: 'Model kullanıma hazır',
+            error: 'Hata oluştu'
+        };
+        
+        statusText.textContent = statusTexts[status] || statusTexts.pending;
     }
 
-    setupProcessing() {
-        // Setup step animations and progress tracking
-        this.processingSteps = [
-            { name: 'Ses Analizi', duration: 3000 },
-            { name: 'Model Eğitimi', duration: 8000 },
-            { name: 'Optimizasyon', duration: 4000 }
-        ];
-    }
-
-    async startProcessing() {
-        const startBtn = document.getElementById('startProcessing');
-        const progressFill = document.querySelector('.progress-fill');
-        const progressText = document.querySelector('.progress-text');
+    updateStepProgress(currentStep) {
         const steps = document.querySelectorAll('.step');
+        const stepOrder = ['upload', 'train', 'generate', 'download'];
+        const currentIndex = stepOrder.indexOf(currentStep);
         
-        // Disable button
-        startBtn.disabled = true;
-        startBtn.innerHTML = `
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="2" fill="none" stroke-dasharray="50.27" stroke-dashoffset="50.27">
-                    <animate attributeName="stroke-dashoffset" values="50.27;0;50.27" dur="2s" repeatCount="indefinite"/>
-                </circle>
-            </svg>
-            İşleniyor...
-        `;
-        
-        // Update processing status
-        const statusElement = document.querySelector('.processing-status');
-        statusElement.textContent = 'İşleniyor';
-        statusElement.className = 'processing-status processing';
-        
-        let totalProgress = 0;
-        const totalDuration = this.processingSteps.reduce((sum, step) => sum + step.duration, 0);
-        
-        for (let i = 0; i < this.processingSteps.length; i++) {
-            const step = this.processingSteps[i];
-            const stepElement = steps[i + 1]; // Skip first completed step
+        steps.forEach((step, index) => {
+            step.classList.remove('active', 'completed');
             
-            // Activate current step
-            stepElement.classList.add('active');
-            
-            // Animate progress for this step
-            const stepProgress = await this.animateStepProgress(step.duration, totalProgress, totalProgress + step.duration, totalDuration, progressFill, progressText);
-            totalProgress += step.duration;
-            
-            // Complete current step
-            stepElement.classList.remove('active');
-            stepElement.classList.add('completed');
-            
-            const stepIcon = stepElement.querySelector('.step-icon');
-            stepIcon.innerHTML = `
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <path d="M13 4L6 11L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            `;
-        }
-        
-        // Processing complete
-        statusElement.textContent = 'Tamamlandı';
-        statusElement.className = 'processing-status';
-        
-        startBtn.disabled = false;
-        startBtn.innerHTML = `
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M6 4l8 6-8 6V4z" fill="currentColor"/>
-            </svg>
-            Tekrar İşle
-        `;
-        
-        this.showNotification('Ses klonlama işlemi tamamlandı!', 'success');
-        
-        // Enable generate button
-        const generateBtn = document.querySelector('.generate-btn');
-        generateBtn.disabled = false;
+            if (index < currentIndex) {
+                step.classList.add('completed');
+            } else if (index === currentIndex) {
+                step.classList.add('active');
+            }
+        });
     }
 
-    animateStepProgress(duration, startProgress, endProgress, totalDuration, progressFill, progressText) {
-        return new Promise(resolve => {
-            const startTime = Date.now();
-            
-            const animate = () => {
-                const elapsed = Date.now() - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                
-                const currentProgress = startProgress + (endProgress - startProgress) * progress;
-                const percentage = (currentProgress / totalDuration) * 100;
-                
-                progressFill.style.width = `${percentage}%`;
-                progressText.textContent = `İşleniyor... ${Math.round(percentage)}%`;
-                
-                if (progress < 1) {
-                    requestAnimationFrame(animate);
-                } else {
-                    resolve();
-                }
-            };
-            
-            animate();
+    toggleGenerationControls(enabled) {
+        const elements = [
+            document.getElementById('textInput'),
+            document.getElementById('speechSpeed'),
+            document.getElementById('voicePitch'),
+            document.getElementById('generateBtn')
+        ];
+        
+        elements.forEach(element => {
+            if (element) element.disabled = !enabled;
         });
+    }
+
+    toggleSampleAudio(e) {
+        e.stopPropagation();
+        const btn = e.currentTarget;
+        const sampleItem = btn.closest('.sample-item');
+        const isPlaying = btn.classList.contains('playing');
+        
+        // Stop all other audio first
+        this.stopAllSampleAudio();
+        
+        if (!isPlaying) {
+            // Add playing state
+            btn.classList.add('playing');
+            sampleItem?.classList.add('playing');
+            
+            // Add ripple effect
+            const ripple = btn.querySelector('.play-ripple');
+            if (ripple) {
+                ripple.style.width = '60px';
+                ripple.style.height = '60px';
+                setTimeout(() => {
+                    ripple.style.width = '0';
+                    ripple.style.height = '0';
+                }, 300);
+            }
+            
+            // Change icon to pause
+            const playIcon = btn.querySelector('.play-icon svg path');
+            if (playIcon) {
+                playIcon.setAttribute('d', 'M6 4h4v12H6V4zm6 0h4v12h-4V4z'); // Pause icon
+            }
+            
+            // Simulate audio duration
+            const duration = 3000 + Math.random() * 2000; // 3-5 seconds
+            setTimeout(() => {
+                this.stopSampleAudio(btn);
+            }, duration);
+            
+        } else {
+            this.stopSampleAudio(btn);
+        }
+    }
+
+    stopAllSampleAudio() {
+        document.querySelectorAll('.play-btn.playing').forEach(btn => {
+            this.stopSampleAudio(btn);
+        });
+    }
+
+    stopSampleAudio(btn) {
+        const sampleItem = btn.closest('.sample-item');
+        
+        btn.classList.remove('playing');
+        sampleItem?.classList.remove('playing');
+        
+        // Change icon back to play
+        const playIcon = btn.querySelector('.play-icon svg path');
+        if (playIcon) {
+            playIcon.setAttribute('d', 'M6 4l8 6-8 6V4z'); // Play icon
+        }
+    }
+
+    updateCharCount() {
+        const textInput = document.getElementById('textInput');
+        const charCount = document.getElementById('charCount');
+        
+        if (textInput && charCount) {
+            charCount.textContent = textInput.value.length;
+        }
+    }
+
+    updateSpeedValue(e) {
+        const value = parseFloat(e.target.value);
+        const display = e.target.parentElement.querySelector('.slider-value');
+        if (display) display.textContent = `${value}x`;
+    }
+
+    updatePitchValue(e) {
+        const value = parseFloat(e.target.value);
+        const display = e.target.parentElement.querySelector('.slider-value');
+        if (display) {
+            if (value < 0.95) display.textContent = 'Düşük';
+            else if (value > 1.05) display.textContent = 'Yüksek';
+            else display.textContent = 'Normal';
+        }
     }
 
     generateVoice() {
-        const testText = document.getElementById('testText').value;
+        const textInput = document.getElementById('textInput');
+        const text = textInput?.value.trim();
         
-        if (!testText.trim()) {
-            this.showNotification('Lütfen test metni girin', 'error');
+        if (!text) {
+            this.showNotification('warning', 'Metin Gerekli', 'Lütfen seslendirilecek metni girin.');
             return;
         }
         
-        const generateBtn = document.querySelector('.generate-btn');
-        generateBtn.disabled = true;
-        generateBtn.innerHTML = `
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="2" fill="none" stroke-dasharray="37.7" stroke-dashoffset="37.7">
-                    <animate attributeName="stroke-dashoffset" values="37.7;0;37.7" dur="2s" repeatCount="indefinite"/>
-                </circle>
-            </svg>
-            Oluşturuluyor...
-        `;
+        if (!this.currentModel) {
+            this.showNotification('warning', 'Model Seçilmedi', 'Lütfen bir ses modeli seçin.');
+            return;
+        }
         
-        // Simulate voice generation
-        setTimeout(() => {
-            generateBtn.disabled = false;
-            generateBtn.innerHTML = `
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <path d="M8 1l2.5 5 5.5.5-4 4 1 5.5L8 13l-5 2.5 1-5.5-4-4 5.5-.5L8 1z" fill="currentColor"/>
-                </svg>
-                Ses Oluştur
-            `;
+        const generateBtn = document.getElementById('generateBtn');
+        if (generateBtn) {
+            generateBtn.disabled = true;
+            generateBtn.classList.add('generating');
             
-            // Update cloned voice player
-            const clonedPlayer = document.querySelector('.comparison-item:last-child .audio-player');
-            if (clonedPlayer) {
-                this.simulateGeneratedAudio(clonedPlayer);
+            // Add generating state to button
+            const btnContent = generateBtn.querySelector('.btn-content');
+            if (btnContent) {
+                btnContent.innerHTML = `
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M10 2v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="2" fill="none"/>
+                    </svg>
+                    <span>Üretiliyor...</span>
+                `;
             }
             
-            this.showNotification('Klonlanan ses başarıyla oluşturuldu!', 'success');
-            
-            // Enable download button
-            const downloadBtn = document.querySelector('.download-btn');
-            downloadBtn.disabled = false;
-        }, 3000);
+            // Trigger glow animation
+            const btnGlow = generateBtn.querySelector('.btn-glow');
+            if (btnGlow) {
+                btnGlow.style.animation = 'none';
+                setTimeout(() => {
+                    btnGlow.style.animation = 'btnGlow 2s infinite';
+                }, 100);
+            }
+        }
+        
+        this.showGenerationProgress();
+        this.simulateGeneration();
+        
+        const modelName = this.currentModel === 'custom' ? 'özel modeliniz' : this.presetModels[this.currentModel];
+        this.showNotification('info', 'Ses Üretiliyor', `${modelName} kullanılarak ses üretimi başladı.`);
     }
 
-    simulateGeneratedAudio(playerElement) {
-        const playBtn = playerElement.querySelector('.play-btn');
-        const duration = playerElement.querySelector('.duration');
+    showGenerationProgress() {
+        const progressContainer = document.getElementById('generationProgress');
+        const generateBtn = document.getElementById('generateBtn');
         
-        duration.textContent = '0:15';
+        if (generateBtn) generateBtn.style.display = 'none';
+        if (progressContainer) progressContainer.style.display = 'block';
         
-        playBtn.addEventListener('click', () => {
-            this.showNotification('Klonlanan ses oynatılıyor', 'info');
+        this.animateProgress();
+    }
+
+    animateProgress() {
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+        
+        if (!progressFill || !progressText) return;
+        
+        const steps = [
+            { progress: 20, text: 'Metin analiz ediliyor...' },
+            { progress: 50, text: 'Ses sentezleniyor...' },
+            { progress: 80, text: 'Audio dosyası oluşturuluyor...' },
+            { progress: 100, text: 'Tamamlandı!' }
+        ];
+        
+        let stepIndex = 0;
+        const interval = setInterval(() => {
+            const step = steps[stepIndex];
+            progressFill.style.width = `${step.progress}%`;
+            progressText.textContent = step.text;
             
-            playBtn.innerHTML = `
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <rect x="3" y="2" width="3" height="12" fill="currentColor"/>
-                    <rect x="10" y="2" width="3" height="12" fill="currentColor"/>
-                </svg>
-            `;
+            stepIndex++;
+            if (stepIndex >= steps.length) {
+                clearInterval(interval);
+                setTimeout(() => this.completeGeneration(), 500);
+            }
+        }, 1000);
+    }
+
+    simulateGeneration() {
+        setTimeout(() => this.completeGeneration(), 4000);
+    }
+
+    completeGeneration() {
+        this.generatedAudioUrl = 'data:audio/wav;base64,mock-audio-data';
+        
+        const generateBtn = document.getElementById('generateBtn');
+        const generatedAudio = document.getElementById('generatedAudio');
+        const totalTimeSpan = document.getElementById('totalTime');
+        
+        // Reset generate button
+        if (generateBtn) {
+            generateBtn.disabled = false;
+            generateBtn.classList.remove('generating');
             
-            setTimeout(() => {
-                playBtn.innerHTML = `
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M3 2l10 6-10 6V2z" fill="currentColor"/>
+            const btnContent = generateBtn.querySelector('.btn-content');
+            if (btnContent) {
+                btnContent.innerHTML = `
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M10 1l1.5 3 3.5.5-2.5 2.5.5 3.5L10 9l-2.5 1.5.5-3.5L5.5 4.5 9 4 10 1z" fill="currentColor"/>
                     </svg>
+                    <span>Ses Üret</span>
                 `;
-            }, 15000);
-        });
+            }
+            
+            // Stop glow animation
+            const btnGlow = generateBtn.querySelector('.btn-glow');
+            if (btnGlow) {
+                btnGlow.style.animation = 'none';
+            }
+        }
+        
+        // Show audio player
+        if (generatedAudio) generatedAudio.style.display = 'block';
+        if (totalTimeSpan) totalTimeSpan.textContent = '0:08';
+        
+        this.updateStepProgress('download');
+        this.showNotification('success', 'Ses Hazır!', 'Sesiniz başarıyla üretildi ve indirmeye hazır.');
     }
 
-    downloadVoice() {
-        this.showNotification('Ses dosyası indiriliyor...', 'info');
+    selectPresetModel(e) {
+        e.stopPropagation();
+        const modelId = e.currentTarget.dataset.model;
+        const modelName = this.presetModels[modelId];
+        const voiceModelSelect = document.getElementById('voiceModelSelect');
         
-        // Simulate download
-        const downloadBtn = document.querySelector('.download-btn');
-        downloadBtn.innerHTML = `
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="2" fill="none" stroke-dasharray="37.7" stroke-dashoffset="37.7">
-                    <animate attributeName="stroke-dashoffset" values="37.7;0;37.7" dur="2s" repeatCount="indefinite"/>
-                </circle>
-            </svg>
-            İndiriliyor...
-        `;
+        // Update dropdown selection
+        if (voiceModelSelect) {
+            voiceModelSelect.value = modelId;
+            // Trigger change event to update the interface
+            voiceModelSelect.dispatchEvent(new Event('change'));
+        }
+        
+        // Visual feedback for the button
+        e.currentTarget.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+            e.currentTarget.style.transform = '';
+        }, 150);
+        
+        this.showNotification('success', 'Model Seçildi', `${modelName} modeli aktif edildi.`);
+    }
+
+    toggleGeneratedAudio() {
+        const audioPlayBtn = document.getElementById('audioPlayBtn');
+        const isPlaying = audioPlayBtn?.classList.contains('playing');
+        
+        if (!isPlaying) {
+            this.playGeneratedAudio();
+        } else {
+            this.stopGeneratedAudio();
+        }
+    }
+
+    playGeneratedAudio() {
+        const audioPlayBtn = document.getElementById('audioPlayBtn');
+        
+        if (audioPlayBtn) {
+            audioPlayBtn.classList.add('playing');
+            
+            // Update icon and add waves animation
+            const playIcon = audioPlayBtn.querySelector('.play-icon svg path');
+            if (playIcon) {
+                playIcon.setAttribute('d', 'M6 4h4v16H6V4zm8 0h4v16h-4V4z'); // Pause icon
+            }
+            
+            // Show waves
+            const waves = audioPlayBtn.querySelector('.play-waves');
+            if (waves) {
+                waves.style.opacity = '1';
+            }
+        }
+        
+        // Simulate audio timeline progress
+        this.animateAudioTimeline();
+        
+        // Auto stop after duration
+        setTimeout(() => {
+            this.stopGeneratedAudio();
+        }, 8000); // 8 seconds
+    }
+
+    stopGeneratedAudio() {
+        const audioPlayBtn = document.getElementById('audioPlayBtn');
+        
+        if (audioPlayBtn) {
+            audioPlayBtn.classList.remove('playing');
+            
+            // Update icon
+            const playIcon = audioPlayBtn.querySelector('.play-icon svg path');
+            if (playIcon) {
+                playIcon.setAttribute('d', 'M5 3l14 9-14 9V3z'); // Play icon
+            }
+            
+            // Hide waves
+            const waves = audioPlayBtn.querySelector('.play-waves');
+            if (waves) {
+                waves.style.opacity = '0';
+            }
+        }
+        
+        // Reset timeline
+        const timelineProgress = document.getElementById('timelineProgress');
+        if (timelineProgress) {
+            timelineProgress.style.width = '0%';
+        }
+    }
+
+    animateAudioTimeline() {
+        const timelineProgress = document.getElementById('timelineProgress');
+        const currentTimeSpan = document.getElementById('currentTime');
+        let progress = 0;
+        const duration = 8; // 8 seconds
+        
+        const interval = setInterval(() => {
+            progress += 0.1;
+            const percentage = (progress / duration) * 100;
+            
+            if (timelineProgress) {
+                timelineProgress.style.width = `${Math.min(percentage, 100)}%`;
+            }
+            
+            if (currentTimeSpan) {
+                const currentSeconds = Math.floor(progress);
+                currentTimeSpan.textContent = this.formatTime(currentSeconds);
+            }
+            
+            if (progress >= duration) {
+                clearInterval(interval);
+            }
+        }, 100);
+    }
+
+    downloadGeneratedAudio() {
+        if (!this.generatedAudioUrl) {
+            this.showNotification('error', 'Ses Bulunamadı', 'İndirilecek ses dosyası bulunamadı.');
+            return;
+        }
+        
+        const link = document.createElement('a');
+        link.href = '#';
+        link.download = `generated_voice_${Date.now()}.wav`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        this.showNotification('success', 'İndiriliyor', 'Ses dosyası indiriliyor...');
+    }
+
+    refreshModels() {
+        const refreshBtn = document.getElementById('refreshModels');
+        if (!refreshBtn) return;
+        
+        refreshBtn.disabled = true;
+        refreshBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="animation: spin 1s linear infinite;"><path d="M1 4v6h6M15 12V6H9M2.5 15a6.5 6.5 0 0012.4-3M13.5 1A6.5 6.5 0 001.1 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Yenileniyor...`;
         
         setTimeout(() => {
-            downloadBtn.innerHTML = `
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <path d="M8 12l-4-4h3V2h2v6h3l-4 4zM2 14h12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                İndir
-            `;
-            
-            this.showNotification('Ses dosyası başarıyla indirildi!', 'success');
+            refreshBtn.disabled = false;
+            refreshBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M1 4v6h6M15 12V6H9M2.5 15a6.5 6.5 0 0012.4-3M13.5 1A6.5 6.5 0 001.1 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Yenile`;
+            this.showNotification('info', 'Modeller Yenilendi', 'Model listesi güncellendi.');
         }, 2000);
     }
 
-    showNotification(message, type = 'info') {
-        // Create notification element
-        const notification = document.createElement('div');
-        notification.className = `notification ${type}`;
-        notification.innerHTML = `
-            <div class="notification-content">
-                <span>${message}</span>
-                <button class="notification-close">&times;</button>
-            </div>
-        `;
+    formatFileSize(bytes) {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    formatDuration(seconds) {
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${mins}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    formatTime(seconds) {
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${mins}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    showNotification(type, title, message) {
+        // Use the global notification system if available
+        if (window.notificationSystem) {
+            window.notificationSystem.showToast(title, type);
+        } else {
+            // Fallback alert
+            alert(`${title}: ${message}`);
+        }
+    }
+
+    // Model Selection Handlers
+    handleModelSelection(e) {
+        const selectedValue = e.target.value;
+        const modelPreview = document.getElementById('modelPreview');
+        const selectedModelName = document.getElementById('selectedModelName');
+        const textInput = document.getElementById('textInput');
+        const generateBtn = document.getElementById('generateBtn');
         
-        // Add to page
-        document.body.appendChild(notification);
-        
-        // Show notification
-        setTimeout(() => notification.classList.add('show'), 100);
-        
-        // Auto remove
-        setTimeout(() => {
-            notification.classList.remove('show');
-            setTimeout(() => notification.remove(), 300);
-        }, 4000);
-        
-        // Close button
-        notification.querySelector('.notification-close').addEventListener('click', () => {
-            notification.classList.remove('show');
-            setTimeout(() => notification.remove(), 300);
+        if (selectedValue && selectedValue !== '') {
+            if (modelPreview) modelPreview.style.display = 'block';
+            if (selectedModelName) {
+                if (selectedValue === 'custom') {
+                    selectedModelName.textContent = 'Özel Modeliniz';
+                } else {
+                    selectedModelName.textContent = this.presetModels[selectedValue];
+                }
+            }
+            
+            // Enable text input and generate button
+            if (textInput) {
+                textInput.disabled = false;
+                textInput.placeholder = "Seslendirilmesini istediğiniz metni buraya yazın...";
+            }
+            if (generateBtn) generateBtn.disabled = false;
+            
+            this.currentModel = selectedValue;
+            this.toggleGenerationControls(true);
+            
+            // Update model selection visual state
+            this.updatePresetModelSelection(selectedValue);
+            
+            this.showNotification('success', 'Model Seçildi', `${this.presetModels[selectedValue] || 'Özel model'} aktif edildi.`);
+        } else {
+            if (modelPreview) modelPreview.style.display = 'none';
+            if (textInput) textInput.disabled = true;
+            if (generateBtn) generateBtn.disabled = true;
+            this.currentModel = null;
+            this.toggleGenerationControls(false);
+        }
+    }
+
+    updatePresetModelSelection(selectedModel) {
+        document.querySelectorAll('.modern-preset-model').forEach(model => {
+            model.classList.remove('selected');
+            const selectBtn = model.querySelector('.model-select-btn');
+            if (selectBtn) {
+                selectBtn.innerHTML = `
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                        <path d="M15 4L6 13l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>Seç</span>
+                `;
+            }
         });
+        
+        if (selectedModel && selectedModel !== 'custom') {
+            const selectedModelCard = document.querySelector(`[data-model="${selectedModel}"]`);
+            if (selectedModelCard) {
+                selectedModelCard.classList.add('selected');
+                const selectBtn = selectedModelCard.querySelector('.model-select-btn');
+                if (selectBtn) {
+                    selectBtn.innerHTML = `
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                            <path d="M15 4L6 13l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Seçili</span>
+                    `;
+                }
+            }
+        }
+    }
+
+    previewModel(e) {
+        e.stopPropagation();
+        const modelId = e.currentTarget.dataset.model;
+        const modelName = this.presetModels[modelId];
+        
+        // Add visual feedback
+        e.currentTarget.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+            e.currentTarget.style.transform = '';
+        }, 150);
+        
+        // Simulate playing model preview
+        this.showNotification('info', 'Model Örneği', `${modelName} ses örneği çalınıyor...`);
+        
+        // Add playing state to button
+        const playIcon = e.currentTarget.querySelector('svg path');
+        if (playIcon) {
+            playIcon.setAttribute('d', 'M6 4h2v10H6V4zm4 0h2v10h-2V4z'); // Pause icon
+        }
+        
+        setTimeout(() => {
+            if (playIcon) {
+                playIcon.setAttribute('d', 'M6 4l8 6-8 6V4z'); // Play icon
+            }
+            this.showNotification('success', 'Örnek Tamamlandı', `${modelName} ses örneği tamamlandı.`);
+        }, 3000);
+    }
+
+    testSelectedModel() {
+        if (!this.currentModel) {
+            this.showNotification('warning', 'Model Seçilmedi', 'Önce bir ses modeli seçin.');
+            return;
+        }
+        
+        const testBtn = document.getElementById('modelTestBtn');
+        if (testBtn) {
+            testBtn.disabled = true;
+            testBtn.innerHTML = `
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M6 4h2v8H6V4zm2 0h2v8h-2V4z" fill="currentColor"/>
+                </svg>
+                Test Ediliyor...
+            `;
+        }
+        
+        const modelName = this.currentModel === 'custom' ? 'Özel modeliniz' : this.presetModels[this.currentModel];
+        this.showNotification('info', 'Model Testi', `${modelName} test ediliyor...`);
+        
+        setTimeout(() => {
+            if (testBtn) {
+                testBtn.disabled = false;
+                testBtn.innerHTML = `
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M3 2l10 6-10 6V2z" fill="currentColor"/>
+                    </svg>
+                    Test Et
+                `;
+            }
+            this.showNotification('success', 'Test Tamamlandı', `${modelName} başarıyla test edildi.`);
+        }, 2000);
     }
 }
 
-// Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    new VoiceCloning();
-});
-
-// Add notification styles
-const notificationStyles = `
-.notification {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    z-index: 10000;
-    transform: translateX(400px);
-    transition: transform 0.3s ease;
-    max-width: 350px;
-    border-left: 4px solid #6C63FF;
+// CSS spin animasyonu
+if (!document.querySelector('#voice-spin-animation')) {
+    const style = document.createElement('style');
+    style.id = 'voice-spin-animation';
+    style.textContent = `@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`;
+    document.head.appendChild(style);
 }
 
-.notification.show {
-    transform: translateX(0);
-}
-
-.notification.success {
-    border-left-color: #22c55e;
-}
-
-.notification.error {
-    border-left-color: #ef4444;
-}
-
-.notification.info {
-    border-left-color: #3b82f6;
-}
-
-.notification-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 1.5rem;
-    gap: 1rem;
-}
-
-.notification-content span {
-    color: var(--text-primary);
-    font-weight: 500;
-}
-
-.notification-close {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    color: var(--text-secondary);
-    cursor: pointer;
-    padding: 0;
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    transition: all 0.3s ease;
-}
-
-.notification-close:hover {
-    background: rgba(0, 0, 0, 0.1);
-    color: var(--text-primary);
-}
-`;
-
-// Add styles to head
-const styleSheet = document.createElement('style');
-styleSheet.textContent = notificationStyles;
-document.head.appendChild(styleSheet);
+// Initialize Voice Cloning when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    window.voiceCloning = new VoiceCloning();
+    console.log('🎤 Voice Cloning System initialized');
+}); 

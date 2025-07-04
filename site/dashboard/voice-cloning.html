@@ -109,7 +109,6 @@
                         <span>Profil</span>
                     </a>
                 </li>
-
             </ul>
         </nav>
 
@@ -142,8 +141,7 @@
             <div class="header-left">
                 <button class="sidebar-toggle">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" />
+                        <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                     </svg>
                 </button>
                 <div class="page-title">
@@ -152,46 +150,45 @@
                 </div>
             </div>
             <div class="header-right">
-
                 <div class="user-points">
                     <div class="points-display">
                         <span class="points-label">Puanım</span>
                         <span class="points-value">2,450</span>
                     </div>
                 </div>
+                
                 <div class="notification-container">
-                    <button class="notification-btn">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                            <path
-                                d="M10 2C7.8 2 6 3.8 6 6v4l-2 2v1h12v-1l-2-2V6c0-2.2-1.8-4-4-4zM8.5 15.5v.5c0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5v-.5"
-                                stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round" />
+                    <button class="notification-btn" id="notificationBtn">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="m13.73 21a2 2 0 0 1-3.46 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        <span class="notification-badge">3</span>
+                        <span class="notification-badge" id="notificationBadge">1</span>
                     </button>
-
-                    <!-- Notification Dropdown -->
-                    <div class="notification-dropdown">
+                    
+                    <div class="notification-popup" id="notificationPopup">
                         <div class="notification-header">
-                            <h4>Bildirimler</h4>
-                            <button class="mark-all-read">Tümünü Okundu İşaretle</button>
+                            <h3>Bildirimler</h3>
+                            <button class="mark-all-read" id="markAllRead">Tümünü Okundu İşaretle</button>
                         </div>
-                        <div class="notification-list">
-                            <div class="notification-item unread">
-                                <div class="notification-icon success">
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                        <path d="M13 4L6 11L3 8" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round" />
+                        <div class="notification-list" id="notificationList">
+                            <div class="notification-item unread" data-id="1">
+                                <div class="notification-icon info">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                                        <path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
                                 </div>
                                 <div class="notification-content">
-                                    <div class="notification-title">Ses klonlama tamamlandı</div>
-                                    <div class="notification-text">Sesiniz başarıyla klonlandı ve kullanıma hazır</div>
-                                    <div class="notification-time">5 dakika önce</div>
+                                    <div class="notification-title">Yeni Ses Efektleri Eklendi</div>
+                                    <div class="notification-text">Ses klonlama modülüne echo, reverb ve pitch shift efektleri eklendi.</div>
+                                    <div class="notification-time">4 saat önce</div>
                                 </div>
-                                <div class="notification-actions">
-                                    <button class="action-view">Dinle</button>
-                                </div>
+                                <button class="notification-close">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                        <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </button>
                             </div>
                         </div>
                         <div class="notification-footer">
@@ -202,470 +199,465 @@
             </div>
         </header>
 
-        <!-- Voice Cloning Content -->
+        <!-- Dashboard Content -->
         <div class="dashboard-content">
-            <!-- Stats Cards -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon voice-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" stroke="currentColor"
-                                stroke-width="2" fill="none" />
-                            <path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </div>
-                    <div class="stat-content">
-                        <div class="stat-number">5</div>
-                        <div class="stat-label">Klonlanan Ses</div>
-                        <div class="stat-change positive">+2 bu ay</div>
-                    </div>
+            <!-- Etik Kullanım Bilgilendirmesi -->
+            <div class="ethics-notice">
+                <div class="ethics-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 9v3m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
                 </div>
-
-                <div class="stat-card">
-                    <div class="stat-icon time-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none" />
-                            <polyline points="12,6 12,12 16,14" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </div>
-                    <div class="stat-content">
-                        <div class="stat-number">24</div>
-                        <div class="stat-label">Dakika Ses</div>
-                        <div class="stat-change positive">+8 bu hafta</div>
-                    </div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-icon quality-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <polygon
-                                points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"
-                                stroke="currentColor" stroke-width="2" fill="none" />
-                        </svg>
-                    </div>
-                    <div class="stat-content">
-                        <div class="stat-number">98%</div>
-                        <div class="stat-label">Kalite Skoru</div>
-                        <div class="stat-change positive">+5% artış</div>
-                    </div>
+                <div class="ethics-content">
+                    <h4>Etik Kullanım Bildirimi</h4>
+                    <p>Ses klonlama teknolojisini sadece yasal amaçlar için ve kendi sesinizi klonlamak amacıyla kullanın. Başkalarının seslerini izinsiz klonlamak yasaktır ve yasal sorumluluğa yol açabilir.</p>
                 </div>
             </div>
 
-            <!-- Main Voice Cloning Interface -->
-            <div class="voice-cloning-grid">
-                <!-- Voice Recording Section -->
-                <div class="voice-section">
-                    <div class="card">
+            <!-- Progress Steps -->
+            <div class="voice-steps">
+                <div class="step active" data-step="upload">
+                    <div class="step-number">1</div>
+                    <div class="step-label">Ses Yükle</div>
+                </div>
+                <div class="step" data-step="train">
+                    <div class="step-number">2</div>
+                    <div class="step-label">Model Oluştur</div>
+                </div>
+                <div class="step" data-step="generate">
+                    <div class="step-number">3</div>
+                    <div class="step-label">Ses Üret</div>
+                </div>
+                <div class="step" data-step="download">
+                    <div class="step-number">4</div>
+                    <div class="step-label">İndir</div>
+                </div>
+            </div>
+
+            <!-- Main Content Grid -->
+            <div class="voice-main-grid">
+                <!-- Ses Yükleme Bölümü -->
+                <div class="voice-upload-section">
+                    <div class="section-card">
                         <div class="card-header">
-                            <h3>Ses Kaydı</h3>
-                            <div class="ai-badge">
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                    <path d="M8 1l2.5 5 5.5.5-4 4 1 5.5L8 13l-5 2.5 1-5.5-4-4 5.5-.5L8 1z"
-                                        fill="currentColor" />
+                            <h3>Ses Dosyası Yükle</h3>
+                            <div class="badge ai-badge">
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                    <path d="M7 1l1.5 3 3.5.5-2.5 2.5.5 3.5L7 9l-2.5 1.5.5-3.5L2.5 4.5 6 4 7 1z" fill="currentColor"/>
                                 </svg>
                                 AI Destekli
                             </div>
                         </div>
                         <div class="card-content">
-                            <!-- Recording Controls -->
-                            <div class="recording-controls">
-                                <button class="record-btn" id="recordBtn">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"
-                                            fill="none" />
-                                        <circle cx="12" cy="12" r="3" fill="currentColor" />
-                                    </svg>
-                                    Kayıt Başlat
-                                </button>
-                                <div class="recording-timer">00:00</div>
+                            <div class="upload-requirements">
+                                <h4>Gereksinimler:</h4>
+                                <ul>
+                                    <li>En az 20 saniye ses kaydı</li>
+                                    <li>WAV veya MP3 formatı</li>
+                                    <li>Maksimum 50MB</li>
+                                    <li>Temiz ve net ses kalitesi</li>
+                                </ul>
                             </div>
-
-                            <!-- Audio Visualizer -->
-                            <div class="audio-visualizer">
-                                <canvas id="audioCanvas" width="400" height="100"></canvas>
-                            </div>
-
-                            <!-- File Upload -->
-                            <div class="file-upload-area">
-                                <div class="upload-zone" id="uploadZone">
+                            
+                            <div class="upload-area" id="uploadArea">
+                                <div class="upload-content">
                                     <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                                        <path d="M24 8v24M12 20l12-12 12 12" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M24 8v24M12 20l12-12 12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
-                                    <h4>Ses dosyası yükleyin</h4>
-                                    <p>MP3, WAV, M4A formatları desteklenir (Max 10MB)</p>
-                                    <button class="upload-btn">Dosya Seç</button>
-                                    <input type="file" id="audioFile" accept=".mp3,.wav,.m4a" hidden>
+                                    <h4>Ses dosyanızı sürükleyip bırakın</h4>
+                                    <p>veya dosya seçmek için tıklayın</p>
+                                    <button class="upload-btn" type="button">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                            <path d="M17 12v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5M7 8l3-3 3 3M10 5v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                        Dosya Seç
+                                    </button>
+                                    <input type="file" id="audioFile" accept=".wav,.mp3" hidden>
                                 </div>
                             </div>
 
-                            <!-- Audio Settings -->
-                            <div class="audio-settings">
-                                <div class="setting-group">
-                                    <label>Ses Kalitesi</label>
-                                    <select id="audioQuality">
-                                        <option value="high">Yüksek (48kHz)</option>
-                                        <option value="medium" selected>Orta (44.1kHz)</option>
-                                        <option value="low">Düşük (22kHz)</option>
-                                    </select>
-                                </div>
-                                <div class="setting-group">
-                                    <label>Gürültü Azaltma</label>
-                                    <input type="checkbox" id="noiseReduction" checked>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sample Voices Section -->
-                <div class="samples-section">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>Örnek Sesler</h3>
-                            <p>Modellenmek için hazırlanmış örnek sesler</p>
-                        </div>
-                        <div class="card-content">
-                            <div class="sample-voices-grid">
-                                <div class="sample-voice-card">
-                                    <div class="voice-avatar male">
-                                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                                            <circle cx="16" cy="10" r="6" fill="currentColor" />
-                                            <path d="M4 26c0-6.627 5.373-12 12-12s12 5.373 12 12" fill="currentColor" />
+                            <div class="file-info" id="fileInfo" style="display: none;">
+                                <div class="file-details">
+                                    <div class="file-icon">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M9 18V5l12-2v13M9 9l12-2M9 13a3 3 0 100 6 3 3 0 000-6z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                         </svg>
                                     </div>
-                                    <div class="voice-info">
-                                        <h4>Erkek Ses - Profesyonel</h4>
-                                        <p>Resmi sunumlar için ideal</p>
-                                        <div class="voice-stats">
-                                            <span>Yaş: 35-45</span>
-                                            <span>Ton: Ciddi</span>
-                                        </div>
+                                    <div class="file-meta">
+                                        <div class="file-name" id="fileName"></div>
+                                        <div class="file-size" id="fileSize"></div>
+                                        <div class="file-duration" id="fileDuration"></div>
                                     </div>
-                                    <div class="voice-actions">
-                                        <button class="play-btn">
-                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                                <path d="M3 2l10 6-10 6V2z" fill="currentColor" />
-                                            </svg>
-                                        </button>
-                                        <button class="select-btn">Seç</button>
-                                    </div>
-                                </div>
-
-                                <div class="sample-voice-card">
-                                    <div class="voice-avatar female">
-                                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                                            <circle cx="16" cy="10" r="6" fill="currentColor" />
-                                            <path d="M4 26c0-6.627 5.373-12 12-12s12 5.373 12 12" fill="currentColor" />
-                                        </svg>
-                                    </div>
-                                    <div class="voice-info">
-                                        <h4>Kadın Ses - Samimi</h4>
-                                        <p>Günlük konuşmalar için uygun</p>
-                                        <div class="voice-stats">
-                                            <span>Yaş: 25-35</span>
-                                            <span>Ton: Sıcak</span>
-                                        </div>
-                                    </div>
-                                    <div class="voice-actions">
-                                        <button class="play-btn">
-                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                                <path d="M3 2l10 6-10 6V2z" fill="currentColor" />
-                                            </svg>
-                                        </button>
-                                        <button class="select-btn">Seç</button>
-                                    </div>
-                                </div>
-
-                                <div class="sample-voice-card">
-                                    <div class="voice-avatar young">
-                                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                                            <circle cx="16" cy="10" r="6" fill="currentColor" />
-                                            <path d="M4 26c0-6.627 5.373-12 12-12s12 5.373 12 12" fill="currentColor" />
-                                        </svg>
-                                    </div>
-                                    <div class="voice-info">
-                                        <h4>Genç Ses - Enerjik</h4>
-                                        <p>Dinamik içerikler için</p>
-                                        <div class="voice-stats">
-                                            <span>Yaş: 18-25</span>
-                                            <span>Ton: Canlı</span>
-                                        </div>
-                                    </div>
-                                    <div class="voice-actions">
-                                        <button class="play-btn">
-                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                                <path d="M3 2l10 6-10 6V2z" fill="currentColor" />
-                                            </svg>
-                                        </button>
-                                        <button class="select-btn">Seç</button>
-                                    </div>
-                                </div>
-
-                                <div class="sample-voice-card">
-                                    <div class="voice-avatar narrator">
-                                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                                            <circle cx="16" cy="10" r="6" fill="currentColor" />
-                                            <path d="M4 26c0-6.627 5.373-12 12-12s12 5.373 12 12" fill="currentColor" />
-                                        </svg>
-                                    </div>
-                                    <div class="voice-info">
-                                        <h4>Anlatıcı Ses - Derin</h4>
-                                        <p>Belgesel ve hikaye anlatımı</p>
-                                        <div class="voice-stats">
-                                            <span>Yaş: 40-55</span>
-                                            <span>Ton: Derin</span>
-                                        </div>
-                                    </div>
-                                    <div class="voice-actions">
-                                        <button class="play-btn">
-                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                                <path d="M3 2l10 6-10 6V2z" fill="currentColor" />
-                                            </svg>
-                                        </button>
-                                        <button class="select-btn">Seç</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Processing and Results Section -->
-            <div class="processing-results-grid">
-                <!-- AI Processing -->
-                <div class="processing-section">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>AI İşleme</h3>
-                            <div class="processing-status">Hazır</div>
-                        </div>
-                        <div class="card-content">
-                            <div class="processing-steps">
-                                <div class="step completed">
-                                    <div class="step-icon">
+                                    <button class="remove-file" id="removeFile">
                                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                            <path d="M13 4L6 11L3 8" stroke="currentColor" stroke-width="2"
-                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M6 6l4 4M10 6l-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                                         </svg>
-                                    </div>
-                                    <div class="step-content">
-                                        <h4>Ses Analizi</h4>
-                                        <p>Ses karakteristikleri belirlendi</p>
-                                    </div>
-                                </div>
-                                <div class="step">
-                                    <div class="step-icon">2</div>
-                                    <div class="step-content">
-                                        <h4>Model Eğitimi</h4>
-                                        <p>AI modeli eğitiliyor</p>
-                                    </div>
-                                </div>
-                                <div class="step">
-                                    <div class="step-icon">3</div>
-                                    <div class="step-content">
-                                        <h4>Optimizasyon</h4>
-                                        <p>Ses kalitesi optimize ediliyor</p>
-                                    </div>
+                                    </button>
                                 </div>
                             </div>
-
-                            <div class="progress-container">
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="width: 0%"></div>
-                                </div>
-                                <div class="progress-text">İşleme başlamadı</div>
-                            </div>
-
-                            <button class="start-processing-btn" id="startProcessing">
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                    <path d="M6 4l8 6-8 6V4z" fill="currentColor" />
-                                </svg>
-                                İşlemeyi Başlat
-                            </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Results and Testing -->
-                <div class="results-section">
-                    <div class="card">
+                <!-- Örnek Ses Veri Seti -->
+                <div class="voice-samples-section">
+                    <div class="section-card">
                         <div class="card-header">
-                            <h3>Sonuç ve Test</h3>
-                            <div class="quality-score">Kalite: 98%</div>
+                            <h3>Örnek Ses Veri Setleri</h3>
+                            <p>Nasıl ses kaydı yapacağınızı öğrenmek için dinleyin</p>
                         </div>
                         <div class="card-content">
-                            <!-- Test Text Input -->
-                            <div class="test-input">
-                                <label for="testText">Test Metni</label>
-                                <textarea id="testText"
-                                    placeholder="Klonlanan sesinizle test etmek istediğiniz metni yazın...">Merhaba, ben AI tarafından klonlanan sesinizim. Bu teknoloji sayesinde istediğiniz metni benim sesimle dinleyebilirsiniz.</textarea>
-                            </div>
-
-                            <!-- Voice Comparison -->
-                            <div class="voice-comparison">
-                                <div class="comparison-item">
-                                    <h4>Orijinal Ses</h4>
-                                    <div class="audio-player">
-                                        <button class="play-btn">
-                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                                <path d="M3 2l10 6-10 6V2z" fill="currentColor" />
-                                            </svg>
+                            <div class="sample-list">
+                                <div class="sample-item">
+                                    <div class="sample-info">
+                                        <h4>Temiz Kayıt Örneği</h4>
+                                        <p>Gürültüsüz ortamda yapılan kaliteli ses kaydı</p>
+                                        <span class="sample-duration">0:22</span>
+                                    </div>
+                                    <div class="sample-controls">
+                                        <button class="play-btn modern-sample-play-btn" data-audio="sample1">
+                                            <div class="play-icon">
+                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                    <path d="M6 4l8 6-8 6V4z" fill="currentColor"/>
+                                                </svg>
+                                            </div>
+                                            <div class="play-ripple"></div>
                                         </button>
-                                        <div class="audio-waveform"></div>
-                                        <span class="duration">0:15</span>
+                                        <div class="audio-waveform">
+                                            <div class="wave-bar"></div>
+                                            <div class="wave-bar"></div>
+                                            <div class="wave-bar"></div>
+                                            <div class="wave-bar"></div>
+                                            <div class="wave-bar"></div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="comparison-item">
-                                    <h4>Klonlanan Ses</h4>
-                                    <div class="audio-player">
-                                        <button class="play-btn">
-                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                                <path d="M3 2l10 6-10 6V2z" fill="currentColor" />
-                                            </svg>
+
+                                <div class="sample-item">
+                                    <div class="sample-info">
+                                        <h4>Doğal Konuşma Stili</h4>
+                                        <p>Günlük konuşma temposunda kayıt örneği</p>
+                                        <span class="sample-duration">0:28</span>
+                                    </div>
+                                    <div class="sample-controls">
+                                        <button class="play-btn modern-sample-play-btn" data-audio="sample2">
+                                            <div class="play-icon">
+                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                    <path d="M6 4l8 6-8 6V4z" fill="currentColor"/>
+                                                </svg>
+                                            </div>
+                                            <div class="play-ripple"></div>
                                         </button>
-                                        <div class="audio-waveform"></div>
-                                        <span class="duration">0:15</span>
+                                        <div class="audio-waveform">
+                                            <div class="wave-bar"></div>
+                                            <div class="wave-bar"></div>
+                                            <div class="wave-bar"></div>
+                                            <div class="wave-bar"></div>
+                                            <div class="wave-bar"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="sample-item">
+                                    <div class="sample-info">
+                                        <h4>Profesyonel Ton</h4>
+                                        <p>Resmi sunum tarzında kayıt örneği</p>
+                                        <span class="sample-duration">0:31</span>
+                                    </div>
+                                    <div class="sample-controls">
+                                        <button class="play-btn modern-sample-play-btn" data-audio="sample3">
+                                            <div class="play-icon">
+                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                    <path d="M6 4l8 6-8 6V4z" fill="currentColor"/>
+                                                </svg>
+                                            </div>
+                                            <div class="play-ripple"></div>
+                                        </button>
+                                        <div class="audio-waveform">
+                                            <div class="wave-bar"></div>
+                                            <div class="wave-bar"></div>
+                                            <div class="wave-bar"></div>
+                                            <div class="wave-bar"></div>
+                                            <div class="wave-bar"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Metinden Ses Üretme ve Hazır Modeller -->
+            <div class="voice-generation-grid">
+                <!-- Metinden Ses Üretme -->
+                <div class="text-to-speech-section">
+                    <div class="section-card">
+                        <div class="card-header">
+                            <h3>Metinden Ses Üretme</h3>
+                            <div class="model-status" id="modelStatus">
+                                <span class="status-indicator pending"></span>
+                                <span class="status-text">Model henüz oluşturulmadı</span>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <!-- Model Selection -->
+                            <div class="model-selection-section">
+                                <label for="voiceModelSelect">Ses Modeli Seç:</label>
+                                <div class="model-select-container">
+                                    <select id="voiceModelSelect" class="voice-model-select" disabled>
+                                        <option value="">Önce ses yükleyin veya hazır model seçin</option>
+                                        <option value="custom" disabled>Özel Modeliniz (Henüz hazır değil)</option>
+                                        <optgroup label="Hazır Modeller">
+                                            <option value="female-young">🎤 Genç Kadın Sesi</option>
+                                            <option value="male-adult">🎤 Yetişkin Erkek Sesi</option>
+                                            <option value="female-narrator">🎤 Anlatıcı Sesi</option>
+                                            <option value="male-deep">🎤 Derin Erkek Sesi</option>
+                                        </optgroup>
+                                    </select>
+                                    <div class="model-preview" id="modelPreview" style="display: none;">
+                                        <div class="preview-info">
+                                            <span class="model-name" id="selectedModelName"></span>
+                                            <button class="model-test-btn" id="modelTestBtn">
+                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                    <path d="M3 2l10 6-10 6V2z" fill="currentColor"/>
+                                                </svg>
+                                                Test Et
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Voice Settings -->
+                            <div class="text-input-section">
+                                <label for="textInput">Seslendirilecek Metin:</label>
+                                <textarea id="textInput" placeholder="Seslendirilmesini istediğiniz metni buraya yazın... (Maksimum 500 karakter)" maxlength="500" disabled></textarea>
+                                <div class="text-counter">
+                                    <span id="charCount">0</span>/500 karakter
+                                </div>
+                            </div>
+
                             <div class="voice-settings">
-                                <div class="setting-row">
-                                    <label>Konuşma Hızı</label>
-                                    <input type="range" min="0.5" max="2" step="0.1" value="1" id="speechRate">
-                                    <span>1.0x</span>
+                                <div class="setting-group">
+                                    <label for="speechSpeed">Konuşma Hızı:</label>
+                                    <div class="slider-container">
+                                        <input type="range" id="speechSpeed" min="0.5" max="2" step="0.1" value="1" disabled>
+                                        <span class="slider-value">1.0x</span>
+                                    </div>
                                 </div>
-                                <div class="setting-row">
-                                    <label>Ses Tonu</label>
-                                    <input type="range" min="-12" max="12" step="1" value="0" id="pitch">
-                                    <span>0</span>
-                                </div>
-                                <div class="setting-row">
-                                    <label>Ses Seviyesi</label>
-                                    <input type="range" min="0" max="100" step="5" value="80" id="volume">
-                                    <span>80%</span>
+                                <div class="setting-group">
+                                    <label for="voicePitch">Ses Tonu:</label>
+                                    <div class="slider-container">
+                                        <input type="range" id="voicePitch" min="0.8" max="1.2" step="0.05" value="1" disabled>
+                                        <span class="slider-value">Normal</span>
+                                    </div>
                                 </div>
                             </div>
 
-                            <!-- Action Buttons -->
-                            <div class="action-buttons">
-                                <button class="generate-btn">
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                        <path d="M8 1l2.5 5 5.5.5-4 4 1 5.5L8 13l-5 2.5 1-5.5-4-4 5.5-.5L8 1z"
-                                            fill="currentColor" />
-                                    </svg>
-                                    Ses Oluştur
+                            <div class="generation-controls">
+                                <button class="generate-btn modern-btn" id="generateBtn" disabled>
+                                    <div class="btn-content">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                            <path d="M10 1l1.5 3 3.5.5-2.5 2.5.5 3.5L10 9l-2.5 1.5.5-3.5L5.5 4.5 9 4 10 1z" fill="currentColor"/>
+                                        </svg>
+                                        <span>Ses Üret</span>
+                                    </div>
+                                    <div class="btn-glow"></div>
                                 </button>
-                                <button class="download-btn">
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                        <path d="M8 12l-4-4h3V2h2v6h3l-4 4zM2 14h12" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
-                                    İndir
-                                </button>
+                                <div class="generation-progress modern-progress" id="generationProgress" style="display: none;">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" id="progressFill"></div>
+                                        <div class="progress-shine"></div>
+                                    </div>
+                                    <span class="progress-text" id="progressText">Ses üretiliyor...</span>
+                                </div>
+                            </div>
+
+                            <!-- Generated Audio -->
+                            <div class="generated-audio modern-audio-player" id="generatedAudio" style="display: none;">
+                                <div class="audio-player">
+                                    <button class="audio-play-btn modern-play-btn" id="audioPlayBtn">
+                                        <div class="play-icon">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M5 3l14 9-14 9V3z" fill="currentColor"/>
+                                            </svg>
+                                        </div>
+                                        <div class="play-waves">
+                                            <div class="wave"></div>
+                                            <div class="wave"></div>
+                                            <div class="wave"></div>
+                                        </div>
+                                    </button>
+                                    <div class="audio-timeline">
+                                        <div class="timeline-progress" id="timelineProgress"></div>
+                                        <div class="timeline-handle" id="timelineHandle"></div>
+                                    </div>
+                                    <div class="audio-time">
+                                        <span id="currentTime">0:00</span> / <span id="totalTime">0:00</span>
+                                    </div>
+                                    <button class="download-audio-btn modern-download-btn" id="downloadAudioBtn">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                            <path d="M10 1v12M6 9l4 4 4-4M1 15v2a1 1 0 001 1h16a1 1 0 001-1v-2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                        <span>İndir</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hazır Ses Modelleri -->
+                <div class="preset-models-section">
+                    <div class="section-card">
+                        <div class="card-header">
+                            <h3>Hazır Ses Modelleri</h3>
+                            <p>Sistem ses modelleri ile hızlı deneyim</p>
+                        </div>
+                        <div class="card-content">
+                            <div class="preset-models-grid">
+                                <div class="preset-model modern-preset-model" data-model="female-young">
+                                    <div class="model-avatar">
+                                        <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+                                            <circle cx="18" cy="14" r="7" fill="#FF6B9D"/>
+                                            <path d="M7 28c0-6 5-11 11-11s11 5 11 11" stroke="#FF6B9D" stroke-width="2" fill="none"/>
+                                        </svg>
+                                    </div>
+                                    <div class="model-info">
+                                        <h4>Genç Kadın Sesi</h4>
+                                        <p>Enerjik ve samimi ton</p>
+                                    </div>
+                                    <div class="model-actions">
+                                        <button class="model-preview-btn" data-model="female-young">
+                                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                                <path d="M6 4l8 6-8 6V4z" fill="currentColor"/>
+                                            </svg>
+                                            <span>Test Et</span>
+                                        </button>
+                                        <button class="model-select-btn" data-model="female-young">
+                                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                                <path d="M15 4L6 13l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                            <span>Seç</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="preset-model modern-preset-model" data-model="male-adult">
+                                    <div class="model-avatar">
+                                        <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+                                            <circle cx="18" cy="14" r="7" fill="#4ECDC4"/>
+                                            <path d="M7 28c0-6 5-11 11-11s11 5 11 11" stroke="#4ECDC4" stroke-width="2" fill="none"/>
+                                        </svg>
+                                    </div>
+                                    <div class="model-info">
+                                        <h4>Yetişkin Erkek Sesi</h4>
+                                        <p>Profesyonel ve güvenilir</p>
+                                    </div>
+                                    <div class="model-actions">
+                                        <button class="model-preview-btn" data-model="male-adult">
+                                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                                <path d="M6 4l8 6-8 6V4z" fill="currentColor"/>
+                                            </svg>
+                                            <span>Test Et</span>
+                                        </button>
+                                        <button class="model-select-btn" data-model="male-adult">
+                                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                                <path d="M15 4L6 13l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                            <span>Seç</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="preset-model modern-preset-model" data-model="female-narrator">
+                                    <div class="model-avatar">
+                                        <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+                                            <circle cx="18" cy="14" r="7" fill="#A8E6CF"/>
+                                            <path d="M7 28c0-6 5-11 11-11s11 5 11 11" stroke="#A8E6CF" stroke-width="2" fill="none"/>
+                                        </svg>
+                                    </div>
+                                    <div class="model-info">
+                                        <h4>Anlatıcı Sesi</h4>
+                                        <p>Kitap okuma ve eğitim için</p>
+                                    </div>
+                                    <div class="model-actions">
+                                        <button class="model-preview-btn" data-model="female-narrator">
+                                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                                <path d="M6 4l8 6-8 6V4z" fill="currentColor"/>
+                                            </svg>
+                                            <span>Test Et</span>
+                                        </button>
+                                        <button class="model-select-btn" data-model="female-narrator">
+                                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                                <path d="M15 4L6 13l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                            <span>Seç</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="preset-model modern-preset-model" data-model="male-deep">
+                                    <div class="model-avatar">
+                                        <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+                                            <circle cx="18" cy="14" r="7" fill="#FFD93D"/>
+                                            <path d="M7 28c0-6 5-11 11-11s11 5 11 11" stroke="#FFD93D" stroke-width="2" fill="none"/>
+                                        </svg>
+                                    </div>
+                                    <div class="model-info">
+                                        <h4>Derin Erkek Sesi</h4>
+                                        <p>Güçlü ve etkileyici ton</p>
+                                    </div>
+                                    <div class="model-actions">
+                                        <button class="model-preview-btn" data-model="male-deep">
+                                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                                <path d="M6 4l8 6-8 6V4z" fill="currentColor"/>
+                                            </svg>
+                                            <span>Test Et</span>
+                                        </button>
+                                        <button class="model-select-btn" data-model="male-deep">
+                                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                                <path d="M15 4L6 13l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                            <span>Seç</span>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Recent Projects -->
-            <div class="recent-projects">
-                <div class="section-header">
-                    <h2>Son Projeler</h2>
-                    <button class="view-all-btn">Tümünü Gör</button>
-                </div>
-                <div class="projects-grid">
-                    <div class="project-card">
-                        <div class="project-icon voice">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" stroke="currentColor"
-                                    stroke-width="2" fill="none" />
-                                <path d="M19 10v2a7 7 0 0 1-14 0v-2" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </div>
-                        <div class="project-info">
-                            <h3>Profesyonel Sunum Sesi</h3>
-                            <p>İş sunumları için klonlanan ses</p>
-                            <div class="project-meta">
-                                <span>2 gün önce</span>
-                                <span>•</span>
-                                <span>5:30 dk</span>
-                            </div>
-                        </div>
-                        <div class="project-actions">
-                            <button class="play-btn">
+            <!-- Model İndirme ve Yönetim -->
+            <div class="model-management-section">
+                <div class="section-card">
+                    <div class="card-header">
+                        <h3>Model Yönetimi</h3>
+                        <div class="header-actions">
+                            <button class="refresh-btn" id="refreshModels">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                    <path d="M3 2l10 6-10 6V2z" fill="currentColor" />
+                                    <path d="M1 4v6h6M15 12V6H9M2.5 15a6.5 6.5 0 0012.4-3M13.5 1A6.5 6.5 0 001.1 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
+                                Yenile
                             </button>
-                            <button class="edit-btn">Düzenle</button>
                         </div>
                     </div>
-
-                    <div class="project-card">
-                        <div class="project-icon voice">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" stroke="currentColor"
-                                    stroke-width="2" fill="none" />
-                                <path d="M19 10v2a7 7 0 0 1-14 0v-2" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </div>
-                        <div class="project-info">
-                            <h3>Podcast Anlatıcı Sesi</h3>
-                            <p>Podcast serileri için özel ses</p>
-                            <div class="project-meta">
-                                <span>1 hafta önce</span>
-                                <span>•</span>
-                                <span>12:45 dk</span>
-                            </div>
-                        </div>
-                        <div class="project-actions">
-                            <button class="play-btn">
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                    <path d="M3 2l10 6-10 6V2z" fill="currentColor" />
+                    <div class="card-content">
+                        <div class="model-list" id="modelList">
+                            <div class="empty-state" id="emptyModels">
+                                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                    <path d="M24 8v24M12 20l12-12 12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
-                            </button>
-                            <button class="edit-btn">Düzenle</button>
-                        </div>
-                    </div>
-
-                    <div class="project-card">
-                        <div class="project-icon voice">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" stroke="currentColor"
-                                    stroke-width="2" fill="none" />
-                                <path d="M19 10v2a7 7 0 0 1-14 0v-2" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </div>
-                        <div class="project-info">
-                            <h3>Eğitim Videosu Sesi</h3>
-                            <p>Online kurs içerikleri için</p>
-                            <div class="project-meta">
-                                <span>2 hafta önce</span>
-                                <span>•</span>
-                                <span>8:20 dk</span>
+                                <h4>Henüz ses modeliniz yok</h4>
+                                <p>Ses dosyası yükleyerek ilk modelinizi oluşturun</p>
                             </div>
-                        </div>
-                        <div class="project-actions">
-                            <button class="play-btn">
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                    <path d="M3 2l10 6-10 6V2z" fill="currentColor" />
-                                </svg>
-                            </button>
-                            <button class="edit-btn">Düzenle</button>
                         </div>
                     </div>
                 </div>
             </div>
+
+
         </div>
     </main>
 

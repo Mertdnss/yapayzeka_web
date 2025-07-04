@@ -52,62 +52,9 @@
         visibility: visible;
     }
     
-    /* Notification badge mobile adjustments */
-    .notification-badge {
-        top: 5px;
-        right: 5px;
-        font-size: 8px;
-        padding: 1px 4px;
-        min-width: 12px;
-        height: 12px;
-        line-height: 10px;
-        border-radius: 7px;
-    }
+
     
-    /* Voice Cloning Responsive Styles */
-    .voice-cloning-grid,
-    .processing-results-grid {
-        grid-template-columns: 1fr;
-    }
     
-    .voice-comparison {
-        grid-template-columns: 1fr;
-    }
-    
-    .audio-settings {
-        grid-template-columns: 1fr;
-    }
-    
-    .action-buttons {
-        flex-direction: column;
-    }
-    
-    .sample-voices-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .projects-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .project-card {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .setting-row {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0.5rem;
-    }
-    
-    .setting-row label {
-        min-width: auto;
-    }
-    
-    .setting-row span {
-        text-align: center;
-    }
     
     /* Sidebar structure optimization */
     .sidebar-header {
@@ -525,23 +472,7 @@
         font-weight: 600;
     }
     
-    /* Notification dropdown mobile styles */
-    .notification-container {
-        position: relative;
-    }
-    
-    .notification-dropdown {
-        right: 0;
-        left: auto;
-        width: 90vw;
-        max-width: 350px;
-        max-height: 70vh;
-    }
-    
-    .notification-dropdown::before {
-        right: 20px;
-        left: auto;
-    }
+
     
     .header-right {
         gap: 8px;
@@ -786,61 +717,7 @@
         font-size: 12px;
     }
     
-    .cv-builder-page .notification-btn {
-        width: 32px;
-        height: 32px;
-    }
-    
-    .cv-builder-page .notification-btn svg {
-        width: 16px;
-        height: 16px;
-    }
-    
-    .voice-cloning-page .page-title h1 {
-        font-size: 13px;
-        line-height: 1.0;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        margin: 0;
-    }
-    
-    .voice-cloning-page .page-title p {
-        font-size: 8px;
-        line-height: 1.1;
-        margin-top: 0;
-        margin-bottom: 0;
-    }
-    
-    .voice-cloning-page .page-title {
-        flex: 1;
-        min-width: 0;
-    }
-    
-    .voice-cloning-page .header-left {
-        gap: 4px;
-    }
-    
-    .voice-cloning-page .user-points {
-        font-size: 11px;
-    }
-    
-    .voice-cloning-page .points-label {
-        font-size: 8px;
-    }
-    
-    .voice-cloning-page .points-value {
-        font-size: 12px;
-    }
-    
-    .voice-cloning-page .notification-btn {
-        width: 32px;
-        height: 32px;
-    }
-    
-    .voice-cloning-page .notification-btn svg {
-        width: 16px;
-        height: 16px;
-    }
+
     
     /* Chat History Mobile Styles */
     .chat-history-toggle {
@@ -1126,17 +1003,7 @@
         font-size: 14px;
     }
     
-    /* Mobile notification badge adjustments */
-    .notification-badge {
-        top: 4px;
-        right: 4px;
-        font-size: 7px;
-        padding: 1px 3px;
-        min-width: 10px;
-        height: 10px;
-        line-height: 8px;
-        border-radius: 6px;
-    }
+
 }
 
 /* Dashboard Mobile Styles */
@@ -1217,15 +1084,7 @@
         font-size: 12px;
     }
     
-    .chat-page .notification-btn {
-        width: 32px;
-        height: 32px;
-    }
-    
-    .chat-page .notification-btn svg {
-        width: 16px;
-        height: 16px;
-    }
+
     
     /* Tasks Page Mobile Adjustments */
     .tasks-page .page-title h1 {
@@ -1264,15 +1123,7 @@
         font-size: 12px;
     }
     
-    .tasks-page .notification-btn {
-        width: 32px;
-        height: 32px;
-    }
-    
-    .tasks-page .notification-btn svg {
-        width: 16px;
-        height: 16px;
-    }
+
     
     /* Dashboard Page Mobile Adjustments */
     .dashboard-page .page-title h1 {
@@ -1311,15 +1162,7 @@
         font-size: 12px;
     }
     
-    .dashboard-page .notification-btn {
-        width: 32px;
-        height: 32px;
-    }
-    
-    .dashboard-page .notification-btn svg {
-        width: 16px;
-        height: 16px;
-    }
+
     
     /* CV Builder Mobile Adjustments */
     .cv-builder-page .page-title h1 {
@@ -1358,67 +1201,9 @@
         font-size: 12px;
     }
     
-    .cv-builder-page .notification-btn {
-        width: 32px;
-        height: 32px;
-    }
+
     
-    .cv-builder-page .notification-btn svg {
-        width: 16px;
-        height: 16px;
-    }
-    
-    /* Voice Cloning Mobile Adjustments */
-    .voice-cloning-page .page-title h1 {
-        font-size: 16px;
-        line-height: 1.1;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        margin: 0;
-    }
-    
-    .voice-cloning-page .page-title p {
-        font-size: 9px;
-        line-height: 1.2;
-        margin-top: 1px;
-        margin-bottom: 0;
-    }
-    
-    .voice-cloning-page .header-left {
-        gap: 6px;
-    }
-    
-    .voice-cloning-page .page-title {
-        flex: 1;
-        min-width: 0;
-    }
-    
-    .voice-cloning-page .voice-cloning-grid,
-    .voice-cloning-page .processing-results-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-    
-    .voice-cloning-page .sample-voices-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .voice-cloning-page .projects-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .voice-cloning-page .recording-controls {
-        flex-direction: column;
-        align-items: stretch;
-    }
-    
-    .voice-cloning-page .action-buttons {
-        flex-direction: column;
-    }
-    
-    .voice-cloning-page .voice-comparison {
-        grid-template-columns: 1fr;
-    }
+
 }
 
 /* Games Page Responsive Styles */
@@ -1756,5 +1541,1156 @@
     
     .chat-item-preview {
         font-size: 14px;
+    }
+}
+
+/* Ses Klonlama Sayfası - Responsive Stiller */
+
+/* Tablet Görünümü */
+@media (max-width: 1024px) {
+    .voice-main-grid, 
+    .voice-generation-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .voice-steps {
+        gap: 32px;
+        padding: 20px;
+    }
+
+    .step:not(:last-child)::after {
+        display: none;
+    }
+
+    .voice-settings {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .section-card {
+        padding: 20px;
+    }
+
+    .preset-models-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Mobil Görünümü */
+@media (max-width: 768px) {
+
+    .voice-steps {
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        padding: 16px;
+    }
+
+    .step {
+        flex-direction: row;
+        gap: 12px;
+        width: 100%;
+        max-width: 200px;
+    }
+
+    .step-number {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+        flex-shrink: 0;
+    }
+
+    .step-label {
+        font-size: 13px;
+        text-align: left;
+    }
+
+    .ethics-notice {
+        flex-direction: column;
+        text-align: center;
+        padding: 16px;
+    }
+
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .card-header h3 {
+        font-size: 16px;
+    }
+
+    .upload-area {
+        padding: 24px 16px;
+    }
+
+    .upload-content h4 {
+        font-size: 14px;
+    }
+
+    .upload-content p {
+        font-size: 12px;
+    }
+
+    .upload-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    .file-details {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .remove-file {
+        align-self: flex-end;
+    }
+
+    .sample-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .sample-controls {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .audio-waveform {
+        flex: 1;
+        justify-content: center;
+    }
+
+    #textInput {
+        min-height: 100px;
+        font-size: 16px; /* iOS zoom'u önlemek için */
+    }
+
+    .voice-settings {
+        padding: 16px;
+        gap: 16px;
+    }
+
+    .slider-container {
+        flex-direction: column;
+        gap: 8px;
+        align-items: stretch;
+    }
+
+    .slider-value {
+        text-align: left;
+        min-width: auto;
+    }
+
+    .generate-btn {
+        width: 100%;
+        padding: 14px 24px;
+        font-size: 15px;
+    }
+
+    .audio-player {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .audio-timeline {
+        order: -1;
+    }
+
+    .audio-time {
+        min-width: auto;
+    }
+
+    .preset-model {
+        padding: 12px;
+        gap: 12px;
+    }
+
+    .model-avatar svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .model-info h4 {
+        font-size: 13px;
+    }
+
+    .model-info p {
+        font-size: 11px;
+    }
+
+    .model-select-btn {
+        width: 28px;
+        height: 28px;
+    }
+
+    .header-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .refresh-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 10px 16px;
+    }
+
+
+}
+
+/* Küçük Mobil Görünümü */
+@media (max-width: 480px) {
+
+    .section-card {
+        padding: 16px;
+        margin-bottom: 16px;
+    }
+
+    .voice-steps {
+        padding: 12px;
+        gap: 12px;
+    }
+
+    .step {
+        max-width: 160px;
+    }
+
+    .step-number {
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+    }
+
+    .step-label {
+        font-size: 12px;
+    }
+
+    .ethics-notice {
+        padding: 12px;
+    }
+
+    .ethics-content h4 {
+        font-size: 14px;
+    }
+
+    .ethics-content p {
+        font-size: 13px;
+    }
+
+    .upload-requirements {
+        padding: 12px;
+    }
+
+    .upload-requirements h4 {
+        font-size: 13px;
+    }
+
+    .upload-requirements li {
+        font-size: 12px;
+    }
+
+    .upload-area {
+        padding: 20px 12px;
+    }
+
+    .upload-content svg {
+        width: 36px;
+        height: 36px;
+    }
+
+    .sample-item {
+        padding: 12px;
+    }
+
+    .play-btn {
+        width: 32px;
+        height: 32px;
+    }
+
+    .play-btn svg {
+        width: 12px;
+        height: 12px;
+    }
+
+    .voice-settings {
+        padding: 12px;
+    }
+
+    .generate-btn {
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+
+    .audio-play-btn {
+        width: 40px;
+        height: 40px;
+    }
+
+    .audio-play-btn svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .download-audio-btn {
+        width: 36px;
+        height: 36px;
+    }
+
+    .download-audio-btn svg {
+        width: 14px;
+        height: 14px;
+    }
+
+    .preset-model {
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .empty-state {
+        padding: 20px 12px;
+    }
+
+    .empty-state svg {
+        width: 36px;
+        height: 36px;
+    }
+
+    .empty-state h4 {
+        font-size: 14px;
+    }
+
+    .empty-state p {
+        font-size: 13px;
+    }
+}
+
+/* Landscape Tablet */
+@media (max-width: 1024px) and (orientation: landscape) {
+    .voice-steps {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 24px;
+    }
+
+    .step {
+        flex-direction: column;
+        max-width: none;
+    }
+
+    .step-label {
+        text-align: center;
+    }
+}
+
+/* Yüksek çözünürlük ekranlar için */
+@media (min-width: 1400px) {
+    .voice-main-grid, 
+    .voice-generation-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+    }
+
+    .voice-steps {
+        gap: 64px;
+        padding: 32px;
+    }
+
+    .section-card {
+        padding: 32px;
+    }
+
+    .upload-area {
+        padding: 60px 40px;
+    }
+
+    .preset-models-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+/* Print Stiller */
+@media print {
+    .voice-cloning-page {
+        background: white !important;
+    }
+
+    .section-card {
+        box-shadow: none !important;
+        border: 1px solid #ddd !important;
+        background: white !important;
+    }
+
+    .sidebar,
+    .header,
+    .upload-btn,
+    .play-btn,
+    .generate-btn,
+    .download-audio-btn,
+    .model-select-btn,
+    .refresh-btn {
+        display: none !important;
+    }
+
+    .main-content {
+        margin-left: 0 !important;
+        padding: 20px !important;
+    }
+
+    .ethics-notice,
+    .upload-area,
+    .audio-player,
+    .voice-settings {
+        background: #f9f9f9 !important;
+        color: #333 !important;
+    }
+}
+
+/* Erişilebilirlik için high contrast mode */
+@media (prefers-contrast: high) {
+    .section-card {
+        border: 2px solid #000;
+        background: #fff;
+    }
+
+    .upload-area {
+        border: 3px solid #000;
+        background: #fff;
+    }
+
+    .step-number {
+        border: 2px solid #000;
+    }
+
+    .play-btn,
+    .generate-btn,
+    .upload-btn {
+        border: 2px solid #000;
+    }
+}
+
+/* Motion azaltma tercihi */
+@media (prefers-reduced-motion: reduce) {
+    .section-card,
+    .upload-area,
+    .play-btn,
+    .step {
+        transition: none;
+    }
+
+    .wave-bar {
+        animation: none;
+    }
+
+    .status-indicator {
+        animation: none;
+    }
+}
+
+/* Notification System Mobile Responsive */
+@media (max-width: 768px) {
+    .notification-container {
+        margin-left: 8px;
+    }
+    
+    .notification-btn {
+        padding: 12px;
+        border-radius: 10px;
+        min-width: 44px;
+        min-height: 44px;
+    }
+    
+    .notification-btn svg {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .notification-badge {
+        min-width: 18px;
+        height: 18px;
+        font-size: 9px;
+        padding: 2px 5px;
+    }
+    
+    .notification-popup {
+        width: 90vw;
+        max-width: 340px;
+        right: -10px;
+        max-height: 70vh;
+    }
+    
+    .notification-popup::before {
+        right: 25px;
+    }
+    
+    .notification-header {
+        padding: 16px 16px 12px;
+    }
+    
+    .notification-header h3 {
+        font-size: 15px;
+    }
+    
+    .mark-all-read {
+        font-size: 11px;
+        padding: 5px 10px;
+    }
+    
+    .notification-item {
+        padding: 14px 16px;
+        gap: 10px;
+    }
+    
+    .notification-icon {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .notification-icon svg {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .notification-title {
+        font-size: 13px;
+    }
+    
+    .notification-text {
+        font-size: 12px;
+    }
+    
+    .notification-time {
+        font-size: 10px;
+    }
+    
+    .notification-close svg {
+        width: 12px;
+        height: 12px;
+    }
+    
+    .notification-footer {
+        padding: 12px 16px;
+    }
+    
+    .view-all-notifications {
+        padding: 8px;
+        font-size: 12px;
+    }
+    
+    /* Toast Notifications Mobile */
+    .toast-container {
+        top: 80px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+    
+    .toast {
+        padding: 12px;
+        border-radius: 10px;
+    }
+    
+    .toast-title {
+        font-size: 13px;
+    }
+    
+    .toast-message {
+        font-size: 12px;
+    }
+    
+    .toast-icon {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .notification-popup {
+        width: 95vw;
+        right: -20px;
+    }
+    
+    .notification-popup::before {
+        right: 35px;
+    }
+    
+    .notification-item {
+        padding: 12px 12px;
+        gap: 8px;
+    }
+    
+    .notification-icon {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .notification-title {
+        font-size: 12px;
+    }
+    
+    .notification-text {
+        font-size: 11px;
+    }
+    
+    .notification-time {
+        font-size: 9px;
+    }
+}
+
+/* Landscape Tablets */
+@media (max-width: 1024px) and (orientation: landscape) {
+    .notification-popup {
+        max-height: 60vh;
+    }
+}
+
+/* High DPI Screens */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .notification-badge {
+        border-width: 1px;
+    }
+    
+    .notification-popup::before {
+        border-width: 0.5px;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .notification-container,
+    .toast-container {
+        display: none !important;
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .notification-badge {
+        animation: none;
+    }
+    
+    .notification-popup {
+        transition: opacity 0.1s ease;
+    }
+    
+    .toast {
+        transition: opacity 0.1s ease;
+    }
+    
+    .notification-btn:hover {
+        transform: none;
+    }
+}
+
+/* Modal Responsive Styles */
+@media (max-width: 768px) {
+    .modal-container {
+        width: 95%;
+        height: 95vh;
+        max-height: none;
+        border-radius: 16px;
+    }
+    
+    .modal-header {
+        padding: 16px 20px;
+    }
+    
+    .modal-title h2 {
+        font-size: 18px;
+    }
+    
+    .modal-actions {
+        gap: 8px;
+    }
+    
+    .modal-mark-all-read {
+        display: none;
+    }
+    
+    .modal-filters {
+        flex-direction: column;
+        gap: 16px;
+        padding: 16px 20px;
+    }
+    
+    .filter-tabs {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .notification-search input {
+        width: 100%;
+    }
+    
+    .modal-notifications-list {
+        padding: 12px 20px;
+    }
+    
+    .modal-notification-item {
+        padding: 12px;
+        gap: 12px;
+    }
+    
+    .modal-notification-icon {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .modal-notification-title {
+        font-size: 14px;
+    }
+    
+    .modal-notification-text {
+        font-size: 12px;
+    }
+    
+    .modal-notification-actions {
+        flex-direction: column;
+        gap: 4px;
+    }
+    
+    .modal-pagination {
+        padding: 12px 20px;
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .pagination-info {
+        order: -1;
+    }
+    
+    .pagination-btn {
+        flex: 1;
+        justify-content: center;
+        min-width: 80px;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-container {
+        width: 98%;
+        height: 98vh;
+        border-radius: 12px;
+    }
+    
+    .modal-header {
+        padding: 12px 16px;
+    }
+    
+    .modal-title h2 {
+        font-size: 16px;
+    }
+    
+    .modal-filters {
+        padding: 12px 16px;
+    }
+    
+    .filter-tabs {
+        gap: 4px;
+    }
+    
+    .filter-tab {
+        padding: 4px 8px;
+        font-size: 11px;
+    }
+    
+    .modal-notifications-list {
+        padding: 8px 16px;
+    }
+    
+    .modal-notification-item {
+        padding: 10px;
+        gap: 10px;
+    }
+    
+    .modal-notification-icon {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .modal-notification-icon svg {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .modal-notification-title {
+        font-size: 13px;
+    }
+    
+    .modal-notification-text {
+        font-size: 11px;
+    }
+    
+    .modal-notification-time {
+        font-size: 10px;
+    }
+    
+    .modal-pagination {
+        padding: 8px 16px;
+    }
+    
+    .pagination-btn {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+}
+
+/* High DPI Displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .modal-container {
+        border-width: 0.5px;
+    }
+    
+    .modal-header,
+    .modal-filters,
+    .modal-pagination {
+        border-width: 0.5px;
+    }
+    
+    .modal-notification-item {
+        border-width: 0.5px;
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .notification-modal,
+    .modal-overlay,
+    .modal-container {
+        animation: none;
+    }
+    
+    .modal-notification-item {
+        transition: none;
+    }
+    
+    .modal-notification-item:hover {
+        transform: none;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .notification-modal {
+        display: none !important;
+    }
+}
+
+/* Modern Voice Cloning Responsive Styles */
+@media (max-width: 768px) {
+    /* Model Selection */
+    .model-selection-section {
+        padding: 16px;
+        margin-bottom: 16px;
+    }
+    
+    .voice-model-select {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+    
+    .model-preview {
+        padding: 10px;
+    }
+    
+    .preview-info {
+        flex-direction: column;
+        gap: 8px;
+        align-items: stretch;
+    }
+    
+    .model-test-btn {
+        justify-content: center;
+    }
+    
+    /* Modern Buttons */
+    .modern-btn {
+        padding: 14px 24px;
+        font-size: 15px;
+    }
+    
+    .modern-btn .btn-content {
+        gap: 8px;
+    }
+    
+    /* Audio Player */
+    .modern-audio-player {
+        padding: 16px;
+    }
+    
+    .modern-play-btn {
+        width: 56px;
+        height: 56px;
+        margin-right: 12px;
+    }
+    
+    .modern-download-btn {
+        padding: 10px 16px;
+        font-size: 14px;
+        margin-left: 8px;
+    }
+    
+    /* Sample Play Buttons */
+    .modern-sample-play-btn {
+        width: 44px;
+        height: 44px;
+    }
+    
+    /* Preset Models */
+    .preset-models-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .modern-preset-model {
+        padding: 20px;
+    }
+    
+    .modern-preset-model .model-avatar {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 12px;
+    }
+    
+    .model-actions {
+        flex-direction: column;
+        gap: 6px;
+    }
+    
+    .model-preview-btn, 
+    .model-actions .model-select-btn {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+    
+    /* Audio Timeline */
+    .audio-timeline {
+        margin: 0 12px;
+    }
+    
+    .timeline-handle {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Model Selection */
+    .model-selection-section {
+        padding: 12px;
+    }
+    
+    .voice-model-select {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+    
+    /* Modern Buttons */
+    .modern-btn {
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+    
+    /* Audio Player */
+    .modern-audio-player {
+        padding: 12px;
+    }
+    
+    .modern-play-btn {
+        width: 48px;
+        height: 48px;
+        margin-right: 8px;
+    }
+    
+    .modern-download-btn {
+        padding: 8px 12px;
+        font-size: 12px;
+        margin-left: 4px;
+    }
+    
+    .modern-download-btn span {
+        display: none;
+    }
+    
+    /* Sample Play Buttons */
+    .modern-sample-play-btn {
+        width: 40px;
+        height: 40px;
+    }
+    
+    /* Preset Models */
+    .modern-preset-model {
+        padding: 16px;
+    }
+    
+    .modern-preset-model .model-avatar {
+        width: 44px;
+        height: 44px;
+        margin-bottom: 10px;
+    }
+    
+    .modern-preset-model .model-info h4 {
+        font-size: 14px;
+    }
+    
+    .modern-preset-model .model-info p {
+        font-size: 12px;
+    }
+    
+    .model-preview-btn, 
+    .model-actions .model-select-btn {
+        padding: 8px 10px;
+        font-size: 11px;
+    }
+    
+    .model-preview-btn span,
+    .model-actions .model-select-btn span {
+        display: none;
+    }
+    
+    /* Audio Timeline */
+    .audio-timeline {
+        margin: 0 8px;
+        height: 4px;
+    }
+    
+    .timeline-handle {
+        width: 12px;
+        height: 12px;
+        border-width: 2px;
+    }
+    
+    /* Voice Settings */
+    .voice-settings {
+        flex-direction: column;
+        gap: 16px;
+    }
+    
+    .setting-group {
+        margin-bottom: 0;
+    }
+}
+
+/* Touch Optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .modern-sample-play-btn,
+    .modern-play-btn,
+    .model-preview-btn,
+    .model-actions .model-select-btn {
+        min-width: 44px;
+        min-height: 44px;
+    }
+    
+    .timeline-handle {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .modern-preset-model:hover::before {
+        opacity: 0;
+    }
+    
+    .modern-preset-model:hover {
+        transform: none;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    }
+}
+
+/* High DPI Displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .modern-preset-model,
+    .modern-audio-player,
+    .model-selection-section {
+        border-width: 0.5px;
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .modern-btn,
+    .modern-sample-play-btn,
+    .modern-play-btn,
+    .modern-preset-model,
+    .sample-item {
+        transition: none;
+    }
+    
+    .modern-btn:hover,
+    .modern-sample-play-btn:hover,
+    .modern-play-btn:hover,
+    .modern-preset-model:hover,
+    .sample-item:hover {
+        transform: none;
+    }
+    
+    .btn-glow,
+    .progress-shine {
+        animation: none;
+    }
+    
+    .wave,
+    .play-waves,
+    .wave-bar {
+        animation: none;
+    }
+}
+
+/* Light Theme Optimization */
+@media (prefers-color-scheme: light) {
+    .voice-cloning-page .section-card {
+        background: rgba(255, 255, 255, 0.98);
+        border-color: rgba(0, 0, 0, 0.08);
+    }
+    
+    .model-selection-section {
+        background: rgba(255, 255, 255, 0.98);
+        border-color: rgba(0, 0, 0, 0.08);
+    }
+    
+    .voice-model-select {
+        background: rgba(255, 255, 255, 0.98);
+        color: #1f2937;
+        border-color: rgba(0, 0, 0, 0.12);
+    }
+    
+    .modern-preset-model {
+        background: rgba(255, 255, 255, 0.98);
+        border-color: rgba(0, 0, 0, 0.08);
+    }
+    
+    .modern-preset-model .model-info h4 {
+        color: #1f2937;
+    }
+    
+    .modern-preset-model .model-info p {
+        color: #6b7280;
+    }
+    
+    .sample-item {
+        background: rgba(255, 255, 255, 0.98);
+        border-color: rgba(0, 0, 0, 0.08);
+    }
+    
+    .modern-audio-player {
+        background: rgba(255, 255, 255, 0.98);
+        border-color: rgba(0, 0, 0, 0.08);
+    }
+}
+
+/* Landscape Tablet */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    .voice-generation-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .preset-models-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
     }
 }

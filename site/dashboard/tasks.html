@@ -132,73 +132,99 @@
                 </div>
             </div>
             <div class="header-right">
-
                 <div class="user-points">
                     <div class="points-display">
                         <span class="points-label">Puanım</span>
                         <span class="points-value">2,450</span>
                     </div>
                 </div>
+                
                 <div class="notification-container">
-                    <button class="notification-btn">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                            <path d="M10 2C7.8 2 6 3.8 6 6v4l-2 2v1h12v-1l-2-2V6c0-2.2-1.8-4-4-4zM8.5 15.5v.5c0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5v-.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <button class="notification-btn" id="notificationBtn">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="m13.73 21a2 2 0 0 1-3.46 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        <span class="notification-badge">3</span>
+                        <span class="notification-badge" id="notificationBadge">4</span>
                     </button>
                     
-                    <!-- Notification Dropdown -->
-                    <div class="notification-dropdown">
+                    <div class="notification-popup" id="notificationPopup">
                         <div class="notification-header">
-                            <h4>Bildirimler</h4>
-                            <button class="mark-all-read">Tümünü Okundu İşaretle</button>
+                            <h3>Bildirimler</h3>
+                            <button class="mark-all-read" id="markAllRead">Tümünü Okundu İşaretle</button>
                         </div>
-                        <div class="notification-list">
-                            <div class="notification-item unread">
+                        <div class="notification-list" id="notificationList">
+                            <div class="notification-item unread" data-id="1">
                                 <div class="notification-icon success">
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" fill="currentColor"/>
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                        <path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
                                 </div>
                                 <div class="notification-content">
-                                    <div class="notification-title">Yeni görev eklendi</div>
-                                    <div class="notification-text">Trendyol sponsorluğunda yeni bir görev mevcut</div>
-                                    <div class="notification-time">2 dakika önce</div>
-                                </div>
-                                <div class="notification-actions">
-                                    <button class="notification-action">Görüntüle</button>
-                                </div>
-                            </div>
-                            <div class="notification-item unread">
-                                <div class="notification-icon info">
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" fill="currentColor"/>
-                                        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" fill="currentColor"/>
-                                    </svg>
-                                </div>
-                                <div class="notification-content">
-                                    <div class="notification-title">Görev tamamlandı</div>
-                                    <div class="notification-text">Hepsiburada ürün ziyareti görevi başarıyla tamamlandı</div>
+                                    <div class="notification-title">Görev Tamamlandı!</div>
+                                    <div class="notification-text">N11 Ürün Paylaşımı göreviniz tamamlandı. +120 puan kazandınız!</div>
                                     <div class="notification-time">1 saat önce</div>
                                 </div>
-                                <div class="notification-actions">
-                                    <button class="notification-action">Detaylar</button>
-                                </div>
+                                <button class="notification-close">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                        <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </button>
                             </div>
-                            <div class="notification-item">
-                                <div class="notification-icon warning">
-                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                        <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" fill="currentColor"/>
+                            
+                            <div class="notification-item unread" data-id="2">
+                                <div class="notification-icon">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                        <path d="M12 9v3m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
                                 </div>
                                 <div class="notification-content">
-                                    <div class="notification-title">Görev süresi dolmak üzere</div>
-                                    <div class="notification-text">GittiGidiyor sosyal medya paylaşımı için 2 saat kaldı</div>
+                                    <div class="notification-title">Yeni Görevler Eklendi</div>
+                                    <div class="notification-text">3 yeni görev mevcut. Yüksek puanlı görevleri kaçırmayın!</div>
                                     <div class="notification-time">3 saat önce</div>
                                 </div>
-                                <div class="notification-actions">
-                                    <button class="notification-action">Tamamla</button>
+                                <button class="notification-close">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                        <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            
+                            <div class="notification-item unread" data-id="3">
+                                <div class="notification-icon warning">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                        <path d="M12 9v3m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
                                 </div>
+                                <div class="notification-content">
+                                    <div class="notification-title">Görev Süresi Doluyor</div>
+                                    <div class="notification-text">GittiGidiyor sosyal medya göreviniz 6 saat içinde sona erecek.</div>
+                                    <div class="notification-time">5 saat önce</div>
+                                </div>
+                                <button class="notification-close">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                        <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            
+                            <div class="notification-item unread" data-id="4">
+                                <div class="notification-icon info">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                                        <path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <div class="notification-content">
+                                    <div class="notification-title">Puan Sıralamanız Yükseldi</div>
+                                    <div class="notification-text">Bu haftaki performansınızla 15. sıraya yükseldiniz!</div>
+                                    <div class="notification-time">1 gün önce</div>
+                                </div>
+                                <button class="notification-close">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                        <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </button>
                             </div>
                         </div>
                         <div class="notification-footer">
